@@ -3,8 +3,8 @@
 
 
 <ol class="breadcrumb">
-	<li><a href="dashboard.php">Home</a></li>
-	<li>Order</li>
+	<li><a href="/">Home</a></li>
+	<li><a href="/orders/add_order">Order</a></li>
 	<li class="active">Add Order</li>
 </ol>
   
@@ -20,11 +20,11 @@
 	  <div class="panel-heading">
 				Add Order
   
-	  </div> <!--/panel-->	
+	  </div> <!--/panel-->
+	  @include('partials.error')
 	  <div class="panel-body">
-					  
-  
-			  <div class="success-messages"></div> <!--/success-messages-->
+
+			<div class="success-messages"></div> <!--/success-messages-->
   
 			<form class="form-horizontal" method="POST" action="/orders/insert_order" id="createOrderForm">
 				@csrf
@@ -63,7 +63,7 @@
 							$arrayNumber = 0;
 						@endphp
 						{{-- for($x = 1; $x < 3; $x++) { ?> --}}
-						@for($x=1;$x<3;$x++)
+						@for($x=1;$x<2;$x++)
 							<tr id="row{{$x}}" class="{{$arrayNumber}}">			  				
 								<td style="margin-left:20px;">
 									<div class="form-group">
