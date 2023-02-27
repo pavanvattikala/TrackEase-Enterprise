@@ -92,7 +92,7 @@
 								</td>
 								<td style="padding-left:20px;">
 									<div class="form-group">
-									<input type="number" name="quantity[]" id="quantity{{$x}}" onkeyup="getTotal({{$x}})" autocomplete="off" class="form-control" min="1" />
+									<input type="number" name="quantity[]" id="quantity{{$x}}" onkeyup="subAmount()" autocomplete="off" class="form-control" min="1" />
 									</div>
 								</td>
 								<td style="padding-left:20px;">			  					
@@ -119,13 +119,6 @@
 						<input type="hidden" class="form-control" id="subTotalValue" name="subTotalValue" />
 					  </div>
 					</div> <!--/form-group-->			  
-					{{-- <div class="form-group">
-					  <label for="vat" class="col-sm-3 control-label">VAT 13%</label>
-					  <div class="col-sm-9">
-						<input type="text" class="form-control" id="vat" name="vat" disabled="true" />
-						<input type="hidden" class="form-control" id="vatValue" name="vatValue" />
-					  </div>
-					</div> <!--/form-group-->			   --}}
 					<div class="form-group">
 					  <label for="totalAmount" class="col-sm-3 control-label">Total Amount</label>
 					  <div class="col-sm-9">
@@ -136,7 +129,7 @@
 					<div class="form-group">
 					  <label for="discount" class="col-sm-3 control-label">Discount</label>
 					  <div class="col-sm-9">
-						<input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" />
+						<input type="text" class="form-control" id="discount" name="discount" onkeyup="subAmount()" value="0" />
 					  </div>
 					</div> <!--/form-group-->	
 					<div class="form-group">
@@ -152,7 +145,7 @@
 					<div class="form-group">
 					  <label for="paid" class="col-sm-3 control-label">Paid Amount</label>
 					  <div class="col-sm-9">
-						<input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" />
+						<input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="subAmount()" />
 					  </div>
 					</div> <!--/form-group-->			  
 					<div class="form-group">

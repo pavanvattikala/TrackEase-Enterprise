@@ -76,6 +76,8 @@ Route::prefix('orders')->group(function(){
         return view('sv.order.manage_order');
     });
 
+    Route::get('/fetchOrders',[OrderController::class,'fetchOrders']);
+
 });
 
 //orders end

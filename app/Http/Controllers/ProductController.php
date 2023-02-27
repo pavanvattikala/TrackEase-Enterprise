@@ -126,7 +126,7 @@ class ProductController extends Controller
         ->where('product.status',1)
         ->get();
 
-        dd($result);
+       // dd($result);
 
         return json_encode($result);
 
