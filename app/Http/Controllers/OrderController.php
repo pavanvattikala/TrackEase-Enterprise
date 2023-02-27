@@ -50,6 +50,11 @@ class OrderController extends Controller
                 'total'=>$request->totalValue[$i]
             ];
             DB::table('order_items')->insert($order_item_data);
+
+            // update the product table colums
+            DB::table('product')->where('product_id',$request->productName[$i])->decrement('quantity',$request->quantity[$i]);
+            DB::table('product')->where('product_id',$request->productName[$i])->update(['updated_at'=>today()]);
+
              
           }
 

@@ -16,7 +16,7 @@
 
   <ul class="nav navbar-nav navbar-right">        
 
-      <li id="navDashboard"><a href="/index"><i class="glyphicon glyphicon-list-alt"></i>  Dashboard</a></li>        
+      <li id="navDashboard"><a href="/"><i class="glyphicon glyphicon-list-alt"></i>  Dashboard</a></li>        
     
     <li id="navBrand"><a href="/brand"><i class="glyphicon glyphicon-btc"></i>  Brand</a></li>        
 
