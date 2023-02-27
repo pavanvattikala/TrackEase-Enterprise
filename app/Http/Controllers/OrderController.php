@@ -77,7 +77,7 @@ class OrderController extends Controller
             </button>
             <ul class="dropdown-menu">
             <li><a type="button" data-toggle="modal" href="/order/manage/view_order/'.$order_id.'"> <i class="glyphicon glyphicon-search"></i>View / Edit</a></li> 
-                <li><a type="button" data-toggle="modal" href="/order/trash/'.$order_id.'"> <i class="glyphicon glyphicon-trash"></i><span style="color:red">Delete</span></a></li>
+                <li><a type="button" href="" onclick="removeOrder('.$order_id.')" data-toggle="modal" data-target="#removeOrder"> <i class="glyphicon glyphicon-trash"></i><span style="color:red">Delete</span></a></li>
                 <li><a type="button" data-toggle="modal" href="/order/print/'.$order_id.'"> <i class="glyphicon glyphicon-print"></i>Print</a></li>
             </ul>
             </div>';
@@ -129,5 +129,19 @@ class OrderController extends Controller
 
         echo json_encode($output);
 
+    }
+
+    public function removeOrder(Request $request){
+        $request->validate([
+            'orderId'=>'required'
+        ]);
+
+        $orderId = $request->orderId;
+        DB::table('order_items')->where('order_id', $orderId)->delete();
+        DB::table('orders')->where('order_id', $orderId)->delete();
+
+        $messege= "Order ".$orderId." is sucessfully deleted";
+
+        return redirect()->back()->with('success',$messege);
     }
 }

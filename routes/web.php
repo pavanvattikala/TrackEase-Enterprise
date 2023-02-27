@@ -78,6 +78,8 @@ Route::prefix('orders')->group(function(){
 
     Route::get('/fetchOrders',[OrderController::class,'fetchOrders']);
 
+    Route::post('/removeOrder',[OrderController::class,'removeOrder']);
+
 });
 
 //orders end

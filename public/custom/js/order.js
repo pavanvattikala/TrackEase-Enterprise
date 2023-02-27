@@ -1,5 +1,6 @@
 var manageOrderTable;
 
+// to load the data table
 $(document).ready(function() {
 	$('#navOrder').addClass('active');
 	
@@ -87,6 +88,7 @@ function addRow() {
 
 } // /add row
 
+// to delete the row
 function removeProductRow(row = null) {
 	if(row) {
 		$("#row"+row).remove();
@@ -138,8 +140,8 @@ function getProductData(row = null) {
 	} else {
 		alert('no row! please refresh the page');
 	}
-} // /select on product data
-
+} 
+// /sub total amount
 function subAmount() {
 	var tableProductLength = $("#productTable tbody tr").length;
 	//console.log(tableProductLength);
@@ -168,7 +170,8 @@ function subAmount() {
 
 	calculateAllAmount();
 
-} // /sub total amount
+} 
+// function to calculate the values down the sub amount
 function calculateAllAmount(){
 
 	subTotal = $("#subTotal").val();
@@ -198,7 +201,7 @@ function calculateAllAmount(){
 
 	
 }
-
+// reset order form
 function resetOrderForm() {
 	// reset the input field
 	$("#createOrderForm")[0].reset();
@@ -206,64 +209,9 @@ function resetOrderForm() {
 	$(".text-danger").remove();
 	// remove form group error 
 	$(".form-group").removeClass('has-success').removeClass('has-error');
-} // /reset order form
-
-
-// remove order from server
-function removeOrder(orderId = null) {
-	if(orderId) {
-		$("#removeOrderBtn").unbind('click').bind('click', function() {
-			$("#removeOrderBtn").button('loading');
-
-			$.ajax({
-				url: 'php_action/removeOrder.php',
-				type: 'post',
-				data: {orderId : orderId},
-				dataType: 'json',
-				success:function(response) {
-					$("#removeOrderBtn").button('reset');
-
-					if(response.success == true) {
-
-						manageOrderTable.ajax.reload(null, false);
-						// hide modal
-						$("#removeOrderModal").modal('hide');
-						// success messages
-						$("#success-messages").html('<div class="alert alert-success">'+
-	            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-	            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
-	          '</div>');
-
-						// remove the mesages
-	          $(".alert-success").delay(500).show(10, function() {
-							$(this).delay(3000).hide(10, function() {
-								$(this).remove();
-							});
-						}); // /.alert	          
-
-					} else {
-						// error messages
-						$(".removeOrderMessages").html('<div class="alert alert-warning">'+
-	            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-	            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
-	          '</div>');
-
-						// remove the mesages
-	          $(".alert-success").delay(500).show(10, function() {
-							$(this).delay(3000).hide(10, function() {
-								$(this).remove();
-							});
-						}); // /.alert	          
-					} // /else
-
-				} // /success
-			});  // /ajax function to remove the order
-
-		}); // /remove order button clicked
-		
-
-	} else {
-		alert('error! refresh the page again');
-	}
+} 
+//order delte
+function removeOrder(orderId) {
+	$('#removeOrderId').text(orderId);
+	$('#formRemoveOrderId').val(orderId);
 }
-// /remove order from server
