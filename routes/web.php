@@ -80,6 +80,8 @@ Route::prefix('orders')->group(function(){
 
     Route::post('/removeOrder',[OrderController::class,'removeOrder']);
 
+    Route::get('/manage/view_order/{orderId}',[OrderController::class,'viewOrder']);
+
 });
 
 //orders end

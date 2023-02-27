@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    //
+    //to create an order
     public function create(Request $request){
         //dd($request->all());
         $request->validate([
@@ -59,6 +59,7 @@ class OrderController extends Controller
 
     }
 
+    // to fetch the order from the api call
     public function fetchOrders(){
         $orders_data = DB::table('orders')->orderBy('order_date','desc')->get();
 
@@ -76,9 +77,9 @@ class OrderController extends Controller
                 Action <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-            <li><a type="button" data-toggle="modal" href="/order/manage/view_order/'.$order_id.'"> <i class="glyphicon glyphicon-search"></i>View / Edit</a></li> 
+            <li><a type="button" data-toggle="modal" href="/orders/manage/view_order/'.$order_id.'"> <i class="glyphicon glyphicon-search"></i>View / Edit</a></li> 
                 <li><a type="button" href="" onclick="removeOrder('.$order_id.')" data-toggle="modal" data-target="#removeOrder"> <i class="glyphicon glyphicon-trash"></i><span style="color:red">Delete</span></a></li>
-                <li><a type="button" data-toggle="modal" href="/order/print/'.$order_id.'"> <i class="glyphicon glyphicon-print"></i>Print</a></li>
+                <li><a type="button" data-toggle="modal" href="/orders/print/'.$order_id.'"> <i class="glyphicon glyphicon-print"></i>Print</a></li>
             </ul>
             </div>';
 
@@ -131,6 +132,7 @@ class OrderController extends Controller
 
     }
 
+    // to trash the order
     public function removeOrder(Request $request){
         $request->validate([
             'orderId'=>'required'
@@ -143,5 +145,70 @@ class OrderController extends Controller
         $messege= "Order ".$orderId." is sucessfully deleted";
 
         return redirect()->back()->with('success',$messege);
+    }
+    
+    // to view or edit the order
+    public function viewOrder($orderId)
+    {
+        $orderData = DB::table('orders')->join('order_items','order_items.order_id','=','orders.order_id')->where('orders.order_id',$orderId)->get();
+
+
+        //dd($orderData);
+
+        $orderCount = count($orderData);
+
+
+        foreach($orderData as $order){
+            //elemets that dont repeat
+            $orderDate=$order->order_date;
+            $clientName = $order->client_name;
+            $clientContact = $order->client_contact;
+            $subTotal = $order->sub_total;
+            $totalAmount = $order->total_amount;
+            $discount = $order->discount;
+            $grandTotal = $order->grand_total;
+            $paid = $order->paid;
+            $due = $order->due;
+            $paymentType = $order->payment_type;
+            $paymentStatus = $order->payment_status;
+
+            //elemets that repeat
+
+            $productId [] = $order->product_id;
+
+            $qunatity [] = $order->quantity;
+
+            $rate [] = $order->rate;
+
+            $total [] = $order->total;
+        }
+
+
+        $data = [
+            //single time 
+            "orderDate"=>$orderDate,
+            "clientName" =>$clientName,
+            "clientContact" => $clientContact,
+            "subTotal" => $subTotal,
+            "totalAmount" => $totalAmount,
+            "discount" => $discount,
+            "grandTotal" => $grandTotal,
+            "paid" => $paid,
+            "due" => $due,
+            "paymentType" => $paymentType,
+            "paymentStatus" => $paymentStatus,
+            //elements that repeat
+            "productId"=>$productId,
+            "quantity" => $qunatity,
+            "rate" =>$rate,
+            "total"=> $total,
+
+            // count
+
+            "orderCount"=>$orderCount
+        ];
+       // dd($data);
+
+        return view('sv.order.view_order')->with('data',$data);
     }
 }
