@@ -1,29 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-@php
-// 	$sql = "SELECT * FROM product WHERE status = 1";
-// $query = $connect->query($sql);
-// $countProduct = $query->num_rows;
-
-// $orderSql = "SELECT * FROM orders WHERE order_status = 1";
-// $orderQuery = $connect->query($orderSql);
-// $countOrder = $orderQuery->num_rows;
-
-// $totalRevenue = 0;
-// while ($orderResult = $orderQuery->fetch_assoc()) {
-// 	$totalRevenue += $orderResult['paid'];
-// }
-
-// $lowStockSql = "SELECT * FROM product WHERE quantity <= 3 AND status = 1";
-// $lowStockQuery = $connect->query($lowStockSql);
-// $countLowStock = $lowStockQuery->num_rows;
-
-// $connect->close();
-@endphp
-
-
-
 <style type="text/css">
 	.ui-datepicker-calendar {
 		display: none;
@@ -43,7 +20,7 @@
 				
 				<a href="product.php" style="text-decoration:none;color:black;">
 					Total Product
-					<span class="badge pull pull-right">{{"countProduct"}}</span>	
+					<span class="badge pull pull-right">{{ $data['countProduct']}}</span>	
 				</a>
 				
 			</div> <!--/panel-hdeaing-->
@@ -55,7 +32,7 @@
 			<div class="panel-heading">
 				<a href="orders.php?o=manord" style="text-decoration:none;color:black;">
 					Total Orders
-					<span class="badge pull pull-right">{{"countOrder"}}</span>
+					<span class="badge pull pull-right">{{ $data['countTotal']}}</span>
 				</a>
 					
 			</div> <!--/panel-hdeaing-->
@@ -67,7 +44,7 @@
 			<div class="panel-heading">
 				<a href="product.php" style="text-decoration:none;color:black;">
 					Low Stock
-					<span class="badge pull pull-right">{{"countLowStock"}}</span>	
+					<span class="badge pull pull-right">{{ $data['lowStockCount']}}</span>	
 				</a>
 				
 			</div> <!--/panel-hdeaing-->
@@ -88,7 +65,7 @@
 
 		<div class="card">
 		  <div class="cardHeader" style="background-color:#245580;">
-		    <h1>{{"total_revenue count"}}</h1>
+		    <h1>{{ $data['totalRevenue']}}</h1>
 		  </div>
 
 		  <div class="cardContainer">

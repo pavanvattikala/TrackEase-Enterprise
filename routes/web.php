@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServiceController;
@@ -18,12 +19,8 @@ use App\Http\Controllers\ServiceController;
 |
 */
 
-Route::get('/', function () {
-    return view('sv.dashboard');
-});
-Route::get('/index', function () {
-    return view('sv.dashboard');
-});
+Route::get('/',[DashBoardController::class,'index']);
+
 // brans start
 Route::get('/brand',function(){
     return view('sv.brand.index');
