@@ -17,48 +17,31 @@
 	<div class="col-md-3">
 		<div class="panel panel-success">
 			<div class="panel-heading">
-				
-				<a href="product.php" style="text-decoration:none;color:black;">
-					Total Product
-					<span class="badge pull pull-right">{{ $data['countProduct']}}</span>	
-				</a>
-				
+				<a href="/product" style="text-decoration:none;color:black;">Total Product<span class="badge pull pull-right">{{ $data['countProduct']}}</span></a>
 			</div> 
 		</div> 
 	</div> 
 
-		<div class="col-md-3">
-			<div class="panel panel-info">
+	<div class="col-md-3">
+		<div class="panel panel-info">
 			<div class="panel-heading">
-				<a href="orders.php?o=manord" style="text-decoration:none;color:black;">
-					Total Orders
-					<span class="badge pull pull-right">{{ $data['countOrder']}}</span>
-				</a>
-					
+				<a href="/orders/manage" style="text-decoration:none;color:black;">Total Orders<span class="badge pull pull-right">{{ $data['countOrder']}}</span></a>
 			</div> 
 		</div> 
-		</div> 
+	</div> 
 
-		<div class="col-md-3">
-			<div class="panel panel-info">
+	<div class="col-md-3">
+		<div class="panel panel-info">
 			<div class="panel-heading">
-				<a href="orders.php?o=manord" style="text-decoration:none;color:black;">
-					Total Services
-					<span class="badge pull pull-right">{{ $data['countService']}}</span>
-				</a>
-					
+				<a href="/service/manage" style="text-decoration:none;color:black;">Total Services<span class="badge pull pull-right">{{ $data['countService']}}</span></a>
 			</div> 
 		</div> 
-		</div>
+	</div>
 
 	<div class="col-md-3">
 		<div class="panel panel-danger">
 			<div class="panel-heading">
-				<a href="" style="text-decoration:none;color:black;">
-					Low Stock
-					<span class="badge pull pull-right">{{ $data['lowStockCount']}}</span>	
-				</a>
-				
+				<a href="/product" style="text-decoration:none;color:black;">Low Stock<span class="badge pull pull-right">{{ $data['lowStockCount']}}</span></a>
 			</div> 
 		</div> 
 	</div> 
