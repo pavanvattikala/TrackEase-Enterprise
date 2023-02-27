@@ -19,7 +19,6 @@ class DashBoardController extends Controller
         //service count
         $countService = DB::table('service_data')->where('service_date',today())->where('status',1)->get()->count();
 
-        $countTotal = $countOrder+$countService; // total count
 
         
         //total revenue from orders
@@ -34,7 +33,8 @@ class DashBoardController extends Controller
 
         $data = [
             'countProduct'=>$countProduct,
-            'countTotal'=>$countTotal,
+            'countOrder'=>$countOrder,
+            'countService'=>$countService,
             'totalRevenue'=>$totalRevenue,
             'lowStockCount'=>$lowStockCount
 
