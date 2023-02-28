@@ -16,7 +16,7 @@ function editBrands(brandId = null) {
 	if(brandId) {
 
 		//remove hidden brand id text
-		$('#brandId').remove();
+		$('#editBrandId').remove();
 
 		// remove the error 
 		$('.text-danger').remove();
@@ -58,7 +58,7 @@ function editBrands(brandId = null) {
 				$("#editBrandName").val(response.brand_name);
 				var option = response.brand_active;
 				//console.log($("#editBrandStatus option:eq(2)"))
-				$('#editBrandStatus option:eq('+option+')').attr('selected', true);
+				$('#editBrandActiveStatus option:eq('+option+')').attr('selected', true);
 
 			} // /success
 		}); // ajax function
@@ -67,3 +67,11 @@ function editBrands(brandId = null) {
 		alert('error!! Refresh the page again');
 	}
 } 
+
+function removeBrands(brandId = null){
+	if(brandId) {
+		$('#removeBrandId').val(brandId);
+	} else {
+		alert('error!! Refresh the page again');
+	}
+}

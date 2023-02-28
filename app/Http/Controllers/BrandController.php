@@ -47,8 +47,8 @@ class BrandController extends Controller
                 Action <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a type="button" data-toggle="modal" data-target="#editBrandModel" onclick="editBrands('.$brandId.')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-                <li><a type="button" data-toggle="modal" data-target="#removeMemberModal" onclick="removeBrands('.$brandId.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
+                <li><a type="button" href="" data-toggle="modal" data-target="#editBrandModel" onclick="editBrands('.$brandId.')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
+                <li><a type="button" href="" data-toggle="modal" data-target="#removeMemberModal" onclick="removeBrands('.$brandId.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
             </ul>
             </div>';
 
@@ -67,15 +67,15 @@ class BrandController extends Controller
 
         $request->validate([
             'editBrandName'=>'required',
-            'editBrandStatus'=>'required',
+            'editBrandActiveStatus'=>'required',
             'editBrandId'=>'required'
         ]);
 
         $brandId=$request->editBrandId;
         $editBrandName=$request->editBrandName;
-        $editBrandStatus=$request->editBrandStatus;
+        $editBrandActiveStatus=$request->editBrandActiveStatus;
 
-        DB::table('brands')->where('brand_id',$brandId)->update(['brand_name'=>$editBrandName,'brand_status'=>$editBrandStatus,'updated_at'=>today()]);
+        DB::table('brands')->where('brand_id',$brandId)->update(['brand_name'=>$editBrandName,'brand_status'=>$editBrandActiveStatus,'updated_at'=>today()]);
 
        return redirect('/brand')->with('success','Brand Edited Sucessfully');
 
@@ -85,5 +85,17 @@ class BrandController extends Controller
         $result = DB::table('brands')->select('brand_name','brand_active')->where('brand_id',$request->brandId)->first();
 
         echo json_encode($result);
+    }
+
+    public function trash(Request $request){
+        $request->validate([
+            'removeBrandId'=>'required'
+        ]);
+
+        $removeBrandId = $request->removeBrandId;
+
+        DB::table('brands')->where('brand_id',$removeBrandId)->update(['brand_status'=>0,'updated_at'=>today()]);
+
+        return redirect('/brand')->with('success','Brand Deleted Sucessfully');
     }
 }

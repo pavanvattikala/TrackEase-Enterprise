@@ -111,10 +111,10 @@
 						</div>
 				</div>        	        
 				<div class="form-group">
-					<label for="editBrandStatus" class="col-sm-3 control-label">Status: </label>
+					<label for="editBrandActiveStatus" class="col-sm-3 control-label">Status: </label>
 					<label class="col-sm-1 control-label">: </label>
 						<div class="col-sm-8">
-							<select class="form-control" id="editBrandStatus" name="editBrandStatus">
+							<select class="form-control" id="editBrandActiveStatus" name="editBrandActiveStatus">
 								<option value="">~~SELECT~~</option>
 								<option value="1">Available</option>
 								<option value="2">Not Available</option>
@@ -150,12 +150,15 @@
       </div>
       <div class="modal-footer removeBrandFooter">
         <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-        <button type="button" class="btn btn-primary" id="removeBrandBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
+		<form action="/brand/trash" method="post">
+			@csrf
+			<input type="hidden" name="removeBrandId" id="removeBrandId" value="">
+			<input  class="btn btn-danger" type="submit" value="Delte Brand">
+		</form>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!-- /remove brand -->
+    </div>
+  </div>
+</div>
 
 <script src="custom/js/brand.js"></script>
 

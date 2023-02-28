@@ -22,17 +22,22 @@ use App\Http\Controllers\ServiceController;
 Route::get('/',[DashBoardController::class,'index']);
 
 // brans start
-Route::get('/brand',function(){
-    return view('sv.brand.index');
+
+
+Route::prefix('brand')->group(function(){
+
+    Route::get('/',function(){
+        return view('sv.brand.index');
+    
+    });
+    
+    Route::post('/createbrand',[BrandController::class,'create']);
+    Route::get('/fetch_brand',[BrandController::class,'fetchbrand']);
+    Route::post('/fetchSelectedBrand',[BrandController::class,'fetchselectedbrand']);
+    Route::post('/editBrand',[BrandController::class,'editbrand']);
+    Route::post('/trash',[BrandController::class,'trash']);
 
 });
-
-Route::post('brand/createbrand',[BrandController::class,'create']);
-Route::get('brand/fetch_brand',[BrandController::class,'fetchbrand']);
-Route::post('brand/fetchSelectedBrand',[BrandController::class,'fetchselectedbrand']);
-Route::post('brand/editBrand',[BrandController::class,'editbrand']);
-
-
 //brand end
 
 // categories start
