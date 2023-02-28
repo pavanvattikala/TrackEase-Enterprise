@@ -63,12 +63,25 @@ class BrandController extends Controller
         echo json_encode($output);
     }
     public function editbrand(Request $request){
-        dd($request->all());
+        //dd($request->all());
+
+        $request->validate([
+            'editBrandName'=>'required',
+            'editBrandStatus'=>'required',
+            'editBrandId'=>'required'
+        ]);
+
+        $brandId=$request->editBrandId;
+        $editBrandName=$request->editBrandName;
+        $editBrandStatus=$request->editBrandStatus;
+
+        DB::table('brands')->where('brand_id',$brandId)->update(['brand_name'=>$editBrandName,'brand_status'=>$editBrandStatus,'updated_at'=>today()]);
+
+       return redirect('/brand')->with('success','Brand Edited Sucessfully');
+
     }
     public function fetchselectedbrand(Request $request){
-        //var_dump($request->all());
-       // echo($request->brandId);
-        //$brand = DB::table('brands')->select('brand_name','brand_active')->where('brand_id',$request->brand_id)->get();
+
         $result = DB::table('brands')->select('brand_name','brand_active')->where('brand_id',$request->brandId)->first();
 
         echo json_encode($result);
