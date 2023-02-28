@@ -154,7 +154,11 @@
       </div>
       <div class="modal-footer removeCategoriesFooter">
         <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-        <button type="button" class="btn btn-primary" id="removeCategoriesBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
+		<form action="/category/trash" method="post">
+			@csrf
+			<input type="hidden" name="removeCategoryID" id="removeCategoryID" value="">
+			<input type="submit" class="btn btn-danger" value="Delete">
+		</form>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

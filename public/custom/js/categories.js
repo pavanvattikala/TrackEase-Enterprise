@@ -68,4 +68,13 @@ function editCategories(categoriesId = null) {
 	} else {
 		alert('Oops!! Refresh the page');
 	}
-} // /edit categories function
+} 
+//trash categories
+function removeCategories(categoriesId = null){
+	
+	if(categoriesId) {
+		$('#removeCategoryID').val(categoriesId);
+	} else {
+		alert('error!! Refresh the page again');
+	}
+}

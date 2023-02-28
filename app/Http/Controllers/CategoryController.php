@@ -86,5 +86,18 @@ class CategoryController extends Controller
 
        return redirect('/category')->with('success','Brand Edited Sucessfully');
     }
+    public function trash(Request $request){
+
+        //dd($request->all());
+        $request->validate([
+            'removeCategoryID'=>'required'
+        ]);
+
+        $removeCategoryID = $request->removeCategoryID;
+
+        DB::table('categories')->where('categories_id',$removeCategoryID)->update(['categories_status'=>0,'updated_at'=>today()]);
+
+        return redirect('/category')->with('success','Category Deleted Sucessfully');
+    }
     
 }

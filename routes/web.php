@@ -49,6 +49,9 @@ Route::prefix('category')->group(function(){
 
     Route::post('/edit_category',[CategoryController::class,'editCategory']);
 
+    Route::post('/trash',[CategoryController::class,'trash']);
+
+
 });
 
 
