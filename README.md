@@ -39,7 +39,7 @@ Contributions are always welcome!
 - Serivices Management 
 - Fullscreen mode
 - Cross platform
-- can be converted to desktop application see - [@SV-desktop](https://www.github.com/pavan-54)
+- can be converted to desktop application see - [@SV-desktop](https://github.com/pavan-54/SV-Desktop)
 
 
 
