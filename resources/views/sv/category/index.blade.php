@@ -16,10 +16,11 @@
 			<div class="panel-body">
 
 				<div class="remove-messages"></div>
+				@include('partials.error')
 
 				<div class="div-action pull pull-right" style="padding-bottom:20px;">
 					<button class="btn btn-default button1" data-toggle="modal" id="addCategoriesModalBtn" data-target="#addCategoriesModal"> <i class="glyphicon glyphicon-plus-sign"></i> Add Categories </button>
-				</div> <!-- /div-action -->				
+				</div> 			
 				
 				<table class="table" id="manageCategoriesTable">
 					<thead>
@@ -30,12 +31,11 @@
 						</tr>
 					</thead>
 				</table>
-				<!-- /table -->
 
-			</div> <!-- /panel-body -->
-		</div> <!-- /panel -->		
-	</div> <!-- /col-md-12 -->
-</div> <!-- /row -->
+			</div> 
+		</div> 
+	</div>
+</div>
 
 
 <!-- add categories -->
@@ -43,7 +43,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
 
-    	<form class="form-horizontal" id="submitCategoriesForm" action="category/createCategories" method="POST">
+    	<form class="form-horizontal" id="submitCategoriesForm" action="category/create_category" method="POST">
 			@csrf
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -59,7 +59,7 @@
 				    <div class="col-sm-7">
 				      <input type="text" class="form-control" id="categoriesName" placeholder="Categories Name" name="categoriesName" autocomplete="off">
 				    </div>
-	        </div> <!-- /form-group-->	         	        
+	        </div>        	        
 	        <div class="form-group">
 	        	<label for="categoriesStatus" class="col-sm-4 control-label">Status: </label>
 	        	<label class="col-sm-1 control-label">: </label>
@@ -70,27 +70,27 @@
 				      	<option value="2">Not Available</option>
 				      </select>
 				    </div>
-	        </div> <!-- /form-group-->	         	        
-	      </div> <!-- /modal-body -->
+	        </div>         	        
+	      </div> 
 	      
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
 	        
 	        <button type="submit" class="btn btn-primary" id="createCategoriesBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
-	      </div> <!-- /modal-footer -->	      
-     	</form> <!-- /.form -->	     
-    </div> <!-- /modal-content -->    
-  </div> <!-- /modal-dailog -->
+	      </div>      
+     	</form>  
+    </div>   
+  </div> 
 </div> 
-<!-- /add categories -->
 
 
-<!-- edit categories brand -->
+<!-- edit categories -->
 <div class="modal fade" id="editCategoriesModal" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
     	
-    	<form class="form-horizontal" id="editCategoriesForm" action="php_action/editCategories.php" method="POST">
+    	<form class="form-horizontal" id="editCategoriesForm" action="category/edit_category" method="POST">
+			@csrf
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Brand</h4>
@@ -111,39 +111,37 @@
 					    <div class="col-sm-7">
 					      <input type="text" class="form-control" id="editCategoriesName" placeholder="Categories Name" name="editCategoriesName" autocomplete="off">
 					    </div>
-		        </div> <!-- /form-group-->	         	        
+		        </div>         	        
 		        <div class="form-group">
-		        	<label for="editCategoriesStatus" class="col-sm-4 control-label">Status: </label>
+		        	<label for="editCategoriesActiveStatus" class="col-sm-4 control-label">Status: </label>
 		        	<label class="col-sm-1 control-label">: </label>
 					    <div class="col-sm-7">
-					      <select class="form-control" id="editCategoriesStatus" name="editCategoriesStatus">
+					      <select class="form-control" id="editCategoriesActiveStatus" name="editCategoriesActiveStatus">
 					      	<option value="">~~SELECT~~</option>
 					      	<option value="1">Available</option>
 					      	<option value="2">Not Available</option>
 					      </select>
 					    </div>
-		        </div> <!-- /form-group-->	 
-		      </div>         	        
-		      <!-- /edit brand result -->
+		        </div>  
+		      </div>     
+			  
+			  <input type="hidden" name="editCategoryId" id="editCategoryId" value="">
 
-	      </div> <!-- /modal-body -->
+	      </div>>
 	      
 	      <div class="modal-footer editCategoriesFooter">
 	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
 	        
 	        <button type="submit" class="btn btn-success" id="editCategoriesBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
 	      </div>
-	      <!-- /modal-footer -->
+	      
      	</form>
-	     <!-- /.form -->
+	    
     </div>
-    <!-- /modal-content -->
+    
   </div>
-  <!-- /modal-dailog -->
 </div>
-<!-- /categories brand -->
 
-<!-- categories brand -->
 <div class="modal fade" tabindex="-1" role="dialog" id="removeCategoriesModal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -160,8 +158,8 @@
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!-- /categories brand -->
+</div><
+
 
 
 <script src="custom/js/categories.js"></script>

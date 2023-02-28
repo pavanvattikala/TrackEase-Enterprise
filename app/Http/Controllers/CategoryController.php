@@ -47,8 +47,8 @@ class CategoryController extends Controller
                 Action <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a type="button" data-toggle="modal" id="editCategoriesModalBtn" data-target="#editCategoriesModal" onclick="editCategories('.$categoriesId.')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-                <li><a type="button" data-toggle="modal" data-target="#removeCategoriesModal" id="removeCategoriesModalBtn" onclick="removeCategories('.$categoriesId.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
+                <li><a type="button" href="" data-toggle="modal" id="editCategoriesModalBtn" data-target="#editCategoriesModal" onclick="editCategories('.$categoriesId.')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
+                <li><a type="button" href="" data-toggle="modal" data-target="#removeCategoriesModal" id="removeCategoriesModalBtn" onclick="removeCategories('.$categoriesId.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
             </ul>
             </div>';
 
@@ -69,6 +69,22 @@ class CategoryController extends Controller
 
         echo json_encode($result);
 
+    }
+    public function  editCategory(Request $request){
+        //dd($request->all());
+        $request->validate([
+            "editCategoriesName" => "required",
+            "editCategoriesActiveStatus" => "required",
+            "editCategoryId" => "required"
+        ]);
+
+        $categoryId=$request->editCategoryId;
+        $categoryName=$request->editCategoriesName;
+        $editCategoriesActiveStatus=$request->editCategoriesActiveStatus;
+
+        DB::table('categories')->where('categories_id',$categoryId)->update(['categories_name'=>$categoryName,'categories_active'=>$editCategoriesActiveStatus,'updated_at'=>today()]);
+
+       return redirect('/category')->with('success','Brand Edited Sucessfully');
     }
     
 }

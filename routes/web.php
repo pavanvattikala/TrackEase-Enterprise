@@ -21,9 +21,7 @@ use App\Http\Controllers\ServiceController;
 
 Route::get('/',[DashBoardController::class,'index']);
 
-// brans start
-
-
+// brand start
 Route::prefix('brand')->group(function(){
 
     Route::get('/',function(){
@@ -41,13 +39,18 @@ Route::prefix('brand')->group(function(){
 //brand end
 
 // categories start
+Route::prefix('category')->group(function(){
+    Route::get('/',function(){
+        return view('sv.category.index');
+    });
+    Route::post('category/create_category',[CategoryController::class,'create']);
+    Route::get('/fetchCategories',[CategoryController::class,'fetchCategories']);
+    Route::post('/fetchSelectedCategories',[CategoryController::class,'fetchSelectedCategories']);
 
-Route::get('/categories',function(){
-    return view('sv.category.index');
+    Route::post('/edit_category',[CategoryController::class,'editCategory']);
+
 });
-Route::post('category/createCategories',[CategoryController::class,'create']);
-Route::get('category/fetchCategories',[CategoryController::class,'fetchCategories']);
-Route::post('category/fetchSelectedCategories',[CategoryController::class,'fetchSelectedCategories']);
+
 
 // categories end
 

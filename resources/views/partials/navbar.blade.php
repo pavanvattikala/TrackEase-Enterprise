@@ -20,7 +20,7 @@
     
     <li id="navBrand"><a href="/brand"><i class="glyphicon glyphicon-btc"></i>  Brand</a></li>        
 
-    <li id="navCategories"><a href="/categories"> <i class="glyphicon glyphicon-th-list"></i> Category</a></li>        
+    <li id="navCategories"><a href="/category"> <i class="glyphicon glyphicon-th-list"></i> Category</a></li>        
 
     <li id="navProduct"><a href="/product"> <i class="glyphicon glyphicon-ruble"></i> Product </a></li>     
 
