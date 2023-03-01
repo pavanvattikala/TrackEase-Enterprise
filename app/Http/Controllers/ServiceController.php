@@ -102,11 +102,16 @@ class ServiceController extends Controller
 
     public function fetchService(){
 
-        $service_data = DB::table('service_data')->orderBy('service_date','desc')->get();
+        $service_data = DB::table('service_data')->orderBy('service_date','desc')->where('status',1)->get();
+
+        $output['data']=[];
+
+        if(empty($service_data)){
+            return  json_encode($output);
+        }
 
         //dd($service_data);
-       
-
+        
         foreach($service_data as $service) { 
             
             $service_id = $service->service_id;
@@ -117,9 +122,9 @@ class ServiceController extends Controller
                 Action <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a type="button" data-toggle="modal" id="editProductModalBtn"  href="/service/manage/edit_service/'.$service_id.'"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-                <li><a type="button" data-toggle="modal" href="/service/manage/view_service/'.$service_id.'"> <i class="glyphicon glyphicon-search"></i> View in Detail</a></li> 
-                <li><a type="button" data-toggle="modal" href="/service/print/'.$service_id.'"> <i class="glyphicon glyphicon-print"></i>Print</a></li>      
+                <li><a type="button" data-toggle="modal" id="editProductModalBtn"  href="/service/manage/view_service/'.$service_id.'"> <i class="glyphicon glyphicon-search"></i>View / Edit</a></li>
+                <li><a type="button" href="" data-toggle="modal" data-target="#removeServiceModal" id="removeServiceModalBtn" onclick="removeService('.$service_id.')"> <i class="glyphicon glyphicon-trash"></i><span style="color:red">Delete</span></a></li>       
+                <li><a type="button" data-toggle="modal" href=""> <i class="glyphicon glyphicon-print"></i>Print</a></li>      
             </ul>
             </div>';
 
@@ -169,14 +174,6 @@ class ServiceController extends Controller
         }; 
 
         echo json_encode($output);
-
-    }
-
-    public function editService($service_id){
-        $service_data = DB::table('service_data') ->join('service_taken_data', 'service_data.service_id', '=', 'service_taken_data.service_id')->where('service_data.service_id',$service_id)->get();
-
-        $service_name  = DB::table('service_types')->select('service_type')->where('service_id',$service_data->service_type)->first()->service_type;
-       
 
     }
 
@@ -292,5 +289,26 @@ class ServiceController extends Controller
 
         return view('sv.service.service_print')->with('data',$data);
 
+    }
+
+    public function trash(Request $request){
+        $request->validate([
+            'removeServiceId'=>'required'
+        ]);
+
+
+        $removeServiceId = $request->removeServiceId;
+
+        $data = array(
+            'status'=>0,
+            'updated_at'=>today()
+        );
+
+        DB::table('service_taken_data')->where('service_id', $removeServiceId)->update($data);
+        DB::table('service_data')->where('service_id', $removeServiceId)->update($data);
+
+        $messege= "Order ".$removeServiceId." is sucessfully deleted";
+
+        return redirect('/service/manage')->with('success','Service Deleted Sucessfully');
     }
 }

@@ -177,57 +177,9 @@ function resetOrderForm() {
 
 
 // remove order from server
-function removeOrder(orderId = null) {
-	if(orderId) {
-		$("#removeOrderBtn").unbind('click').bind('click', function() {
-			$("#removeOrderBtn").button('loading');
-
-			$.ajax({
-				url: 'php_action/removeOrder.php',
-				type: 'post',
-				data: {orderId : orderId},
-				dataType: 'json',
-				success:function(response) {
-					$("#removeOrderBtn").button('reset');
-
-					if(response.success == true) {
-
-						manageServiceTable.ajax.reload(null, false);
-						// hide modal
-						$("#removeOrderModal").modal('hide');
-						// success messages
-						$("#success-messages").html('<div class="alert alert-success">'+
-	            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-	            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
-	          '</div>');
-
-						// remove the mesages
-	          $(".alert-success").delay(500).show(10, function() {
-							$(this).delay(3000).hide(10, function() {
-								$(this).remove();
-							});
-						}); // /.alert	          
-
-					} else {
-						// error messages
-						$(".removeOrderMessages").html('<div class="alert alert-warning">'+
-	            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-	            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
-	          '</div>');
-
-						// remove the mesages
-	          $(".alert-success").delay(500).show(10, function() {
-							$(this).delay(3000).hide(10, function() {
-								$(this).remove();
-							});
-						}); // /.alert	          
-					} // /else
-
-				} // /success
-			});  // /ajax function to remove the order
-
-		}); // /remove order button clicked
-		
+function removeService(serviceId = null) {
+	if(serviceId) {
+		$("#removeServiceForm").append('<input type="hidden" name="removeServiceId" id="removeServiceId" value="'+serviceId+'" />');				
 
 	} else {
 		alert('error! refresh the page again');

@@ -134,12 +134,11 @@ Route::prefix('service')->group(function () {
         return view('sv.service.manage_service');
     });
 
-    Route::get('/manage/edit_service/{service_id}',[ServiceController::class,'editService']);
-    
-    
     Route::get('/manage/view_service/{service_id}',[ServiceController::class,'viewService']);
-
+    
     Route::get('/print/{service_id}',[ServiceController::class,'print']);
+
+    Route::post('/trash',[ServiceController::class,'trash']);
 
 });
 

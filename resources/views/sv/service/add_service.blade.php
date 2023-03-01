@@ -27,7 +27,7 @@
   
 			  <div class="success-messages"></div> <!--/success-messages-->
   
-			<form class="form-horizontal" method="POST" action="/service/insert_service" id="createOrderForm">
+			<form class="form-horizontal" method="POST" action="/service/insert_service" id="createServiceForm">
 				@csrf
   
 				<div class="form-group">
@@ -96,7 +96,7 @@
 								</td>
 								<td>
   
-									<button class="btn btn-default removeProductRowBtn" type="button" id="removeServiceRowBtn" onclick="removeServiceRow({{$x}})"><i class="glyphicon glyphicon-trash"></i></button>
+									<button class="btn btn-default removeServiceRowBtn" type="button" id="removeServiceRowBtn" onclick="removeServiceRow({{$x}})"><i class="glyphicon glyphicon-trash"></i></button>
 								</td>
 							</tr>
 							@php
@@ -185,40 +185,14 @@
 				  <div class="col-sm-offset-2 col-sm-10">
 				  <button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-plus-sign"></i> Add Row </button>
   
-					<button type="submit" id="createOrderBtn" data-loading-text="Loading..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+					<button type="submit" id="createServiceBtn" data-loading-text="Loading..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
   
-					<button type="reset" class="btn btn-default" onclick="resetOrderForm()"><i class="glyphicon glyphicon-erase"></i> Reset</button>
+					<button type="reset" class="btn btn-default" onclick="resetServiceForm()"><i class="glyphicon glyphicon-erase"></i> Reset</button>
 				  </div>
 				</div>
 			  </form>
-  
-  
-	  </div> <!--/panel-->	
-  </div> <!--/panel-->	
-  
-  
-  <!-- remove order -->
-  <div class="modal fade" tabindex="-1" role="dialog" id="removeOrderModal">
-	<div class="modal-dialog">
-	  <div class="modal-content">
-		<div class="modal-header">
-		  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		  <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Remove Service</h4>
-		</div>
-		<div class="modal-body">
-  
-			<div class="removeOrderMessages"></div>
-  
-		  <p>Do you really want to remove ?</p>
-		</div>
-		<div class="modal-footer removeProductFooter">
-		  <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-		  <button type="button" class="btn btn-primary" id="removeOrderBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
-		</div>
-	  </div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-  <!-- /remove order-->
+	  </div> 
+  </div> 
   
   
   <script src="{{ asset('custom/js/service.js') }}"></script>
