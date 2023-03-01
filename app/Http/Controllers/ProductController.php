@@ -133,4 +133,16 @@ class ProductController extends Controller
         
     }
 
+    public function trash(Request $request){
+        $request->validate([
+            'removeProductId'=>'required'
+        ]);
+
+        $removeProductId = $request->removeProductId;
+
+        DB::table('product')->where('product_id',$removeProductId)->update(['status'=>0,'updated_at'=>today()]);
+
+        return redirect('/product')->with('success','Product Deleted Sucessfully');
+    }
+
 }

@@ -68,6 +68,8 @@ Route::prefix('product')->group(function(){
     Route::get('/fetchProduct',[ProductController::class,'fetchProduct']);
     Route::post('/fetchSelectedProduct ',[ProductController::class,'fetchSelectedProduct']);
     Route::post('/fetchProductData ',[ProductController::class,'fetchProductData']);
+    Route::post('/trash ',[ProductController::class,'trash']);
+
 });
 
 
