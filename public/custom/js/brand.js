@@ -51,7 +51,6 @@ function editBrands(brandId = null) {
 				// add  modal footer
 				$('.editBrandFooter').removeClass('div-hide');
 
-				//$('.modal-body').append()
 				$(".editBrandFooter").append('<input type="hidden" name="editBrandId" id="editBrandId" value="'+brandId+'" />');				
 
 

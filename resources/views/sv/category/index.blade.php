@@ -124,9 +124,6 @@
 					    </div>
 		        </div>  
 		      </div>     
-			  
-			  <input type="hidden" name="editCategoryId" id="editCategoryId" value="">
-
 	      </div>>
 	      
 	      <div class="modal-footer editCategoriesFooter">
@@ -154,9 +151,8 @@
       </div>
       <div class="modal-footer removeCategoriesFooter">
         <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-		<form action="/category/trash" method="post">
+		<form action="/category/trash" method="post" id="removeCategoryForm">
 			@csrf
-			<input type="hidden" name="removeCategoryID" id="removeCategoryID" value="">
 			<input type="submit" class="btn btn-danger" value="Delete">
 		</form>
       </div>

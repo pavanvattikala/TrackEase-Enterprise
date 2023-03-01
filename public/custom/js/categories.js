@@ -54,7 +54,7 @@ function editCategories(categoriesId = null) {
 				//modal footer
 				$(".editCategoriesFooter").removeClass('div-hide');	
 
-				$('#editCategoryId').val(categoriesId);
+				$(".editCategoriesFooter").append('<input type="hidden" name="editCategoryId" id="editCategoryId" value="'+categoriesId+'" />');				
 
 				// set the categories name
 				$("#editCategoriesName").val(response.categories_name);
@@ -73,7 +73,8 @@ function editCategories(categoriesId = null) {
 function removeCategories(categoriesId = null){
 	
 	if(categoriesId) {
-		$('#removeCategoryID').val(categoriesId);
+		$("#removeCategoryForm").append('<input type="hidden" name="removeCategoryID" id="removeCategoryID" value="'+categoriesId+'" />');				
+
 	} else {
 		alert('error!! Refresh the page again');
 	}
