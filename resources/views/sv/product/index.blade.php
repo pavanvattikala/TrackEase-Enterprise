@@ -75,7 +75,7 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-{{-- <!-- edit categories brand -->
+<!-- edit categories brand -->
 <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -176,6 +176,12 @@
                               <div class="col-sm-8">
                                 <select class="form-control" id="editBrandName" name="editBrandName">
                                     <option value="">~~SELECT~~</option>
+                                    @php
+                                      $brands = DB::table('brands')->select('brand_id','brand_name')->get();
+                                    @endphp
+                                    @foreach ($brands as $brand)
+                                      <option value="{{ $brand->brand_id }}">{{ $brand->brand_name }}</option>
+                                    @endforeach
                                 </select>
                               </div>
                       </div> <!-- /form-group-->	
@@ -186,6 +192,12 @@
                               <div class="col-sm-8">
                                 <select type="text" class="form-control" id="editCategoryName" name="editCategoryName" >
                                     <option value="">~~SELECT~~</option>
+                                    @php
+                                    $categories_name = DB::table('categories')->select('categories_id','categories_name')->get();
+                                  @endphp
+                                  @foreach ($categories_name as $category)
+                                    <option value="{{ $category->categories_id }}">{{ $category->categories_name }}</option>
+                                  @endforeach
                                 </select>
                               </div>
                       </div> <!-- /form-group-->					        	         	       
@@ -224,7 +236,7 @@
   </div>
 
 
-<script src="custom/js/product.js"></script> --}}
+<script src="custom/js/product.js"></script>
 
     
 @endsection

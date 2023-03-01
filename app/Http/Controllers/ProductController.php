@@ -122,9 +122,9 @@ class ProductController extends Controller
         $result = DB::table('product')
         ->join('brands', 'product.brand_id', '=', 'brands.brand_id')
         ->join('categories', 'product.categories_id', '=', 'categories.categories_id')
-        ->select('product.product_id', 'product.product_name')
+        ->select('product.product_id', 'product.product_name','brands.brand_id','product.quantity','product.selling_price','product.categories_id','product.active')
         ->where('product.status',1)
-        ->get();
+        ->get()->first();
 
        // dd($result);
 

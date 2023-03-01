@@ -52,10 +52,10 @@ function addRow() {
 					'<select class="form-control" name="productName[]" id="productName'+count+'" onchange="getProductData('+count+')" >'+
 						'<option value="">~~SELECT~~</option>';
 						// console.log(response);
-						$.each(response, function(index, value) {
+						//$.each(response, function(index, value) {
 							//console.log(value);
-							tr += '<option value="'+value.product_id+'">'+value.product_name+'</option>';							
-						});
+							tr += '<option value="'+response.product_id+'">'+response.product_name+'</option>';							
+						//});
 													
 					tr += '</select>'+
 					'</div>'+
