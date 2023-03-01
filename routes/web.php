@@ -53,22 +53,23 @@ Route::prefix('category')->group(function(){
 
 
 });
-
-
 // categories end
 
 //product start
-Route::get('/product',function(){
-    return view('sv.product.index');
+Route::prefix('product')->group(function(){
+    Route::get('/',function(){
+        return view('sv.product.index');
+    
+    });
+    Route::get('/add_product',function(){
+        return view('sv.product.add_product');
+    });
+    Route::post('/createProduct',[ProductController::class,'create']);
+    Route::get('/fetchProduct',[ProductController::class,'fetchProduct']);
+    Route::post('/fetchSelectedProduct ',[ProductController::class,'fetchSelectedProduct']);
+    Route::post('/fetchProductData ',[ProductController::class,'fetchProductData']);
+});
 
-});
-Route::get('/product/add_product',function(){
-    return view('sv.product.add_product');
-});
-Route::post('product/createProduct',[ProductController::class,'create']);
-Route::get('product/fetchProduct',[ProductController::class,'fetchProduct']);
-Route::post('product/fetchSelectedProduct ',[ProductController::class,'fetchSelectedProduct']);
-Route::post('product/fetchProductData ',[ProductController::class,'fetchProductData']);
 
 // product end
 
