@@ -104,8 +104,8 @@
   
                         
                       <div role="tabpanel" class="tab-pane active" id="photo">
-                          <form action="php_action/editProductImage.php" method="POST" id="updateProductImageForm" class="form-horizontal" enctype="multipart/form-data">
-  
+                          <form action="product/editProductImage" method="POST" id="updateProductImageForm" class="form-horizontal" enctype="multipart/form-data">
+                            @csrf
                           <br />
                           <div id="edit-productPhoto-messages"></div>
   
@@ -121,27 +121,23 @@
                           <label for="editProductImage" class="col-sm-3 control-label">Select Photo: </label>
                           <label class="col-sm-1 control-label">: </label>
                               <div class="col-sm-8">
-                                  <!-- the avatar markup -->
                                       <div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>							
                                   <div class="kv-avatar center-block">					        
                                       <input type="file" class="form-control" id="editProductImage" placeholder="Product Name" name="editProductImage" class="file-loading" style="width:auto;"/>
                                   </div>
                                 
                               </div>
-                      </div> <!-- /form-group-->	     	           	       
+                      </div>	     	           	       
   
                       <div class="modal-footer editProductPhotoFooter">
                           <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
                           
-                          <!-- <button type="submit" class="btn btn-success" id="editProductImageBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button> -->
                         </div>
-                        <!-- /modal-footer -->
                         </form>
-                        <!-- /form -->
                       </div>
-                      <!-- product image -->
                       <div role="tabpanel" class="tab-pane" id="productInfo">
-                          <form class="form-horizontal" id="editProductForm" action="php_action/editProduct.php" method="POST">				    
+                          <form class="form-horizontal" id="editProductForm" action="product/editProduct" method="POST">
+                            @csrf				    
                           <br />
   
                           <div id="edit-product-messages"></div>
@@ -160,7 +156,7 @@
                               <div class="col-sm-8">
                                 <input type="text" class="form-control" id="editQuantity" placeholder="Quantity" name="editQuantity" autocomplete="off">
                               </div>
-                      </div> <!-- /form-group-->	        	 
+                      </div>        	 
   
                       <div class="form-group">
                           <label for="editRate" class="col-sm-3 control-label">Rate: </label>
@@ -168,7 +164,7 @@
                               <div class="col-sm-8">
                                 <input type="text" class="form-control" id="editRate" placeholder="Rate" name="editRate" autocomplete="off">
                               </div>
-                      </div> <!-- /form-group-->	     	        
+                      </div>     	        
   
                       <div class="form-group">
                           <label for="editBrandName" class="col-sm-3 control-label">Brand Name: </label>
@@ -184,7 +180,7 @@
                                     @endforeach
                                 </select>
                               </div>
-                      </div> <!-- /form-group-->	
+                      </div> 	
   
                       <div class="form-group">
                           <label for="editCategoryName" class="col-sm-3 control-label">Category Name: </label>
@@ -200,7 +196,7 @@
                                   @endforeach
                                 </select>
                               </div>
-                      </div> <!-- /form-group-->					        	         	       
+                      </div> 					        	         	       
   
                       <div class="form-group">
                           <label for="editProductStatus" class="col-sm-3 control-label">Status: </label>
@@ -212,27 +208,20 @@
                                     <option value="2">Not Available</option>
                                 </select>
                               </div>
-                      </div> <!-- /form-group-->	         	        
+                      </div>	         	        
   
                       <div class="modal-footer editProductFooter">
                           <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
                           
                           <button type="submit" class="btn btn-success" id="editProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
-                        </div> <!-- /modal-footer -->				     
-                      </form> <!-- /.form -->				     	
+                        </div> 				     
+                      </form> 	     	
                       </div>    
-                      <!-- /product info -->
                     </div>
-  
-                  </div>
-                
-            </div> <!-- /modal-body -->
-                      
-           
+                  </div>   
+            </div> 
       </div>
-      <!-- /modal-content -->
     </div>
-    <!-- /modal-dailog -->
   </div>
 
 

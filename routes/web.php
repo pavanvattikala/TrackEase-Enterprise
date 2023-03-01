@@ -70,6 +70,8 @@ Route::prefix('product')->group(function(){
     Route::post('/fetchProductData ',[ProductController::class,'fetchProductData']);
     Route::post('/trash ',[ProductController::class,'trash']);
 
+    Route::post('/editProduct ',[ProductController::class,'editProduct']);
+
 });
 
 

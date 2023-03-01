@@ -114,7 +114,30 @@ class ProductController extends Controller
 
     }
     public function fetchSelectedProduct(Request $request){
+        $request->validate([
+            'productId'=>'required'
+        ]);
+
        $productId = $request->productId;
+
+       //dd($productId);
+
+
+       if($request->editProductinfo === "yes"){
+            $result = DB::table('product')
+            ->join('brands', 'product.brand_id', '=', 'brands.brand_id')
+            ->join('categories', 'product.categories_id', '=', 'categories.categories_id')
+            ->select('product.product_id', 'product.product_name','brands.brand_id','product.quantity','product.selling_price','product.categories_id','product.active')
+            ->where('product.status',1)
+            ->where('product_id',$productId)
+            ->get()->first();       
+        }
+       else{
+        $result = DB::table('product')->select('selling_price')->where('product_id',$productId)->first();
+       
+       }
+       return json_encode($result);
+
        $result = DB::table('product')->select('selling_price')->where('product_id',$productId)->first();
        return json_encode($result);
     }
@@ -122,7 +145,7 @@ class ProductController extends Controller
         $result = DB::table('product')
         ->join('brands', 'product.brand_id', '=', 'brands.brand_id')
         ->join('categories', 'product.categories_id', '=', 'categories.categories_id')
-        ->select('product.product_id', 'product.product_name','brands.brand_id','product.quantity','product.selling_price','product.categories_id','product.active')
+        ->select('product.product_id', 'product.product_name')
         ->where('product.status',1)
         ->get()->first();
 
@@ -145,4 +168,33 @@ class ProductController extends Controller
         return redirect('/product')->with('success','Product Deleted Sucessfully');
     }
 
+    public function editProduct(Request $request){
+       // dd($request->all());
+        $request->validate([
+            "editProductName" => "required",
+            "editQuantity" => "required",
+            "editRate" => "required",
+            "editBrandName" => "required",
+            "editCategoryName" => "required",
+            "editProductStatus" => "required",
+            "productId" => "required"
+        ]);
+
+        $data = array(
+            'product_name' => $request->editProductName,
+            'quantity'  =>  $request->editQuantity,
+            'selling_price'  =>  $request->editRate,
+            'brand_id'  =>  $request->editBrandName,
+            'categories_id'  =>  $request->editCategoryName,
+            'active'  =>  $request->editProductStatus,
+            'updated_at' => today()
+        );
+
+
+        DB::table('product')->where('product_id',$request->productId)->update($data);
+
+        return redirect('/product')->with('success','Product Edited Sucessfully');
+
+        
+    }
 }
