@@ -148,9 +148,8 @@
       </div>
       <div class="modal-footer removeBrandFooter">
         <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-		<form action="/brand/trash" method="post">
+		<form action="/brand/trash" method="post" id="removeBrandForm">
 			@csrf
-			<input type="hidden" name="removeBrandId" id="removeBrandId" value="">
 			<input  class="btn btn-danger" type="submit" value="Delte Brand">
 		</form>
       </div>

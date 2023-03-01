@@ -72,7 +72,8 @@ function editBrands(brandId = null) {
 
 function removeBrands(brandId = null){
 	if(brandId) {
-		$('#removeBrandId').val(brandId);
+		$("#removeBrandForm").append('<input type="hidden" name="removeBrandId" id="removeBrandId" value="'+brandId+'" />');				
+
 	} else {
 		alert('error!! Refresh the page again');
 	}
