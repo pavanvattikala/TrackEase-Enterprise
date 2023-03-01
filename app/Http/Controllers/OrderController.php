@@ -82,9 +82,9 @@ class OrderController extends Controller
                 Action <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-            <li><a type="button" data-toggle="modal" href="/orders/manage/view_order/'.$order_id.'"> <i class="glyphicon glyphicon-search"></i>View / Edit</a></li> 
-                <li><a type="button" href="" onclick="removeOrder('.$order_id.')" data-toggle="modal" data-target="#removeOrder"> <i class="glyphicon glyphicon-trash"></i><span style="color:red">Delete</span></a></li>
-                <li><a type="button" data-toggle="modal" href="/orders/print/'.$order_id.'"> <i class="glyphicon glyphicon-print"></i>Print</a></li>
+            <li><a type="button" href="" data-toggle="modal" href="/orders/manage/view_order/'.$order_id.'"> <i class="glyphicon glyphicon-search"></i>View / Edit</a></li> 
+            <li><a type="button" href="" onclick="removeOrder('.$order_id.')" data-toggle="modal" data-target="#removeOrder"> <i class="glyphicon glyphicon-trash"></i><span style="color:red">Delete</span></a></li>
+            <li><a type="button" href="" data-toggle="modal" href="/orders/print/'.$order_id.'"> <i class="glyphicon glyphicon-print"></i>Print</a></li>
             </ul>
             </div>';
 
