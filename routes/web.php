@@ -43,7 +43,7 @@ Route::prefix('category')->group(function(){
     Route::get('/',function(){
         return view('sv.category.index');
     });
-    Route::post('category/create_category',[CategoryController::class,'create']);
+    Route::post('/create_category',[CategoryController::class,'create']);
     Route::get('/fetchCategories',[CategoryController::class,'fetchCategories']);
     Route::post('/fetchSelectedCategories',[CategoryController::class,'fetchSelectedCategories']);
 
