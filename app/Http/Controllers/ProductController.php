@@ -40,24 +40,24 @@ class ProductController extends Controller
                 Action <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a type="button" data-toggle="modal" id="editProductModalBtn" data-target="#editProductModal" onclick="editProduct('.$productId.')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-                <li><a type="button" data-toggle="modal" data-target="#removeProductModal" id="removeProductModalBtn" onclick="removeProduct('.$productId.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
+                <li><a type="button" href="" data-toggle="modal" id="editProductModalBtn" data-target="#editProductModal" onclick="editProduct('.$productId.')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
+                <li><a type="button" href="" data-toggle="modal" data-target="#removeProductModal" id="removeProductModalBtn" onclick="removeProduct('.$productId.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
             </ul>
             </div>';
-
-            // $brandId = $row[3];
-            // $brandSql = "SELECT * FROM brands WHERE brand_id = $brandId";
-            // $brandData = $connect->query($sql);
-            // $brand = "";
-            // while($row = $brandData->fetch_assoc()) {
-            // 	$brand = $row['brand_name'];
-            // }
 
             $brand = $item->brand_name;
             $category = $item->categories_name;
 
             $imageUrl = substr($item->product_image, 3);
             $productImage = "<img class='img-round' src='".$imageUrl."' style='height:30px; width:50px;'  />";
+
+            //setting red colur to less stock quntity
+
+            $quanity='<span>'.$item->quantity.'</span>';
+            
+            if($item->quantity<0){
+                $quanity='<span style="color:red">'.$item->quantity.'</span>';
+            }
 
             $output['data'][] = array( 		
                 // image
@@ -67,7 +67,7 @@ class ProductController extends Controller
                 // selling_price
                 $item->selling_price,
                 // quantity 
-                $item->quantity, 		 	
+                $quanity, 		 	
                 // brand
                 $brand,
                 // category 		
