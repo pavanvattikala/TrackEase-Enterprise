@@ -28,5 +28,8 @@
   <!-- bootstrap js -->
 	<script src="{{ asset('assests/bootstrap/js/bootstrap.min.js') }}"></script>
 
+  <link rel="icon" type="image/png" href="{{ asset('logo.jpg') }}"/>
+
+
 </head>
 
