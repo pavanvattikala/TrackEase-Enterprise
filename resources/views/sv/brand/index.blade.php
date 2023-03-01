@@ -122,8 +122,6 @@
 						</div>
 				</div>
 			</div>  
-			<input type="hidden" name="editBrandId"  id="editBrandId" value="">       	      
-
 	      </div>
 	      
 	      <div class="modal-footer editBrandFooter">

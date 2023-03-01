@@ -15,6 +15,7 @@ $(document).ready(function() {
 function editBrands(brandId = null) {
 	if(brandId) {
 
+		$('#editBrandId').remove();
 		// remove the error 
 		$('.text-danger').remove();
 		// remove the form-error
@@ -50,7 +51,9 @@ function editBrands(brandId = null) {
 				// add  modal footer
 				$('.editBrandFooter').removeClass('div-hide');
 
-				$('.modal-body').append()
+				//$('.modal-body').append()
+				$(".editBrandFooter").append('<input type="hidden" name="editBrandId" id="editBrandId" value="'+brandId+'" />');				
+
 
 				$('#editBrandId').val(brandId);
 
