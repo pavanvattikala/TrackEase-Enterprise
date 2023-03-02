@@ -31,12 +31,14 @@ class DaySheetController extends Controller
 
         $orders_data = DB::table('orders')->select('order_id','paid','order_date')->whereBetween('order_date',[$fromDate,$toDate])->where('status',1)->get();
         $service_data = DB::table('service_data')->whereBetween('service_date',[$fromDate,$toDate])->where('status',1)->get();
+        $expense_data = DB::table('expenses')->select('expense_id','name','amount')->whereBetween('created_at',[$fromDate,$toDate])->where('verified',1)->where('status',1)->get();
+
 
         // $data=$orders_data->merge($service_data);
 
         $types = array('Order','Service','Expense');
 
-        $links = array('/orders/manage/view_order/','/service/manage/view_service/');
+        $links = array('/orders/manage/view_order/','/service/manage/view_service/','/expense/manage/view_expense/');
 
         //$button = 
 
@@ -54,6 +56,14 @@ class DaySheetController extends Controller
                 $types[1],
                 $service->paid_amt,
                 '<a type="button" class="btn btn-primary" href="'.$links[1].$service->service_id.'"> <i class="glyphicon glyphicon-search"></i>View</a>', 		
+                ); 	
+        }
+        foreach ($expense_data as $expense) {
+        
+            $output[] = array( 		
+                $types[2],
+                '-'.$expense->amount,
+                '<a type="button" class="btn btn-primary" href="'.$links[2].$expense->expense_id.'"> <i class="glyphicon glyphicon-search"></i>View</a>', 		
                 ); 	
         }
 
