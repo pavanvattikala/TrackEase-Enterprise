@@ -7,7 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\DaySheetController;
-
+use App\Http\Controllers\ExpenseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -142,8 +142,9 @@ Route::prefix('service')->group(function () {
     Route::post('/trash',[ServiceController::class,'trash']);
 
 });
+//service end
 
-
+//day sheet
 Route::prefix('daysheet')->group(function () {
 
     Route::get('/',[DaySheetController::class,'index']);
@@ -151,4 +152,19 @@ Route::prefix('daysheet')->group(function () {
     Route::post('/fetchdata',[DaySheetController::class,'fetchdata']);
 
 });
-//service end
+
+//expense
+Route::prefix('expense')->group(function () {
+
+    Route::get('/',function(){
+        return view('sv.expense.index');
+    
+    });
+    
+    Route::post('/createExpense',[ExpenseController::class,'create']);
+    Route::get('/fetchExpense',[ExpenseController::class,'fetchExpense']);
+    Route::post('/fetchSelectedBrand',[ExpenseController::class,'fetchselectedbrand']);
+    Route::post('/editBrand',[ExpenseController::class,'editbrand']);
+    Route::post('/trash',[ExpenseController::class,'trash']);
+
+});
