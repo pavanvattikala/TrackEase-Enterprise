@@ -14,7 +14,6 @@ class ServiceController extends Controller
         //dd($request->all());
 
         $request->validate([
-            'clientName'=>'required',
             'clientContact'=>'required',
             'serviceName'=>'required',
             'rate'=>'required',
@@ -25,13 +24,11 @@ class ServiceController extends Controller
             'totalAmountValue'=>'required',
             'grandTotalValue'=>'required',
             'paid'=>'required',
-            'dueValue'=>'required',
-            'paymentType'=>'required',
-            'paymentStatus'=>'required'        
+            'dueValue'=>'required',      
         ]);
 
          $serviceDate  = $request->servicedate;
-         $clientName = $request->clientName;
+         $clientName = !isset($request->clientName) ? 'walk_in' : $request->clientName;
          $clientContact = $request->clientContact;
          $totalAmount = $request->totalAmountValue;
          $serviceCharge = $request->serviceCharge;
@@ -39,8 +36,8 @@ class ServiceController extends Controller
          $grand_total = $request->grandTotalValue;
          $paid = $request->paid;
          $dueValue = $request->dueValue;
-         $paymentType = $request->paymentType;
-         $paymentStatus = $request->paymentStatus;
+         $paymentType = !isset($request->paymentType) ? "1" : $request->paymentType;
+         $paymentStatus = !isset($request->paymentStatus) ? "1" : $request->paymentStatus;
          $subtotal = $request->subTotalValue;
 
          // items that can be 1 or more
