@@ -213,7 +213,7 @@ function resetOrderForm() {
 //order delte
 function removeOrder(orderId) {
 	if(orderId){
-		$('#removeOrderForm').append('<input type="hidden" name="orderId" id="formRemoveOrderId"value="">');
+		$('#removeOrderForm').append('<input type="hidden" name="orderId" id="formRemoveOrderId"value="'+orderId+'">');
 	}
 	
 	else {

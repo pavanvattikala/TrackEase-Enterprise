@@ -13,16 +13,15 @@ class OrderController extends Controller
         //dd($request->all());
         $request->validate([
             'orderDate'=>'required',
-            'clientName'=>'required',
             'clientContact'=>'required',
             'productName'=>'required',
-            'paymentStatus'=>'required',
             'paid'=>'required'
         ]);
+
         
         $data = [
             "order_date"=>$request->orderDate,
-            "client_name" => $request->clientName,
+            "client_name" => !isset($request->clientName) ? 'walk_in' : $request->clientName,
             "client_contact" => $request->clientContact,
             "sub_total" => $request->subTotalValue,
             "total_amount" => $request->totalAmountValue,
@@ -30,9 +29,11 @@ class OrderController extends Controller
             "grand_total" => $request->grandTotalValue,
             "paid" => $request->paid,
             "due" => $request->dueValue,
-            "payment_type" => $request->paymentType,
-            "payment_status" => $request->paymentStatus
+            "payment_type" => !isset($request->paymentType) ? "1" : $request->paymentType,
+            "payment_status" =>!isset($request->paymentStatus) ? "1" : $request->paymentStatus
         ];
+
+        dd($data);
 
 
         $total_items = count($request->productName); // getting no of products
@@ -82,9 +83,9 @@ class OrderController extends Controller
                 Action <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-            <li><a type="button" href="" data-toggle="modal" href="/orders/manage/view_order/'.$order_id.'"> <i class="glyphicon glyphicon-search"></i>View / Edit</a></li> 
+            <li><a type="button" data-toggle="modal" href="/orders/manage/view_order/'.$order_id.'"> <i class="glyphicon glyphicon-search"></i>View / Edit</a></li> 
             <li><a type="button" href="" onclick="removeOrder('.$order_id.')" data-toggle="modal" data-target="#removeOrder"> <i class="glyphicon glyphicon-trash"></i><span style="color:red">Delete</span></a></li>
-            <li><a type="button" href="" data-toggle="modal" href="/orders/print/'.$order_id.'"> <i class="glyphicon glyphicon-print"></i>Print</a></li>
+            <li><a type="button" data-toggle="modal" href="/orders/print/'.$order_id.'"> <i class="glyphicon glyphicon-print"></i>Print</a></li>
             </ul>
             </div>';
 
