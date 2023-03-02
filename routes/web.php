@@ -6,6 +6,7 @@ use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\DaySheetController;
 
 
 /*
@@ -142,4 +143,12 @@ Route::prefix('service')->group(function () {
 
 });
 
+
+Route::prefix('daysheet')->group(function () {
+
+    Route::get('/',[DaySheetController::class,'index']);
+
+    Route::post('/fetchdata',[DaySheetController::class,'fetchdata']);
+
+});
 //service end

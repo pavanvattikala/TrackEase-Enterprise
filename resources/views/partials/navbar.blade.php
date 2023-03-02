@@ -39,6 +39,9 @@
         <li id="topNavAddOrder"><a href="/service/add_service_type"> <i class="glyphicon glyphicon-plus"></i> Add Service Types</a></li>            
       </ul>
     </li> 
+    <li id="navDaySheet"><a href="/daysheet"> <i class="glyphicon glyphicon-th-list"></i> Day Sheet </a></li>
+    <li id="navExpenses"><a href="/expense"> <i class="glyphicon glyphicon-scissors"></i> Expenses </a></li>          
+
 
     {{-- <li id="navReport"><a href="report.php"> <i class="glyphicon glyphicon-check"></i> Report </a></li> --}}
 
