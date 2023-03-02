@@ -49,7 +49,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="removeOrderLabel">Are you sure you want to delete :: <span id="removeOrderId"></span></h5>
+          <h5 class="modal-title" id="removeOrderLabel">Are you sure you want to delete ??</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -59,9 +59,9 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <form action="/orders/removeOrder" method="POST">
+          <form action="/orders/removeOrder" method="POST" id="removeOrderForm">
             @csrf
-            <input type="hidden" name="orderId" id="formRemoveOrderId"value="">
+            
             <input class="btn btn-danger" type="submit" value="Delete">
           </form>
           

@@ -212,6 +212,14 @@ function resetOrderForm() {
 } 
 //order delte
 function removeOrder(orderId) {
-	$('#removeOrderId').text(orderId);
-	$('#formRemoveOrderId').val(orderId);
+	if(orderId){
+		$('#removeOrderForm').append('<input type="hidden" name="orderId" id="formRemoveOrderId"value="">');
+	}
+	
+	else {
+		alert('error!! Refresh the page again');
+	}
+	
+	
+	
 }
