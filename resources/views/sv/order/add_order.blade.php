@@ -38,13 +38,13 @@
 				<div class="form-group">
 				  <label for="clientName" class="col-sm-2 control-label">Client Name</label>
 				  <div class="col-sm-10">
-					<input type="text" class="form-control" id="clientName" name="clientName" placeholder="Client Name" autocomplete="off" />
+					<input type="text" class="form-control" id="clientName" name="clientName" placeholder="Client Name" autocomplete="off" value="{{ old('clientName') }}"/>
 				  </div>
 				</div> <!--/form-group-->
 				<div class="form-group">
 				  <label for="clientContact" class="col-sm-2 control-label">Client Contact</label>
 				  <div class="col-sm-10">
-					<input type="text" class="form-control" id="clientContact" name="clientContact" placeholder="Contact Number" autocomplete="off" />
+					<input type="text" class="form-control" id="clientContact" name="clientContact" placeholder="Contact Number" autocomplete="off" value="{{ old('clientContact') }}"/>
 				  </div>
 				</div> <!--/form-group-->			  
   
