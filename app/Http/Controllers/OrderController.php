@@ -33,8 +33,6 @@ class OrderController extends Controller
             "payment_status" =>!isset($request->paymentStatus) ? "1" : $request->paymentStatus
         ];
 
-        dd($data);
-
 
         $total_items = count($request->productName); // getting no of products
 

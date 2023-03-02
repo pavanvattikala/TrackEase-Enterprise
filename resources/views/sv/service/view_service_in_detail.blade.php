@@ -1,7 +1,13 @@
 @extends('layouts.app')
 @section('content')
 
-
+<style>
+	.form-control[disabled]{
+	  background-color: #dcdadae7 !important;
+	  font-weight: bold;
+	}
+  </style>
+  
 <ol class="breadcrumb">
 	<li><a href="/">Home</a></li>
 	<li>Service</li>
@@ -33,19 +39,19 @@
 				<div class="form-group">
 				  <label for="servicedate" class="col-sm-2 control-label">Service Date</label>
 				  <div class="col-sm-10">
-					<input type="date" class="form-control" id="servicedate" name="servicedate" value="{{ $data['service_date'] }}" />
+					<input type="date" class="form-control" id="servicedate" name="servicedate" value="{{ $data['service_date'] }}" disabled/>
 				  </div>
 				</div> <!--/form-group-->
 				<div class="form-group">
 				  <label for="clientName" class="col-sm-2 control-label">Client Name</label>
 				  <div class="col-sm-10">
-					<input type="text" class="form-control" id="clientName" name="clientName" placeholder="Client Name" autocomplete="off" value="{{ $data['client_name'] }}"/>
+					<input type="text" class="form-control" id="clientName" name="clientName" placeholder="Client Name" autocomplete="off" value="{{ $data['client_name'] }}" disabled/>
 				  </div>
 				</div> <!--/form-group-->
 				<div class="form-group">
 				  <label for="clientContact" class="col-sm-2 control-label">Client Contact</label>
 				  <div class="col-sm-10">
-					<input type="text" class="form-control" id="clientContact" name="clientContact" placeholder="Contact Number" autocomplete="off" value="{{ $data['client_contact'] }}" />
+					<input type="text" class="form-control" id="clientContact" name="clientContact" placeholder="Contact Number" autocomplete="off" value="{{ $data['client_contact'] }}" disabled/>
 				  </div>
 				</div> <!--/form-group-->			  
   
@@ -72,7 +78,7 @@
 										@php
 											 $services = DB::table('service_types')->get();
 										@endphp
-									 <select class="form-control" name="serviceName[]" id="serviceName{{$x}}"  > {{-- onchange="getProductData({{$x}})" --}}
+									 <select class="form-control" name="serviceName[]" id="serviceName{{$x}}"  disabled> {{-- onchange="getProductData({{$x}})" --}}
 										<option value="">~~SELECT~~</option>
 										
 										@foreach ($services as $service)
@@ -83,11 +89,11 @@
 									</div>
 								</td>
 								<td style="padding-left:20px;">			  					
-									<input type="text" name="rate[]" id="rate{{$x}}" onkeyup="getTotal({{$x}})" autocomplete="off" class="form-control" value="{{ $data['rates'][$x-1] }}" />			  					
+									<input type="text" name="rate[]" id="rate{{$x}}" onkeyup="getTotal({{$x}})" autocomplete="off" class="form-control" value="{{ $data['rates'][$x-1] }}" disabled/>			  					
 								</td>
 								<td style="padding-left:20px;">
 									<div class="form-group">
-									<input type="number" name="quantity[]" id="quantity{{$x}}" onkeyup="getTotal({{$x}})" autocomplete="off" class="form-control" min="1" value="{{ $data['quantites'][$x-1] }}" />
+									<input type="number" name="quantity[]" id="quantity{{$x}}" onkeyup="getTotal({{$x}})" autocomplete="off" class="form-control" min="1" value="{{ $data['quantites'][$x-1] }}" disabled/>
 									</div>
 								</td>
 								<td style="padding-left:20px;">			  					
@@ -95,7 +101,7 @@
 								</td>
 								<td>
   
-									<button class="btn btn-default removeProductRowBtn" type="button" id="removeServiceRowBtn" onclick="removeServiceRow({{$x}})"><i class="glyphicon glyphicon-trash"></i></button>
+									<button class="btn btn-default removeProductRowBtn" type="button" id="removeServiceRowBtn" onclick="removeServiceRow({{$x}})" disabled><i class="glyphicon glyphicon-trash"></i></button>
 								</td>
 							</tr>
 							@php
@@ -109,33 +115,33 @@
 					<div class="form-group">
 					  <label for="subTotal" class="col-sm-3 control-label">Sub Amount</label>
 					  <div class="col-sm-9">
-						<input type="text" class="form-control" id="subTotal" name="subTotal" disabled="true" value="{{ $data['sub_amount'] }}"/>
+						<input type="text" class="form-control" id="subTotal" name="subTotal" disabled="true" value="{{ $data['sub_amount'] }}" disabled/>
 						<input type="hidden" class="form-control" id="subTotalValue" name="subTotalValue" />
 					  </div>
 					</div> <!--/form-group-->
 					<div class="form-group">
 						<label for="subTotal" class="col-sm-3 control-label">Service Charge</label>
 						<div class="col-sm-9">
-						  <input type="text" class="form-control" id="serviceCharge" onkeyup="subAmount()" name="serviceCharge" value="{{ $data['service_charge'] }}" />
+						  <input type="text" class="form-control" id="serviceCharge" onkeyup="subAmount()" name="serviceCharge" value="{{ $data['service_charge'] }}" disabled />
 						</div>
 					  </div> <!--/form-group-->			  		  
 					<div class="form-group">
 					  <label for="totalAmount" class="col-sm-3 control-label">Total Amount</label>
 					  <div class="col-sm-9">
-						<input type="text" class="form-control" id="totalAmount" name="totalAmount" disabled="true" value="{{ $data['total_amount'] }}"/>
+						<input type="text" class="form-control" id="totalAmount" name="totalAmount" disabled="true" value="{{ $data['total_amount'] }}" disabled/>
 						<input type="hidden" class="form-control" id="totalAmountValue" name="totalAmountValue" />
 					  </div>
 					</div> <!--/form-group-->			  
 					<div class="form-group">
 					  <label for="discount" class="col-sm-3 control-label">Discount</label>
 					  <div class="col-sm-9">
-						<input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" value="{{ $data['discount'] }}"/>
+						<input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" value="{{ $data['discount'] }}" disabled/>
 					  </div>
 					</div> <!--/form-group-->	
 					<div class="form-group">
 					  <label for="grandTotal" class="col-sm-3 control-label">Grand Total</label>
 					  <div class="col-sm-9">
-						<input type="text" class="form-control" id="grandTotal" name="grandTotal" disabled="true"  value="{{ $data['grandtotal'] }}" />
+						<input type="text" class="form-control" id="grandTotal" name="grandTotal" disabled="true"  value="{{ $data['grandtotal'] }}" disabled/>
 						<input type="hidden" class="form-control" id="grandTotalValue" name="grandTotalValue" />
 					  </div>
 					</div> <!--/form-group-->			  		  
@@ -145,20 +151,20 @@
 					<div class="form-group">
 					  <label for="paid" class="col-sm-3 control-label">Paid Amount</label>
 					  <div class="col-sm-9">
-						<input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" value="{{ $data['paid_amt'] }}" />
+						<input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" value="{{ $data['paid_amt'] }}" disabled/>
 					  </div>
 					</div> <!--/form-group-->			  
 					<div class="form-group">
 					  <label for="due" class="col-sm-3 control-label">Due Amount</label>
 					  <div class="col-sm-9">
-						<input type="text" class="form-control" id="due" name="due" disabled="true"  value="{{ $data['due_amt'] }}"/>
+						<input type="text" class="form-control" id="due" name="due" disabled="true"  value="{{ $data['due_amt'] }}" disabled/>
 						<input type="hidden" class="form-control" id="dueValue" name="dueValue" />
 					  </div>
 					</div> <!--/form-group-->		
 					<div class="form-group">
 					  <label for="clientContact" class="col-sm-3 control-label">Payment Type</label>
 					  <div class="col-sm-9">
-						<select class="form-control" name="paymentType" id="paymentType">
+						<select class="form-control" name="paymentType" id="paymentType" disabled>
 							<option value="">~~SELECT~~</option>
 							<option @selected($data['payment_type'] == 1) value="1">UPi</option>
 							<option @selected($data['payment_type'] == 2) value="2">Cash</option>
@@ -169,7 +175,7 @@
 					<div class="form-group">
 					  <label for="clientContact" class="col-sm-3 control-label">Payment Status</label>
 					  <div class="col-sm-9">
-						<select class="form-control" name="paymentStatus" id="paymentStatus">
+						<select class="form-control" name="paymentStatus" id="paymentStatus" disabled>
 							<option value="">~~SELECT~~</option>
 							<option @selected($data['payment_status'] == 1) value="1">Full Payment</option>
 							<option @selected($data['payment_status'] == 2) value="2">Advance Payment</option>
@@ -180,7 +186,7 @@
 				</div> <!--/col-md-6-->
   
   
-				<div class="form-group submitButtonFooter">
+				{{-- <div class="form-group submitButtonFooter">
 				  <div class="col-sm-offset-2 col-sm-10">
 				  <button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="Loading..." disabled> <i class="glyphicon glyphicon-plus-sign"></i> Add Row </button>
   
@@ -188,7 +194,7 @@
   
 					<button type="reset" class="btn btn-default" onclick="resetOrderForm()" disabled><i class="glyphicon glyphicon-erase"></i> Reset</button>
 				  </div>
-				</div>
+				</div> --}}
 			  </form>
   
   
