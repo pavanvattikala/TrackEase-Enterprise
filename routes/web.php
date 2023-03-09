@@ -168,3 +168,7 @@ Route::prefix('expense')->group(function () {
     Route::post('/trash',[ExpenseController::class,'trash']);
 
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
