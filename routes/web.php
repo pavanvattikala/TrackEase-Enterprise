@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\DaySheetController;
 use App\Http\Controllers\ExpenseController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,8 @@ use App\Http\Controllers\ExpenseController;
 */
 
 Route::get('/',[DashBoardController::class,'index']);
+
+Route::get('/home', [DashBoardController::class,'index']);
 
 // brand start
 Route::prefix('brand')->group(function(){
@@ -145,7 +148,7 @@ Route::prefix('service')->group(function () {
 //service end
 
 //day sheet
-Route::prefix('daysheet')->group(function () {
+Route::prefix('daysheet')->middleware('auth')->group(function () {
 
     Route::get('/',[DaySheetController::class,'index']);
 
@@ -154,7 +157,7 @@ Route::prefix('daysheet')->group(function () {
 });
 
 //expense
-Route::prefix('expense')->group(function () {
+Route::prefix('expense')->middleware('auth')->group(function () {
 
     Route::get('/',function(){
         return view('sv.expense.index');
@@ -171,4 +174,4 @@ Route::prefix('expense')->group(function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
