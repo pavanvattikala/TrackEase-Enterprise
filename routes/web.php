@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\DaySheetController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\StockController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -175,3 +176,17 @@ Route::prefix('expense')->middleware('auth')->group(function () {
 Auth::routes();
 
 
+Route::prefix('stock')->middleware('auth')->group(function () {
+
+    Route::get('/',function(){
+        return view('sv.stock.index');
+    
+    });
+    
+    Route::get('/add_stock',[StockController::class,'add_stock']);
+    Route::get('/fetchStock',[StockController::class,'fetchStock']);
+    Route::post('/insert_stock',[StockController::class,'insertStock']);
+    Route::post('/editBrand',[StockController::class,'editbrand']);
+    Route::post('/trash',[StockController::class,'trash']);
+
+});

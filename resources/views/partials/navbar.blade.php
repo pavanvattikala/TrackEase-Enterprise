@@ -40,7 +40,8 @@
       </ul>
     </li> 
     <li id="navDaySheet"><a href="/daysheet"> <i class="glyphicon glyphicon-th-list"></i> Day Sheet </a></li>
-    <li id="navExpense"><a href="/expense"> <i class="glyphicon glyphicon-scissors"></i> Expenses </a></li>          
+    <li id="navExpense"><a href="/expense"> <i class="glyphicon glyphicon-scissors"></i> Expenses </a></li>   
+    <li id="navStock"><a href="/stock"> <i class="glyphicon glyphicon-folder-close"></i> Stock </a></li>       
 
 
     {{-- <li id="navReport"><a href="report.php"> <i class="glyphicon glyphicon-check"></i> Report </a></li> --}}
