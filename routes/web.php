@@ -173,7 +173,7 @@ Route::prefix('expense')->middleware('auth')->group(function () {
 
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 
 Route::prefix('stock')->middleware('auth')->group(function () {
