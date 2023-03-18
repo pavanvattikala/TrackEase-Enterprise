@@ -32,4 +32,9 @@ class StockController extends Controller
     {
         dd($request);
     }
+
+    public function getStockEntryOptions()
+    {
+        
+    }
 }

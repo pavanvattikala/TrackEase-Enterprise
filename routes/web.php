@@ -184,7 +184,7 @@ Route::prefix('stock')->middleware('auth')->group(function () {
     });
     
     Route::get('/add_stock',[StockController::class,'add_stock']);
-    Route::get('/fetchStock',[StockController::class,'fetchStock']);
+    Route::get('/getStockEntryOptions',[StockController::class,'getStockEntryOptions']);
     Route::post('/insert_stock',[StockController::class,'insertStock']);
     Route::post('/editBrand',[StockController::class,'editbrand']);
     Route::post('/trash',[StockController::class,'trash']);
