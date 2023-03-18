@@ -2,6 +2,8 @@ var manageBrandTable;
 
 $(document).ready(function() {
 	// top bar active
+	$('select').selectpicker();
+
 	$('#navBrand').addClass('active');
 	
 	// manage brand table

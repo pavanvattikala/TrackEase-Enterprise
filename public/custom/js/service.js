@@ -1,6 +1,8 @@
 var manageServiceTable;
 
 $(document).ready(function() {
+	$('select').selectpicker();
+
 
 	var divRequest = $(".div-request").text();
 

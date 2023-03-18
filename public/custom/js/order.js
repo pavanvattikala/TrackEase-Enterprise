@@ -2,6 +2,8 @@ var manageOrderTable;
 
 // to load the data table
 $(document).ready(function() {
+	$('select').selectpicker();
+
 	$('#navOrder').addClass('active');
 	
 	manageOrderTable = $("#manageOrderTable").DataTable({

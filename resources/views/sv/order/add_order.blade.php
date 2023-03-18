@@ -75,7 +75,7 @@
 											->where('product.status',1)
 											->get();
 										@endphp
-									<select class="form-control" name="productName[]" id="productName{{$x}}" onchange="getProductData({{$x}})" >
+									<select class="form-control selectpicker" name="productName[]" id="productName{{$x}}" onchange="getProductData({{$x}})"  data-live-search="true">
 										<option value="">~~SELECT~~</option>
 										
 										@foreach ($products as $product)

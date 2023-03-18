@@ -30,6 +30,11 @@
 
   <link rel="icon" type="image/png" href="{{ asset('logo.jpg') }}"/>
 
+{{-- bootstrap select  --}}
+
+<link rel="stylesheet" href=" {{ asset('assests/bootstrap-select/css/bootstrap-select.min.css') }}">
+
+<script src="{{ asset('assests/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
 
 </head>
 

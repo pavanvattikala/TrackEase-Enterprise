@@ -67,7 +67,7 @@
                       @php
                             $brands = DB::table('brands')->select('brand_id','brand_name')->where('brand_status',1)->where('brand_active',1)->get();
                       @endphp
-                      <select class="form-control" id="brandName" name="brandName">
+                      <select class="form-control" id="brandName" name="brandName" data-live-search="true">
                           <option value="">~~SELECT~~</option>
                           @foreach ($brands as $brand)
                           <option value="{{$brand->brand_id}}">{{$brand->brand_name}}</option>

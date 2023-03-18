@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	// top bar active
+    $('select').selectpicker();
+
 	$('#navDaySheet').addClass('active');
     getactivites();
 	

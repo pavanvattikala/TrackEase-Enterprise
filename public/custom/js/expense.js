@@ -2,6 +2,8 @@ var manageExpenseTable;
 
 $(document).ready(function() {
 	// top bar active
+	$('select').selectpicker();
+
 	$('#navExpense').addClass('active');
 	
 	// manage Expense table

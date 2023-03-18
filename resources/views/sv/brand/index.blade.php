@@ -61,7 +61,7 @@
 	        	<label for="brandStatus" class="col-sm-3 control-label">Status: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <select class="form-control" id="brandStatus" name="brandStatus">
+				      <select class="form-control" id="brandStatus" name="brandStatus" >
 				      	<option value="">~~SELECT~~</option>
 				      	<option value="1">Available</option>
 				      	<option value="2">Not Available</option>

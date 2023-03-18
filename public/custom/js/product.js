@@ -2,6 +2,8 @@ var manageProductTable;
 
 $(document).ready(function() {
 	// top nav bar 
+	$('select').selectpicker();
+
 	$('#navProduct').addClass('active');
 	// manage product data table
 	manageProductTable = $('#manageProductTable').DataTable({

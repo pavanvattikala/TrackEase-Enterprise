@@ -2,6 +2,8 @@ var manageCategoriesTable;
 
 $(document).ready(function() {
 	// active top navbar categories
+	$('select').selectpicker();
+
 	$('#navCategories').addClass('active');	
 
 	manageCategoriesTable = $('#manageCategoriesTable').DataTable({

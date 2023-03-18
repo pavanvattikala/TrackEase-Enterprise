@@ -72,7 +72,7 @@
 											 $services = DB::table('service_types')->get();
 											//dd($services);
 										@endphp
-									 <select class="form-control" name="serviceName[]" id="serviceName{{$x}}"  > {{-- onchange="getProductData({{$x}})" --}}
+									 <select class="form-control" name="serviceName[]" id="serviceName{{$x}}" data-live-search="true" > {{-- onchange="getProductData({{$x}})" --}}
 										<option value="">~~SELECT~~</option>
 										
 										@foreach ($services as $service)
