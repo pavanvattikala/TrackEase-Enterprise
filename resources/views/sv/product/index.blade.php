@@ -24,12 +24,12 @@
 				<table class="table" id="manageProductTable">
 					<thead>
 						<tr>
-							<th style="width:10%;">Photo</th>							
+							<th style="width:10%;">Photo</th>		
+              <th>Brand</th>
 							<th>Product Name</th>
+              <th>Category</th>
 							<th>Rate</th>							
 							<th>Quantity</th>
-							<th>Brand</th>
-							<th>Category</th>
 							<th>Status</th>
 							<th style="width:15%;">Options</th>
 						</tr>

@@ -62,16 +62,16 @@ class ProductController extends Controller
             $output['data'][] = array( 		
                 // image
                 $productImage,
+                // brand
+                $brand,
                 // product name
                 $item->product_name, 
+                // category 		
+                $category,
                 // selling_price
                 $item->selling_price,
                 // quantity 
                 $quanity, 		 	
-                // brand
-                $brand,
-                // category 		
-                $category,
                 // active
                 $active,
                 // button
