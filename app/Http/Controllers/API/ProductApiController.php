@@ -25,7 +25,16 @@ class ProductApiController extends Controller
 
        // dd($result);
 
-        return json_encode($result);
+    //    $select ='<select name="productName[]" id="productName" data-live-search="true" class="selectpicker" id="my-select">Select Product';
+    //    foreach($result as $res){
+    //     $select.='<option value="'.$res->product_id.'">'.$res->product_name.'</option>';
+    //    }
+
+
+    //    $select.='</select>';
+    //     return ($select);
+
+        return ($result);
     }
 
     /**

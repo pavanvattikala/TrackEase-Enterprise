@@ -30,7 +30,7 @@ class StockController extends Controller
     }
     public function insertStock(Request $request)
     {
-        dd($request);
+        dd($request->all());
     }
 
     public function getStockEntryOptions()

@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('content')
+<style>
+	input:read-only{
+	  background-color: #706b6b70  !important;
+	}
+  </style>
 <div class="row">
 	<div class="col-md-12">
 
@@ -47,39 +52,22 @@
                     <thead>
                         <tr>
                             <th>Product Name</th>
-                            <th>Got Price</th>
                             <th>Selling Price</th>
+                            <th>Got Price</th>
                             <th>Quantity</th>
                             <th>Total Amount</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="addStockBody">
-                        {{-- <tr><td>pr Name</td><td>pr got price</td><td>pr sp price</td><td>pr quantity</td><td>pr total</td></tr> --}}
-                        <tr>
-                            <td>
-                                <select name="productName" id="productName" data-live-search="true" class="selectpicker" id="my-select">Select Product
-                                @php
-                                            $result = DB::table('product')
-                                            ->join('brands', 'product.brand_id', '=', 'brands.brand_id')
-                                            ->join('categories', 'product.categories_id', '=', 'categories.categories_id')
-                                            ->select('product.product_id', 'product.product_name')
-                                            ->where('product.status',1)
-                                            ->get()
-
-                                @endphp
-
-                                @foreach ($result as $data)
-                                    <option value="">{{ $data->product_name }}</option>
-                                @endforeach
-                            </select>
-                            </td>
-                            <td><input type="number" name="" id=""></td>
-                            <td><input type="number" name="" id=""></td>
-                            <td><input type="number" name="" id=""></td>
-                            <td><input type="number" name="" id="" disabled></td>
-                        </tr>
+                        
                     </tbody>
                 </table>
+
+                <div class="form-group row">
+                    <a class="btn btn-primary col-3" onclick="addRow()">Add Row</a> 
+                    <input class="btn btn-success col-3" type="submit" value="Submit">
+                </div> 
                     	   
                 </form>
 			</div> 
