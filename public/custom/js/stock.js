@@ -44,19 +44,19 @@ $(document).ready(function() {
 function appendTableRow(tableid,i,type="oldStock",subTableId=0){
 
 	if(type=="newStock"){
-		gotpricerow = '<td><input type="number" id="gotprice'+i+'" name="gotprice'+subTableId+'[]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
-		spprice='<td><input type="number" id="spprice'+i+'" name="spprice'+subTableId+'[]"></td>';
-		quantRow = '<td><input type="number" id="quant'+i+'" name="quant'+subTableId+'[]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
-		totalRow = '<td><input type="number" id="total'+i+'" name="total'+subTableId+'[]" readonly>';
+		gotpricerow = '<td><input type="number"  min="1" required id="gotprice'+i+'" name="gotprice'+subTableId+'[]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
+		spprice='<td><input type="number"  min="1" required id="spprice'+i+'" name="spprice'+subTableId+'[]"></td>';
+		quantRow = '<td><input type="number" min="1" required id="quant'+i+'" name="quant'+subTableId+'[]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
+		totalRow = '<td><input type="number"  min="1" required id="total'+i+'" name="total'+subTableId+'[]" readonly>';
 		deleteRow = '<td><a class="btn bg-grey" onclick="removeRow('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"><i class="glyphicon glyphicon-remove text-danger"></i><span class="text-danger">Remove</span></a></td>'
 		row='<tr id="row'+i+'">'+'<td>'+ProductNameRow+'</td>'+spprice+gotpricerow+quantRow+totalRow+deleteRow+'</tr>';
 		$(tableid).append(row);
 	}
 	else{
-		gotpricerow = '<td><input type="number" id="gotprice'+i+'" name="gotprice[]" onkeyup="changeTotalPrice('+i+')"></td>';
-		spprice='<td><input type="number" id="spprice'+i+'" name="spprice[]"></td>';
-		quantRow = '<td><input type="number" id="quant'+i+'" name="quant[]" onkeyup="changeTotalPrice('+i+')"></td>';
-		totalRow = '<td><input type="number" id="total'+i+'" name="total[]" readonly>';
+		gotpricerow = '<td><input type="number" min="1" required id="gotprice'+i+'" name="gotprice[]" onkeyup="changeTotalPrice('+i+')"></td>';
+		spprice='<td><input type="number" min="1" required  id="spprice'+i+'" name="spprice[]"></td>';
+		quantRow = '<td><input type="number" min="1" required  id="quant'+i+'" name="quant[]" onkeyup="changeTotalPrice('+i+')"></td>';
+		totalRow = '<td><input type="number" min="1" required  id="total'+i+'" name="total[]" readonly>';
 		deleteRow = '<td><a class="btn bg-grey" onclick="removeRow('+i+')"><i class="glyphicon glyphicon-remove text-danger"></i><span class="text-danger">Remove</span></a></td>'
 		row='<tr id="row'+i+'">'+'<td>'+ProductNameRow+'</td>'+spprice+gotpricerow+quantRow+totalRow+deleteRow+'</tr>';
 		$(tableid).append(row);
@@ -149,7 +149,7 @@ $("#getOldStock").click(function (e) {
 		type: 'get',
 		success:function(response) {
 			
-			select ='<select name="productName[]" id="productName" data-live-search="true" class="selectpicker" id="my-select">Select Product';
+			select ='<select name="productName[]" required id="productName" data-live-search="true" class="selectpicker" id="my-select">Select Product';
 
 			response.forEach(obj => {
 				select+='<option value="'+obj.product_id+'">'+obj.product_name+'</option>'
@@ -181,7 +181,7 @@ $("#getNewStock").click(function (e) {
 		type: 'get',
 		async: false,
 		success:function(response) {
-			select ='<select name="brandName[]" id="brandName" class="col-3" data-live-search="true" class="selectpicker" id="my-select">';
+			select ='<select name="brandName[]" id="brandName" required class="col-3" data-live-search="true" class="selectpicker" id="my-select">';
 			select+='<option value="null">-- Select Brand --</option>'
 
 			response.forEach(obj => {
@@ -198,7 +198,7 @@ $("#getNewStock").click(function (e) {
 		async: false,
 		success:function(response) {
 			
-			select ='<select name="categoryName[]" id="categoryName" class="col-3" data-live-search="true" class="selectpicker" id="my-select">';
+			select ='<select name="categoryName[]" id="categoryName" required class="col-3" data-live-search="true" class="selectpicker" id="my-select">';
 			select+='<option value="null">-Select Category --</option>'
 			response.forEach(obj => {
 				select+='<option value="'+obj.categories_id+'">'+obj.categories_name+'</option>'
