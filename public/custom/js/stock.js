@@ -40,8 +40,10 @@ $(document).ready(function() {
 	
 });
 
-
+//appends row to the given selector
 function appendTableRow(tableid,i,type="oldStock",subTableId=0){
+
+	// if new stock
 
 	if(type=="newStock"){
 		gotpricerow = '<td><input type="number"  min="1" required id="gotprice'+i+'" name="gotprice'+subTableId+'[]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
@@ -64,7 +66,7 @@ function appendTableRow(tableid,i,type="oldStock",subTableId=0){
 	
 }
 
-
+// to add price to total column via quantity and got price
 function changeTotalPrice(type="oldStock",i,subTableId=0){
 	if(type=="newStock"){
 		gotprice = Number($('#newSubMainTableBody'+subTableId+'> #row'+i+' > td > #gotprice'+i).val());
@@ -86,6 +88,7 @@ function changeTotalPrice(type="oldStock",i,subTableId=0){
 	
 }
 
+// to remove the row 
 function removeRow(type="oldStock",i,subTableId=0){
 	if(type=="newStock"){
 		
@@ -103,7 +106,7 @@ function removeRow(type="oldStock",i,subTableId=0){
 	}
 	
 }
-
+// to add the extra row 
 function addRow(type="oldStock",subTableId=0){
 	if(type=="newStockBody"){
 		var id = $('#newStockTableBody > tr[id^="newSubMainrow"]').last().attr('id').substring(13);
@@ -136,7 +139,7 @@ function addRow(type="oldStock",subTableId=0){
 		$('select').selectpicker('refresh');
 	}
 }
-
+//to load old stock page
 $("#getOldStock").click(function (e) { 
 
 	if($('#newStockEntryOptions').length == 1){
@@ -168,7 +171,7 @@ $("#getOldStock").click(function (e) {
 	});
 	
 });
-
+// to load new stock page
 $("#getNewStock").click(function (e) { 
 
 	var selectBrand;
