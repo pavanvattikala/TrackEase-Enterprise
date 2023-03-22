@@ -71,8 +71,8 @@ $(document).ready(function() {
 			type: 'get',
 			success:function(response) {
 				
-				select ='<select name="productName[]" required id="productName" data-live-search="true" class="selectpicker" id="my-select">Select Product';
-		
+				select ='<select name="productName[]" required id="productName" data-live-search="true" class="selectpicker" id="my-select" required >Select Product';
+				select+='<option value="">-- Select Product --</option>'
 				response.forEach(obj => {
 					select+='<option value="'+obj.product_id+'">'+obj.product_name+'</option>'
 				});
