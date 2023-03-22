@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\BrandApiController;
+use App\Http\Controllers\API\CategoryApiController;
 use App\Http\Controllers\API\ProductApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('productapi', ProductApiController::class);
+Route::apiResource('brandapi', BrandApiController::class);
+Route::apiResource('categoryapi', CategoryApiController::class);
+

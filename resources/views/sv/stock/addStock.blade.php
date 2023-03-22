@@ -33,7 +33,7 @@
                 <div class="form-group row">
                     <label for="dealer" class="col-sm-2 control-label"> Select Dealer</label>
                     <div class="col-sm-5">
-                        <select class="form-control" name="dealer" id="dealer">
+                        <select class="form-control" name="dealer" id="dealer"  data-live-search="true" >
                             <option value="">~~SELECT Dealer~~</option>
                             @foreach ($dealers as $dealer)
                                 <option value="{{$dealer->id}}">{{$dealer->name}}</option>
@@ -41,14 +41,24 @@
                         </select>	
                     </div>
                 </div>
-                <div class="form-group row">
-                    <a class="btn btn-primary col-3">New Stock Entry</a> 
-                    <a class="btn btn-primary col-3">old Stock Entry</a> 
-                    <a class="btn btn-primary col-3">Stock as Excel Entry</a> 
-                    <a class="btn btn-primary col-3">Submit</a> 
-                </div> 
+                <div class="container" id="topStockEntryMenu">
+                    <div class="form-group row">
+                        <a class="btn btn-primary col-3" id="getNewStock">New Stock Entry</a> 
+                        <a class="btn btn-primary col-3" id="getOldStock">old Stock Entry</a> 
+                        <a class="btn btn-primary col-3" id="stockAsExcel">Stock as Excel Entry</a> 
+                    </div> 
+                    {{-- <div  class="form-group row ">
+                        <select name="brand" id="brand"  data-live-search="true" >
+                            <option value="1">surya</option>
+                        </select>
+                        <select  name="brand" id="brand"  data-live-search="true" >
+                            <option value="1">surya</option>
+                        </select>
+                    </div>  --}}
+                    
+                </div>
                 
-                <table class="table table-responsive table-stripped">
+                <table class="table table-responsive table-stripped table-borderd" id="addStockTable" border="1">
                     <thead>
                         <tr>
                             <th>Product Name</th>
@@ -65,7 +75,7 @@
                 </table>
 
                 <div class="form-group row">
-                    <a class="btn btn-primary col-3" onclick="addRow()">Add Row</a> 
+                    <a class="btn btn-primary col-3" id="addRow" onclick="addRow()">Add Row</a> 
                     <input class="btn btn-success col-3" type="submit" value="Submit">
                 </div> 
                     	   
