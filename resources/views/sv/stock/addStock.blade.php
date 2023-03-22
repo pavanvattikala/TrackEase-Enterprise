@@ -4,6 +4,11 @@
 	input:read-only{
 	  background-color: #706b6b70  !important;
 	}
+
+    input[type=submit]{
+        background-color: #419641 !important;
+    }
+
   </style>
 <div class="row">
 	<div class="col-md-12">
@@ -33,7 +38,7 @@
                 <div class="form-group row">
                     <label for="dealer" class="col-sm-2 control-label"> Select Dealer</label>
                     <div class="col-sm-5">
-                        <select class="form-control" name="dealer" id="dealer"  data-live-search="true" >
+                        <select class="form-control" name="dealer" id="dealer"  data-live-search="true" required>
                             <option value="">~~SELECT Dealer~~</option>
                             @foreach ($dealers as $dealer)
                                 <option value="{{$dealer->id}}">{{$dealer->name}}</option>
@@ -45,7 +50,6 @@
                     <div class="form-group row">
                         <a class="btn btn-primary col-3" id="getNewStock">New Stock Entry</a> 
                         <a class="btn btn-primary col-3" id="getOldStock">old Stock Entry</a> 
-                        <a class="btn btn-primary col-3" id="stockAsExcel">Stock as Excel Entry</a> 
                     </div> 
                     {{-- <div  class="form-group row ">
                         <select name="brand" id="brand"  data-live-search="true" >
@@ -59,24 +63,11 @@
                 </div>
                 
                 <table class="table table-responsive table-stripped table-borderd" id="addStockTable" border="1">
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Selling Price</th>
-                            <th>Got Price</th>
-                            <th>Quantity</th>
-                            <th>Total Amount</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="addStockBody">
-                        
-                    </tbody>
                 </table>
 
                 <div class="form-group row">
                     <a class="btn btn-primary col-3" id="addRow" onclick="addRow()">Add Row</a> 
-                    <input class="btn btn-success col-3" type="submit" value="Submit">
+                    <input class="btn col-3 btn-success" type="submit" id="submit"value="Submit">
                 </div> 
                     	   
                 </form>

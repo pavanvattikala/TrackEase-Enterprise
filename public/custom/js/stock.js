@@ -1,8 +1,12 @@
 var manageStockTable;
+var selectBrand;
+var selectCategory;
 
-var ProductNameRow;
+var oldStockProductNameRow;
 
 var currentPage;
+
+
 
 var headingRow = '<tr><th>ProductName</th><th>SellingPrice</th><th>GotPrice</th><th>Quantity</th><th>TotalAmount</th> <th>Action</th></tr>';
 
@@ -10,13 +14,8 @@ $(document).ready(function() {
 	// top bar active
 	$('select').selectpicker();
 	$('select').selectpicker('refresh');
-
-
-
 	$('#navStock').addClass('active');
 
-	
-	
 	// manage Expense table
 
 	var area = $(location).attr('href');
@@ -33,8 +32,62 @@ $(document).ready(function() {
 	}
 
 	if(last == "add_stock"){
+		//api calls
+
+		// brand api
+		$.ajax({
+			url: '/api/brandapi',
+			type: 'get',
+			success:function(response) {
+				select ='<select name="brandName[]" id="brandName" required class="col-3" data-live-search="true" class="selectpicker" id="my-select">';
+				select+='<option value="">-- Select Brand --</option>'
+		
+				response.forEach(obj => {
+					select+='<option value="'+obj.brand_id+'">'+obj.brand_name+'</option>'
+				});
+				select+='</select>';
+		
+				selectBrand = select;
+			} 
+		});
+		//category api
+		$.ajax({
+			url: '/api/categoryapi',
+			type: 'get',
+			success:function(response) {
+				
+				select ='<select name="categoryName[]" id="categoryName" class="col-3" data-live-search="true" class="selectpicker" id="my-select" required="true">';
+				select+='<option value="">-- Select Category --</option>'
+				response.forEach(obj => {
+					select+='<option value="'+obj.categories_id+'">'+obj.categories_name+'</option>'
+				});
+				select+='</select>';
+				selectCategory = select;
+			} 
+		});
+		//product api
+		$.ajax({
+			url: '/api/productapi',
+			type: 'get',
+			async: false,
+			success:function(response) {
+				
+				select ='<select name="productName[]" required id="productName" data-live-search="true" class="selectpicker" id="my-select">Select Product';
+		
+				response.forEach(obj => {
+					select+='<option value="'+obj.product_id+'">'+obj.product_name+'</option>'
+				});
+				select+='</select>';
+		
+				oldStockProductNameRow = select;
+			} 
+		});
+
 		currentPage = "addstock";
 		//$("#getOldStock").click();
+		$('#submit').attr('disabled',true);
+		$('#addRow').attr('disabled',true);
+		
 	}
 
 	
@@ -46,12 +99,13 @@ function appendTableRow(tableid,i,type="oldStock",subTableId=0){
 	// if new stock
 
 	if(type=="newStock"){
-		gotpricerow = '<td><input type="number"  min="1" required id="gotprice'+i+'" name="gotprice'+subTableId+'[]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
-		spprice='<td><input type="number"  min="1" required id="spprice'+i+'" name="spprice'+subTableId+'[]"></td>';
-		quantRow = '<td><input type="number" min="1" required id="quant'+i+'" name="quant'+subTableId+'[]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
-		totalRow = '<td><input type="number"  min="1" required id="total'+i+'" name="total'+subTableId+'[]" readonly>';
+		newStockprodutNameRow ='<input type="text" name="productName[][]"';
+		gotpricerow = '<td><input type="number"  min="1" required id="gotprice'+i+'" name="gotprice[][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
+		spprice='<td><input type="number"  min="1" required id="spprice'+i+'" name="spprice[][]"></td>';
+		quantRow = '<td><input type="number" min="1" required id="quant'+i+'" name="quant[][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
+		totalRow = '<td><input type="number"  min="1" required id="total'+i+'" name="total[][]" readonly>';
 		deleteRow = '<td><a class="btn bg-grey" onclick="removeRow('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"><i class="glyphicon glyphicon-remove text-danger"></i><span class="text-danger">Remove</span></a></td>'
-		row='<tr id="row'+i+'">'+'<td>'+ProductNameRow+'</td>'+spprice+gotpricerow+quantRow+totalRow+deleteRow+'</tr>';
+		row='<tr id="row'+i+'">'+'<td>'+newStockprodutNameRow+'</td>'+spprice+gotpricerow+quantRow+totalRow+deleteRow+'</tr>';
 		$(tableid).append(row);
 	}
 	else{
@@ -60,7 +114,7 @@ function appendTableRow(tableid,i,type="oldStock",subTableId=0){
 		quantRow = '<td><input type="number" min="1" required  id="quant'+i+'" name="quant[]" onkeyup="changeTotalPrice('+i+')"></td>';
 		totalRow = '<td><input type="number" min="1" required  id="total'+i+'" name="total[]" readonly>';
 		deleteRow = '<td><a class="btn bg-grey" onclick="removeRow('+i+')"><i class="glyphicon glyphicon-remove text-danger"></i><span class="text-danger">Remove</span></a></td>'
-		row='<tr id="row'+i+'">'+'<td>'+ProductNameRow+'</td>'+spprice+gotpricerow+quantRow+totalRow+deleteRow+'</tr>';
+		row='<tr id="row'+i+'">'+'<td>'+oldStockProductNameRow+'</td>'+spprice+gotpricerow+quantRow+totalRow+deleteRow+'</tr>';
 		$(tableid).append(row);
 	}
 	
@@ -92,14 +146,17 @@ function changeTotalPrice(type="oldStock",i,subTableId=0){
 function removeRow(type="oldStock",i,subTableId=0){
 	if(type=="newStock"){
 		
-		console.log(subTableId,i);
+		//console.log(subTableId,i);
 		$('#newSubMainTableBody'+subTableId+' > #row'+i+'').remove();
 
 		innerRowsCount = Number($('#newSubMainTableBody'+subTableId+' tr').length);
 		if(innerRowsCount<2){
 			$('#newSubMainrow'+subTableId).remove();
 		}
-		//row4
+		totalRowsCount = Number($('#newStockTableBody tr').length);
+		if(totalRowsCount  == 0){
+			$('#newStockTableBody').remove();
+		}
 	}
 	else{
 		$('#row'+i+'').remove();
@@ -141,89 +198,40 @@ function addRow(type="oldStock",subTableId=0){
 }
 //to load old stock page
 $("#getOldStock").click(function (e) { 
+	$('#newStockTableBody').remove();
 
-	if($('#newStockEntryOptions').length == 1){
-		$('#newStockEntryOptions').remove();
-	}
+	if($('#addStockBody').length == 0){
+		$('#addStockTable').append('<thead>'+headingRow+'</thead>');
+		$('#addStockTable').append('<tbody id="addStockBody"></tbody>');
 
-	$('#addStockBody').empty();
-	$.ajax({
-		url: '/api/productapi',
-		type: 'get',
-		success:function(response) {
-			
-			select ='<select name="productName[]" required id="productName" data-live-search="true" class="selectpicker" id="my-select">Select Product';
-
-			response.forEach(obj => {
-				select+='<option value="'+obj.product_id+'">'+obj.product_name+'</option>'
-			});
-			select+='</select>';
-
-			ProductNameRow = select;
-
-			for(i=0;i<10;i++){
-				appendTableRow('#addStockBody',i);
-			}
-
-			$('select').selectpicker('refresh');
-			
-		} 
-	});
+		for(i=0;i<10;i++){
+			appendTableRow('#addStockBody',i);
+		}
 	
+		$('select').selectpicker('refresh');
+	
+		$('#submit').attr('disabled',false);
+		$('#addRow').attr('disabled',false);
+		
+	}
 });
 // to load new stock page
-$("#getNewStock").click(function (e) { 
-
-	var selectBrand;
-	var selectCategory;
-
-	$('#addStockTable').empty();
-
-	$.ajax({
-		url: '/api/brandapi',
-		type: 'get',
-		async: false,
-		success:function(response) {
-			select ='<select name="brandName[]" id="brandName" required class="col-3" data-live-search="true" class="selectpicker" id="my-select">';
-			select+='<option value="null">-- Select Brand --</option>'
-
-			response.forEach(obj => {
-				select+='<option value="'+obj.brand_id+'">'+obj.brand_name+'</option>'
-			});
-			select+='</select>';
-
-			selectBrand = select;
-		} 
-	});
-	$.ajax({
-		url: '/api/categoryapi',
-		type: 'get',
-		async: false,
-		success:function(response) {
-			
-			select ='<select name="categoryName[]" id="categoryName" required class="col-3" data-live-search="true" class="selectpicker" id="my-select">';
-			select+='<option value="null">-Select Category --</option>'
-			response.forEach(obj => {
-				select+='<option value="'+obj.categories_id+'">'+obj.categories_name+'</option>'
-			});
-			
-			select+='</select>';
-
-			selectCategory = select;
-		} 
-	});
+$("#getNewStock").click(function (e) {
 	
-	newStockEntryOptions = '<tr><th colspan="2"><label class="col-3">Select Brand :: </label>'+selectBrand+'</th><th colspan="2"><label class="col-3">Select Category :: </label>'+selectCategory+'</th></tr>';
+	if($('#newStockTableBody').length==0){
+		$('#addStockTable').empty();
+		newStockEntryOptions = '<tr><th colspan="2"><label class="col-3">Select Brand :: </label>'+selectBrand+'</th><th colspan="2"><label class="col-3">Select Category :: </label>'+selectCategory+'</th></tr>';
+		globalNewStockEntryOptions =newStockEntryOptions;
+		$('#addStockTable').append('<tbody id="newStockTableBody"></tbody>');
+		for(i=0;i<4;i++){
+			appendNewStockRow(i,newStockEntryOptions);
+		}
+		$("#addRow").attr('onclick', 'addRow("newStockBody")');
+		$('#submit').attr('disabled',false);
+		$('#addRow').attr('disabled',false);
 
-	globalNewStockEntryOptions =newStockEntryOptions;
-
-
-
-	$('#addStockTable').append('<tbody id="newStockTableBody"></tbody>');
-	for(i=0;i<4;i++){
-		appendNewStockRow(i,newStockEntryOptions);
 	}
-	$("#addRow").attr('onclick', 'addRow("newStockBody")');
+
 
 });
 
@@ -234,8 +242,7 @@ function appendNewStockRow(i,newStockEntryOptions){
 		$('#newSubMainTableHead'+i).append(newStockEntryOptions);
 		$('#newSubMainTableHead'+i).append(headingRow);
 		$('#newSubMainTable'+i).append('<tbody id="newSubMainTableBody'+i+'"></tbody>');
-		produtName ='<input type="text" name="productName'+i+'[]"';
-		ProductNameRow=produtName;
+		
 		for(j=0;j<5;j++){
 			appendTableRow('#newSubMainTableBody'+i+'',j,"newStock",i);
 		}
