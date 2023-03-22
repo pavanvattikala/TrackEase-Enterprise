@@ -69,7 +69,6 @@ $(document).ready(function() {
 		$.ajax({
 			url: '/api/productapi',
 			type: 'get',
-			async: false,
 			success:function(response) {
 				
 				select ='<select name="productName[]" required id="productName" data-live-search="true" class="selectpicker" id="my-select">Select Product';
@@ -82,6 +81,7 @@ $(document).ready(function() {
 				oldStockProductNameRow = select;
 			} 
 		});
+		$('.modal-loading').addClass('div-hide');
 
 		currentPage = "addstock";
 		//$("#getOldStock").click();
@@ -94,7 +94,7 @@ $(document).ready(function() {
 });
 
 //appends row to the given selector
-function appendTableRow(tableid,i,type="oldStock",subTableId=0){
+function appendTableRow(tableid,i,type,subTableId){
 
 	// if new stock
 
@@ -108,20 +108,45 @@ function appendTableRow(tableid,i,type="oldStock",subTableId=0){
 		row='<tr id="row'+i+'">'+'<td>'+newStockprodutNameRow+'</td>'+spprice+gotpricerow+quantRow+totalRow+deleteRow+'</tr>';
 		$(tableid).append(row);
 	}
-	else{
-		gotpricerow = '<td><input type="number" min="1" required id="gotprice'+i+'" name="gotprice[]" onkeyup="changeTotalPrice('+i+')"></td>';
+	else if(type == "oldStock"){
+		gotpricerow = '<td><input type="number" min="1" required id="gotprice'+i+'" name="gotprice[]" onkeyup="changeTotalPrice('+encodeURIComponent("'oldStock'")+','+i+',0)"></td>';
 		spprice='<td><input type="number" min="1" required  id="spprice'+i+'" name="spprice[]"></td>';
-		quantRow = '<td><input type="number" min="1" required  id="quant'+i+'" name="quant[]" onkeyup="changeTotalPrice('+i+')"></td>';
+		quantRow = '<td><input type="number" min="1" required  id="quant'+i+'" name="quant[]" onkeyup="changeTotalPrice('+encodeURIComponent("'oldStock'")+','+i+',0)"></td>';
 		totalRow = '<td><input type="number" min="1" required  id="total'+i+'" name="total[]" readonly>';
-		deleteRow = '<td><a class="btn bg-grey" onclick="removeRow('+i+')"><i class="glyphicon glyphicon-remove text-danger"></i><span class="text-danger">Remove</span></a></td>'
+		deleteRow = '<td><a class="btn bg-grey" onclick="removeRow('+encodeURIComponent("'oldStock'")+','+i+',0)"><i class="glyphicon glyphicon-remove text-danger"></i><span class="text-danger">Remove</span></a></td>'
 		row='<tr id="row'+i+'">'+'<td>'+oldStockProductNameRow+'</td>'+spprice+gotpricerow+quantRow+totalRow+deleteRow+'</tr>';
 		$(tableid).append(row);
 	}
 	
 }
+//prepends row to the given selector
+function prependTableRow(tableid,i,type,subTableId){
 
+	// if new stock
+
+	if(type=="newStock"){
+		newStockprodutNameRow ='<input type="text" name="productName[][]"';
+		gotpricerow = '<td><input type="number"  min="1" required id="gotprice'+i+'" name="gotprice[][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
+		spprice='<td><input type="number"  min="1" required id="spprice'+i+'" name="spprice[][]"></td>';
+		quantRow = '<td><input type="number" min="1" required id="quant'+i+'" name="quant[][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
+		totalRow = '<td><input type="number"  min="1" required id="total'+i+'" name="total[][]" readonly>';
+		deleteRow = '<td><a class="btn bg-grey" onclick="removeRow('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"><i class="glyphicon glyphicon-remove text-danger"></i><span class="text-danger">Remove</span></a></td>'
+		row='<tr id="row'+i+'">'+'<td>'+newStockprodutNameRow+'</td>'+spprice+gotpricerow+quantRow+totalRow+deleteRow+'</tr>';
+		$(tableid).before(row);
+	}
+	else if(type == "oldStock"){
+		gotpricerow = '<td><input type="number" min="1" required id="gotprice'+i+'" name="gotprice[]" onkeyup="changeTotalPrice('+encodeURIComponent("'oldStock'")+','+i+',0)"></td>';
+		spprice='<td><input type="number" min="1" required  id="spprice'+i+'" name="spprice[]"></td>';
+		quantRow = '<td><input type="number" min="1" required  id="quant'+i+'" name="quant[]" onkeyup="changeTotalPrice('+encodeURIComponent("'oldStock'")+','+i+',0)"></td>';
+		totalRow = '<td><input type="number" min="1" required  id="total'+i+'" name="total[]" readonly>';
+		deleteRow = '<td><a class="btn bg-grey" onclick="removeRow('+encodeURIComponent("'oldStock'")+','+i+',0)"><i class="glyphicon glyphicon-remove text-danger"></i><span class="text-danger">Remove</span></a></td>'
+		row='<tr id="row'+i+'">'+'<td>'+oldStockProductNameRow+'</td>'+spprice+gotpricerow+quantRow+totalRow+deleteRow+'</tr>';
+		$(tableid).before(row);
+	}
+	
+}
 // to add price to total column via quantity and got price
-function changeTotalPrice(type="oldStock",i,subTableId=0){
+function changeTotalPrice(type,i,subTableId){
 	if(type=="newStock"){
 		gotprice = Number($('#newSubMainTableBody'+subTableId+'> #row'+i+' > td > #gotprice'+i).val());
 		quant = Number($('#newSubMainTableBody'+subTableId+'> #row'+i+' > td > #quant'+i).val());
@@ -130,7 +155,7 @@ function changeTotalPrice(type="oldStock",i,subTableId=0){
 
 
 	}
-	else{
+	else if(type=="oldStock"){
 		gotprice = Number($('#gotprice'+i).val());
 		quant = Number($('#quant'+i).val());
 		var total =gotprice*quant;
@@ -143,7 +168,7 @@ function changeTotalPrice(type="oldStock",i,subTableId=0){
 }
 
 // to remove the row 
-function removeRow(type="oldStock",i,subTableId=0){
+function removeRow(type,i,subTableId){
 	if(type=="newStock"){
 		
 		//console.log(subTableId,i);
@@ -158,13 +183,13 @@ function removeRow(type="oldStock",i,subTableId=0){
 			$('#newStockTableBody').remove();
 		}
 	}
-	else{
+	else if(type == "oldStock"){
 		$('#row'+i+'').remove();
 	}
 	
 }
 // to add the extra row 
-function addRow(type="oldStock",subTableId=0){
+function addRow(type,subTableId){
 	if(type=="newStockBody"){
 		var id = $('#newStockTableBody > tr[id^="newSubMainrow"]').last().attr('id').substring(13);
 		id=Number(id)+1;
@@ -173,39 +198,32 @@ function addRow(type="oldStock",subTableId=0){
 		
 		
 	}
-	if(type=="newStockSubBody"){
+	else if(type=="newStockSubBody"){
 		//console.log(subTableId);
-		
-		
 		var id = $('#newSubMainTableBody'+subTableId+' tr:nth-last-child(2)').attr('id').substring(3);
-		console.log(id);
-		var lasttr = $('#subAddRowTr'+subTableId).clone();
-		console.log(lasttr);
-		$('#subAddRowTr'+subTableId).remove();
 		id=Number(id)+1;
-		appendTableRow('#newSubMainTableBody'+subTableId+'',id,"newStock",subTableId);
-		$("#newSubMainTableBody"+subTableId).append(lasttr);
+		prependTableRow('#subAddRowTr'+subTableId+'',id,"newStock",subTableId);
 		$('select').selectpicker('refresh');
 	}
-	
-	else{
-		var id = $('#addStockBody').last().attr('id').substring(3);
+	else if(type == "oldStock"){
+		var id = $('#addStockBody tr').last().attr('id').substring(3);
 		//alert(id);
 		id=Number(id)+1;
-		appendTableRow('#addStockBody',id);
+		appendTableRow('#addStockBody',id,"oldStock",0);
 		$('select').selectpicker('refresh');
 	}
 }
 //to load old stock page
 $("#getOldStock").click(function (e) { 
 	$('#newStockTableBody').remove();
+	$("#addRow").attr('onclick', 'addRow("oldStock",0)');
 
 	if($('#addStockBody').length == 0){
 		$('#addStockTable').append('<thead>'+headingRow+'</thead>');
 		$('#addStockTable').append('<tbody id="addStockBody"></tbody>');
 
 		for(i=0;i<10;i++){
-			appendTableRow('#addStockBody',i);
+			appendTableRow('#addStockBody',i,"oldStock",0);
 		}
 	
 		$('select').selectpicker('refresh');
@@ -226,7 +244,7 @@ $("#getNewStock").click(function (e) {
 		for(i=0;i<4;i++){
 			appendNewStockRow(i,newStockEntryOptions);
 		}
-		$("#addRow").attr('onclick', 'addRow("newStockBody")');
+		$("#addRow").attr('onclick', 'addRow("newStockBody",0)');
 		$('#submit').attr('disabled',false);
 		$('#addRow').attr('disabled',false);
 

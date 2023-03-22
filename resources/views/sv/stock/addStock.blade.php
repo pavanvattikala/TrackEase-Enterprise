@@ -25,7 +25,8 @@
 			<div class="panel-body">
 
 				<div class="remove-messages"></div>
-                @include('partials.error')			
+                @include('partials.error')		
+	
 
                 <form action="/stock/insert_stock" method="post" enctype="multipart/form-data">
                 @csrf
@@ -51,6 +52,10 @@
                         <a class="btn btn-primary col-3" id="getNewStock">New Stock Entry</a> 
                         <a class="btn btn-primary col-3" id="getOldStock">old Stock Entry</a> 
                     </div> 
+                    <div class="modal-loading" style="width:50px; margin:auto;padding-top:50px; padding-bottom:50px;">
+                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                        <span class="sr-only">Loading...</span>
+                    </div>
                     {{-- <div  class="form-group row ">
                         <select name="brand" id="brand"  data-live-search="true" >
                             <option value="1">surya</option>
