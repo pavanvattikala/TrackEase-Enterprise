@@ -99,7 +99,7 @@ function appendTableRow(tableid,i,type,subTableId){
 	// if new stock
 
 	if(type=="newStock"){
-		newStockprodutNameRow ='<input type="text" name="productName[][]"';
+		newStockprodutNameRow ='<input type="text" name="productName[][]" required>';
 		gotpricerow = '<td><input type="number"  min="1" required id="gotprice'+i+'" name="gotprice[][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
 		spprice='<td><input type="number"  min="1" required id="spprice'+i+'" name="spprice[][]"></td>';
 		quantRow = '<td><input type="number" min="1" required id="quant'+i+'" name="quant[][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
@@ -125,7 +125,7 @@ function prependTableRow(tableid,i,type,subTableId){
 	// if new stock
 
 	if(type=="newStock"){
-		newStockprodutNameRow ='<input type="text" name="productName[][]"';
+		newStockprodutNameRow ='<input type="text" name="productName[][]" required>';
 		gotpricerow = '<td><input type="number"  min="1" required id="gotprice'+i+'" name="gotprice[][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
 		spprice='<td><input type="number"  min="1" required id="spprice'+i+'" name="spprice[][]"></td>';
 		quantRow = '<td><input type="number" min="1" required id="quant'+i+'" name="quant[][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
