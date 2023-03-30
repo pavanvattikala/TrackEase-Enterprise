@@ -23,7 +23,8 @@
 				<table class="table" id="manageStockTable">
 					<thead>
 						<tr>
-							<th style="width:10%;">Stock Id</th>							
+							<th style="width:10%;">Stock Id</th>	
+							<th>Stock Type</th>						
 							<th>Delear Name</th>
 							<th>Amount</th>
 							<th>Date</th>

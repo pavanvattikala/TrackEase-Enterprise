@@ -16,11 +16,38 @@ class StockController extends Controller
     //
     public function fetchStock()
     {
-        $data['data']=[
-            '0'=>['1','Ramana','50,000','22-03-2023','verifies','none'],
-        ];
+        $data = DB::table('stock')->get();
 
-       return json_encode($data);
+        
+        
+        foreach($data as $item){
+            $button = '<!-- Single button -->
+        <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Action <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a type="button" href="" data-toggle="modal" id="editProductModalBtn" data-target="#editProductModal" onclick="editProduct('.$item->id.')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
+            <li><a type="button" href="" data-toggle="modal" data-target="#removeProductModal" id="removeProductModalBtn" onclick="removeProduct('.$item->id.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
+        </ul>
+        </div>';
+
+           // dd($item);
+            $output['data'][] = array( 	
+                
+                $item->id,
+                $item->stock_type,
+                $item->dealer,
+                $item->amount,
+                $item->created_at,
+                $item->status,
+                $button
+            ); 	
+        }
+
+
+
+        echo json_encode($output);
     }
 
     public function add_stock()

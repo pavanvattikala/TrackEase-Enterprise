@@ -252,9 +252,6 @@ $("#getNewStock").click(function (e) {
 	}
 
 	$('#type').val('newStock');
-	
-$('input:text').val("a");
-$('input[type="number"]').val(2);
 
 });
 
