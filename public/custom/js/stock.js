@@ -99,11 +99,11 @@ function appendTableRow(tableid,i,type,subTableId){
 	// if new stock
 
 	if(type=="newStock"){
-		newStockprodutNameRow ='<input type="text" name="productName[][]" required>';
-		gotpricerow = '<td><input type="number"  min="1" required id="gotprice'+i+'" name="gotprice[][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
-		spprice='<td><input type="number"  min="1" required id="spprice'+i+'" name="spprice[][]"></td>';
-		quantRow = '<td><input type="number" min="1" required id="quant'+i+'" name="quant[][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
-		totalRow = '<td><input type="number"  min="1" required id="total'+i+'" name="total[][]" readonly>';
+		newStockprodutNameRow ='<input type="text" name="productName['+subTableId+'][]" required>';
+		gotpricerow = '<td><input type="number"  min="1" required id="gotprice'+i+'" name="gotprice['+subTableId+'][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
+		spprice='<td><input type="number"  min="1" required id="spprice'+i+'" name="spprice['+subTableId+'][]"></td>';
+		quantRow = '<td><input type="number" min="1" required id="quant'+i+'" name="quant['+subTableId+'][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
+		totalRow = '<td><input type="number"  min="1" required id="total'+i+'" name="total['+subTableId+'][]" readonly>';
 		deleteRow = '<td><a class="btn bg-grey" onclick="removeRow('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"><i class="glyphicon glyphicon-remove text-danger"></i><span class="text-danger">Remove</span></a></td>'
 		row='<tr id="row'+i+'">'+'<td>'+newStockprodutNameRow+'</td>'+spprice+gotpricerow+quantRow+totalRow+deleteRow+'</tr>';
 		$(tableid).append(row);
@@ -125,11 +125,11 @@ function prependTableRow(tableid,i,type,subTableId){
 	// if new stock
 
 	if(type=="newStock"){
-		newStockprodutNameRow ='<input type="text" name="productName[][]" required>';
-		gotpricerow = '<td><input type="number"  min="1" required id="gotprice'+i+'" name="gotprice[][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
-		spprice='<td><input type="number"  min="1" required id="spprice'+i+'" name="spprice[][]"></td>';
-		quantRow = '<td><input type="number" min="1" required id="quant'+i+'" name="quant[][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
-		totalRow = '<td><input type="number"  min="1" required id="total'+i+'" name="total[][]" readonly>';
+		newStockprodutNameRow ='<input type="text" name="productName['+subTableId+'][]" required>';
+		gotpricerow = '<td><input type="number"  min="1" required id="gotprice'+i+'" name="gotprice['+subTableId+'][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
+		spprice='<td><input type="number"  min="1" required id="spprice'+i+'" name="spprice['+subTableId+'][]"></td>';
+		quantRow = '<td><input type="number" min="1" required id="quant'+i+'" name="quant['+subTableId+'][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
+		totalRow = '<td><input type="number"  min="1" required id="total'+i+'" name="total['+subTableId+'][]" readonly>';
 		deleteRow = '<td><a class="btn bg-grey" onclick="removeRow('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"><i class="glyphicon glyphicon-remove text-danger"></i><span class="text-danger">Remove</span></a></td>'
 		row='<tr id="row'+i+'">'+'<td>'+newStockprodutNameRow+'</td>'+spprice+gotpricerow+quantRow+totalRow+deleteRow+'</tr>';
 		$(tableid).before(row);
@@ -230,6 +230,7 @@ $("#getOldStock").click(function (e) {
 	
 		$('#submit').attr('disabled',false);
 		$('#addRow').attr('disabled',false);
+		$('#type').val('oldStock');
 		
 	}
 });
@@ -250,6 +251,10 @@ $("#getNewStock").click(function (e) {
 
 	}
 
+	$('#type').val('newStock');
+	
+$('input:text').val("a");
+$('input[type="number"]').val(2);
 
 });
 
@@ -269,3 +274,4 @@ function appendNewStockRow(i,newStockEntryOptions){
 
 		$('select').selectpicker('refresh');
 }
+

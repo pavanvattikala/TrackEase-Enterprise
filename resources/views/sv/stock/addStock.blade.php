@@ -50,7 +50,8 @@
                 <div class="container" id="topStockEntryMenu">
                     <div class="form-group row">
                         <a class="btn btn-primary col-3" id="getNewStock">New Stock Entry</a> 
-                        <a class="btn btn-primary col-3" id="getOldStock">old Stock Entry</a> 
+                        <a class="btn btn-primary col-3" id="getOldStock">old Stock Entry</a>
+                        <input type="hidden" name="type" id="type">
                     </div> 
                     <div class="modal-loading" style="width:50px; margin:auto;padding-top:50px; padding-bottom:50px;">
                         <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
