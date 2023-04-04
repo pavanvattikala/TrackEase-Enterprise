@@ -28,17 +28,19 @@ class DaySheetController extends Controller
         $toDate = $request->toDate;
 
         //dd($fromDate,$toDate);
+        $output=[];
 
         $orders_data = DB::table('orders')->select('order_id','paid','order_date')->whereBetween('order_date',[$fromDate,$toDate])->where('status',1)->get();
         $service_data = DB::table('service_data')->whereBetween('service_date',[$fromDate,$toDate])->where('status',1)->get();
         $expense_data = DB::table('expenses')->select('expense_id','name','amount')->whereBetween('created_at',[$fromDate,$toDate])->where('verified',1)->where('status',1)->get();
+        $stock_data = DB::table('stock')->select('id','stock_name','amount')->whereBetween('created_at',[$fromDate,$toDate])->where('active',1)->where('status',1)->get();
 
 
         // $data=$orders_data->merge($service_data);
 
-        $types = array('Order','Service','Expense');
+        $types = array('Order','Service','Expense','Stock');
 
-        $links = array('/orders/manage/view_order/','/service/manage/view_service/','/expense/manage/view_expense/');
+        $links = array('/orders/manage/view_order/','/service/manage/view_service/','/expense/manage/view_expense/','/expense/stock/view_stock/');
 
         //$button = 
 
@@ -64,6 +66,14 @@ class DaySheetController extends Controller
                 $types[2],
                 '-'.$expense->amount,
                 '<a type="button" class="btn btn-primary" href="'.$links[2].$expense->expense_id.'"> <i class="glyphicon glyphicon-search"></i>View</a>', 		
+                ); 	
+        }
+        foreach ($stock_data as $stock) {
+        
+            $output[] = array( 		
+                $types[3],
+                '-'.$stock->amount,
+                '<a type="button" class="btn btn-primary" href="'.$links[3].$stock->id.'"> <i class="glyphicon glyphicon-search"></i>View</a>', 		
                 ); 	
         }
 
