@@ -26,6 +26,7 @@
 					<thead>
 						<tr>							
 							<th>Expense Name</th>
+							<th>Date</th>
 							<th>Amount</th>
 							<th style="width:15%;">Options</th>
 						</tr>

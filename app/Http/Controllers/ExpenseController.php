@@ -23,14 +23,27 @@ class ExpenseController extends Controller
        return back();
     }
     public function fetchExpense(){
-        $result = DB::table('expenses')->select('expense_id','name','amount','created_at','verified')->where('status',1)->get();
+        $expense = DB::table('expenses')->select('expense_id as id','name','amount','created_at','verified')->where('status',1)->get();
+
+        
+
+        $stock = DB::table('stock')->select('id','stock_name as name','amount','created_at','active as verified')->where('status',1)->get();
+
+       
+
+        $result = $expense->merge($stock);
+
+        
         
         foreach($result as $item) { 
     
 
             // $row = $result->fetch_array();
             $verifiedExpenses = ""; 
-            $expenseId = $item->expense_id;
+            $id = $item->id;
+
+            $date = date('d-m-Y',strtotime($item->created_at));
+
             // active 
             if($item->verified == 1) {
                 // activate member
@@ -46,13 +59,14 @@ class ExpenseController extends Controller
                 Action <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a type="button" href="" data-toggle="modal" data-target="#editexpenseModel" onclick="editexpenses('.$expenseId.')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-                <li><a type="button" href="" data-toggle="modal" data-target="#removeMemberModal" onclick="removeexpenses('.$expenseId.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
+                <li><a type="button" href="" data-toggle="modal" data-target="#editexpenseModel" onclick="editexpenses('.$id.')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
+                <li><a type="button" href="" data-toggle="modal" data-target="#removeMemberModal" onclick="removeexpenses('.$id.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
             </ul>
             </div>';
 
             $output['data'][] = array( 		
-                $item->name, 		
+                $item->name,
+                $date,
                 $verifiedExpenses,
                 $button
                 ); 	
