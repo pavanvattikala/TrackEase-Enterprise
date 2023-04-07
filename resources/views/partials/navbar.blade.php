@@ -63,7 +63,12 @@
           @csrf
       </form>          
       </ul>
-    </li>        
+    </li> 
+    
+    @auth
+    <li id="navmanageUsers"><a href="/users"> <i class="glyphicon glyphicon-folder-close"></i> USers </a></li>       
+    @endauth
+    
            
   </ul>
 </div><!-- /.navbar-collapse -->

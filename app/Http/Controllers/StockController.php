@@ -18,6 +18,8 @@ class StockController extends Controller
     {
         $data = DB::table('stock')->get();
 
+        $output=[];
+
         
         
         foreach($data as $item){
