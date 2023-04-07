@@ -79,12 +79,14 @@ function editProduct(productId = null) {
 				$("#editQuantity").val(response.quantity);
 				// price
 				$("#editRate").val(response.selling_price);
+				//got rate 
+				$("#editGotRate").val(response.got_rate);
 				// brand name
-				$("#editBrandName").val(response.brand_id);
+				$("#editBrandName").val(response.brand_id).change();
 				// category name
-				$("#editCategoryName").val(response.categories_id);
+				$("#editCategoryName").val(response.categories_id).change();
 				// status
-				$("#editProductStatus").val(response.active);
+				$("#editProductStatus").val(response.active).change();
 
 			} // /success function
 		}); // /ajax to fetch product image

@@ -127,7 +127,7 @@ class ProductController extends Controller
             $result = DB::table('product')
             ->join('brands', 'product.brand_id', '=', 'brands.brand_id')
             ->join('categories', 'product.categories_id', '=', 'categories.categories_id')
-            ->select('product.product_id', 'product.product_name','brands.brand_id','product.quantity','product.selling_price','product.categories_id','product.active')
+            ->select('product.product_id', 'product.got_rate' ,'product.product_name','brands.brand_id','product.quantity','product.selling_price','product.categories_id','product.active')
             ->where('product.status',1)
             ->where('product_id',$productId)
             ->get()->first();       
@@ -174,6 +174,7 @@ class ProductController extends Controller
             "editProductName" => "required",
             "editQuantity" => "required",
             "editRate" => "required",
+            "editGotRate" => "required",
             "editBrandName" => "required",
             "editCategoryName" => "required",
             "editProductStatus" => "required",
@@ -184,6 +185,7 @@ class ProductController extends Controller
             'product_name' => $request->editProductName,
             'quantity'  =>  $request->editQuantity,
             'selling_price'  =>  $request->editRate,
+            'got_rate'  =>  $request->editGotRate,
             'brand_id'  =>  $request->editBrandName,
             'categories_id'  =>  $request->editCategoryName,
             'active'  =>  $request->editProductStatus,
