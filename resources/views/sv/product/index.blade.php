@@ -44,6 +44,13 @@
 
 
 
+<!-- /add categories -->
+
+
+
+<!-- /categories brand -->
+
+<!-- categories brand -->
 <div class="modal fade" tabindex="-1" role="dialog" id="removeProductModal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -68,6 +75,7 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+<!-- edit categories brand -->
 <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -156,13 +164,6 @@
                               <div class="col-sm-8">
                                 <input type="text" class="form-control" id="editRate" placeholder="Rate" name="editRate" autocomplete="off">
                               </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="editRate" class="col-sm-3 control-label">Got Rate: </label>
-                        <label class="col-sm-1 control-label">: </label>
-                            <div class="col-sm-8">
-                              <input type="text" class="form-control" id="editGotRate" placeholder="Got Rate" name="editGotRate" autocomplete="off">
-                            </div>
                       </div>     	        
   
                       <div class="form-group">
@@ -175,7 +176,7 @@
                                       $brands = DB::table('brands')->select('brand_id','brand_name')->get();
                                     @endphp
                                     @foreach ($brands as $brand)
-                                      <option  value="{{ $brand->brand_id }}">{{ $brand->brand_name }}</option>
+                                      <option value="{{ $brand->brand_id }}">{{ $brand->brand_name }}</option>
                                     @endforeach
                                 </select>
                               </div>
