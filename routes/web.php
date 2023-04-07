@@ -9,6 +9,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\DaySheetController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -193,5 +194,16 @@ Route::middleware('auth')->group(function(){
         Route::get('/fetchStock',[StockController::class,'fetchStock']);
         Route::post('/trash',[StockController::class,'trash']);
     
+    });
+
+    Route::prefix('users')->group(function () {
+    
+        Route::get('/',function(){
+            return view('sv.users.index');
+        
+        });
+
+        Route::post('/createuser',[UserController::class,'create']);
+
     });
 });
