@@ -65,6 +65,13 @@
       </ul>
     </li>        
            
+    </li> 
+    
+    @auth
+    <li id="navmanageUsers"><a href="/users"> <i class="glyphicon glyphicon-folder-close"></i> Users </a></li>       
+    @endauth
+    
+           
   </ul>
 </div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->
