@@ -22,7 +22,11 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/',[DashBoardController::class,'index']);
+Auth::routes(['register' => false]);
+
+Route::middleware('auth')->group(function(){
+
+    Route::get('/',[DashBoardController::class,'index']);
 
     Route::get('/home', [DashBoardController::class,'index']);
     
