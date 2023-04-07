@@ -164,6 +164,13 @@
                               <div class="col-sm-8">
                                 <input type="text" class="form-control" id="editRate" placeholder="Rate" name="editRate" autocomplete="off">
                               </div>
+                      </div> 
+                      <div class="form-group">
+                        <label for="editRate" class="col-sm-3 control-label">Got Rate: </label>
+                        <label class="col-sm-1 control-label">: </label>
+                            <div class="col-sm-8">
+                              <input type="text" class="form-control" id="editGotRate" placeholder="Rate" name="editGotRate" autocomplete="off">
+                            </div>
                       </div>     	        
   
                       <div class="form-group">
