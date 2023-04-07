@@ -12,7 +12,7 @@
             <h4 class="modal-title"><i class="fa fa-plus"></i> Add Product</h4>
           </div>
 
-          <div class="modal-body" style="max-height:450px; overflow:auto;">
+          <div class="modal-body">
 
               <div id="add-product-messages"></div>
 
@@ -67,7 +67,7 @@
                       @php
                             $brands = DB::table('brands')->select('brand_id','brand_name')->where('brand_status',1)->where('brand_active',1)->get();
                       @endphp
-                      <select class="form-control" id="brandName" name="brandName" data-live-search="true">
+                      <select class="form-control" data-live-search="true" id="brandName" name="brandName">
                           <option value="">~~SELECT~~</option>
                           @foreach ($brands as $brand)
                           <option value="{{$brand->brand_id}}">{{$brand->brand_name}}</option>
@@ -83,7 +83,7 @@
                       @php
                           $categoreis = DB::table('categories')->select('categories_id','categories_name')->where('categories_status',1)->where('categories_active',1)->get();
                       @endphp
-                      <select type="text" class="form-control" id="categoryName" placeholder="Product Name" name="categoryName" >
+                      <select type="text" class="form-control" data-live-search="true" id="categoryName" placeholder="Product Name" name="categoryName" >
                           <option value="">~~SELECT~~</option>
                           @foreach ($categoreis as $category)
                             <option value="{{$category->categories_id}}">{{$category->categories_name}}</option>
@@ -112,4 +112,10 @@
             <button type="submit" class="btn btn-primary" id="createProductBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
           </div> <!-- /modal-footer -->	      
          </form> <!-- /.form -->	     
+
+         
+<script>
+  $('select').selectpicker();
+  $('#navProduct').addClass('active');
+</script>
 @endsection

@@ -177,7 +177,7 @@
                           <label for="editBrandName" class="col-sm-3 control-label">Brand Name: </label>
                           <label class="col-sm-1 control-label">: </label>
                               <div class="col-sm-8">
-                                <select class="form-control" id="editBrandName" name="editBrandName">
+                                <select class="form-control selectpicker" data-live-search="true" id="editBrandName" name="editBrandName">
                                     <option value="">~~SELECT~~</option>
                                     @php
                                       $brands = DB::table('brands')->select('brand_id','brand_name')->get();
@@ -193,7 +193,7 @@
                           <label for="editCategoryName" class="col-sm-3 control-label">Category Name: </label>
                           <label class="col-sm-1 control-label">: </label>
                               <div class="col-sm-8">
-                                <select type="text" class="form-control" id="editCategoryName" name="editCategoryName" >
+                                <select type="text" class="form-control selectpicker" data-live-search="true" id="editCategoryName" name="editCategoryName" >
                                     <option value="">~~SELECT~~</option>
                                     @php
                                     $categories_name = DB::table('categories')->select('categories_id','categories_name')->get();
@@ -209,7 +209,7 @@
                           <label for="editProductStatus" class="col-sm-3 control-label">Status: </label>
                           <label class="col-sm-1 control-label">: </label>
                               <div class="col-sm-8">
-                                <select class="form-control" id="editProductStatus" name="editProductStatus">
+                                <select class="form-control" id="editProductStatus"  name="editProductStatus">
                                     <option value="">~~SELECT~~</option>
                                     <option value="1">Available</option>
                                     <option value="2">Not Available</option>
