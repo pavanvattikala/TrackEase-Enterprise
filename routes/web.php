@@ -196,7 +196,7 @@ Route::middleware('auth')->group(function(){
     
     });
 
-    Route::prefix('users')->group(function () {
+    Route::prefix('users')->middleware('check-permission')->group(function () {
     
         Route::get('/',function(){
             return view('sv.users.index');

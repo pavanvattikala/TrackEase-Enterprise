@@ -46,6 +46,7 @@
 		</div> 
 	</div> 
 </div> 
+@include('partials.error')
 
 <div class="row">
 	<div class="col-md-4">
