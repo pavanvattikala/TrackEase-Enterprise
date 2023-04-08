@@ -2,7 +2,7 @@
 /public/build
 /public/hot
 /public/storage
-/storage
+storage/*
 .env.backup
 .env.production
 .phpunit.result.cache
@@ -15,4 +15,4 @@ yarn-error.log
 /.idea
 /.vscode
 .env
-/bootstrap
+bootstrap/cache*
