@@ -147,7 +147,7 @@ class ProductController extends Controller
         ->join('categories', 'product.categories_id', '=', 'categories.categories_id')
         ->select('product.product_id', 'product.product_name')
         ->where('product.status',1)
-        ->get()->first();
+        ->get();
 
        // dd($result);
 

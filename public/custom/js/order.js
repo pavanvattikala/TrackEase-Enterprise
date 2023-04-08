@@ -51,13 +51,12 @@ function addRow() {
 				'<td>'+
 					'<div class="form-group">'+
 
-					'<select class="form-control" name="productName[]" id="productName'+count+'" onchange="getProductData('+count+')" >'+
+					'<select data-live-search="true" class="form-control" name="productName[]" id="productName'+count+'" onchange="getProductData('+count+')" >'+
 						'<option value="">~~SELECT~~</option>';
 						// console.log(response);
-						//$.each(response, function(index, value) {
-							//console.log(value);
-							tr += '<option value="'+response.product_id+'">'+response.product_name+'</option>';							
-						//});
+						$.each(response, function(index, value) {
+							tr += '<option value="'+value.product_id+'">'+value.product_name+'</option>';							
+						});
 													
 					tr += '</select>'+
 					'</div>'+
@@ -83,7 +82,9 @@ function addRow() {
 				$("#productTable tbody tr:last").after(tr);
 			} else {				
 				$("#productTable tbody").append(tr);
-			}		
+			}	
+			
+			$('select').selectpicker('refresh');
 
 		} // /success
 	});	// get the product data
