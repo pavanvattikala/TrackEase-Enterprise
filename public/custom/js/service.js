@@ -56,7 +56,7 @@ function addRow() {
 				'<td>'+
 					'<div class="form-group">'+
 
-					'<select class="form-control" name="serviceName[]" id="serviceName'+count+'" >'+
+					'<select class="form-control" data-live-search="true"  name="serviceName[]" id="serviceName'+count+'" >'+
 						'<option value="">~~SELECT~~</option>';
 						// console.log(response);
 						$.each(response, function(index, value) {
@@ -87,7 +87,9 @@ function addRow() {
 				$("#serviceTable tbody tr:last").after(tr);
 			} else {				
 				$("#serviceTable tbody").append(tr);
-			}		
+			}	
+			
+			$('select').selectpicker('refresh');
 
 		} // /success
 	});	// get the product data
