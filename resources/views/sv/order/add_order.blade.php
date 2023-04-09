@@ -92,7 +92,7 @@
 								</td>
 								<td style="padding-left:20px;">
 									<div class="form-group">
-									<input type="number" name="quantity[]" id="quantity{{$x}}" onkeyup="subAmount()" autocomplete="off" class="form-control" min="1" />
+									<input type="number" name="quantity[]" id="quantity{{$x}}" onkeyup="subAmount()" autocomplete="off" class="form-control" min="1" step="0.01" />
 									</div>
 								</td>
 								<td style="padding-left:20px;">			  					

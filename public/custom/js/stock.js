@@ -100,19 +100,19 @@ function appendTableRow(tableid,i,type,subTableId){
 
 	if(type=="newStock"){
 		newStockprodutNameRow ='<input type="text" name="productName['+subTableId+'][]" required>';
-		gotpricerow = '<td><input type="number"  min="1" required id="gotprice'+i+'" name="gotprice['+subTableId+'][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
-		spprice='<td><input type="number"  min="1" required id="spprice'+i+'" name="spprice['+subTableId+'][]"></td>';
-		quantRow = '<td><input type="number" min="1" required id="quant'+i+'" name="quant['+subTableId+'][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
-		totalRow = '<td><input type="number"  min="1" required id="total'+i+'" name="total['+subTableId+'][]" readonly>';
+		gotpricerow = '<td><input type="number" step="0.01"  min="1" required id="gotprice'+i+'" name="gotprice['+subTableId+'][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
+		spprice='<td><input type="number" step="0.01" min="1" required id="spprice'+i+'" name="spprice['+subTableId+'][]"></td>';
+		quantRow = '<td><input type="number" step="0.01" min="1" required id="quant'+i+'" name="quant['+subTableId+'][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
+		totalRow = '<td><input type="number" step="0.01"  min="1" required id="total'+i+'" name="total['+subTableId+'][]" readonly>';
 		deleteRow = '<td><a class="btn bg-grey" onclick="removeRow('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"><i class="glyphicon glyphicon-remove text-danger"></i><span class="text-danger">Remove</span></a></td>'
 		row='<tr id="row'+i+'">'+'<td>'+newStockprodutNameRow+'</td>'+spprice+gotpricerow+quantRow+totalRow+deleteRow+'</tr>';
 		$(tableid).append(row);
 	}
 	else if(type == "oldStock"){
-		gotpricerow = '<td><input type="number" min="1" required id="gotprice'+i+'" name="gotprice[]" onkeyup="changeTotalPrice('+encodeURIComponent("'oldStock'")+','+i+',0)"></td>';
-		spprice='<td><input type="number" min="1" required  id="spprice'+i+'" name="spprice[]"></td>';
-		quantRow = '<td><input type="number" min="1" required  id="quant'+i+'" name="quant[]" onkeyup="changeTotalPrice('+encodeURIComponent("'oldStock'")+','+i+',0)"></td>';
-		totalRow = '<td><input type="number" min="1" required  id="total'+i+'" name="total[]" readonly>';
+		gotpricerow = '<td><input type="number" step="0.01" min="1" required id="gotprice'+i+'" name="gotprice[]" onkeyup="changeTotalPrice('+encodeURIComponent("'oldStock'")+','+i+',0)"></td>';
+		spprice='<td><input type="number" step="0.01" min="1" required  id="spprice'+i+'" name="spprice[]"></td>';
+		quantRow = '<td><input type="number" step="0.01" min="1" required  id="quant'+i+'" name="quant[]" onkeyup="changeTotalPrice('+encodeURIComponent("'oldStock'")+','+i+',0)"></td>';
+		totalRow = '<td><input type="number" step="0.01" min="1" required  id="total'+i+'" name="total[]" readonly>';
 		deleteRow = '<td><a class="btn bg-grey" onclick="removeRow('+encodeURIComponent("'oldStock'")+','+i+',0)"><i class="glyphicon glyphicon-remove text-danger"></i><span class="text-danger">Remove</span></a></td>'
 		row='<tr id="row'+i+'">'+'<td>'+oldStockProductNameRow+'</td>'+spprice+gotpricerow+quantRow+totalRow+deleteRow+'</tr>';
 		$(tableid).append(row);
@@ -126,19 +126,19 @@ function prependTableRow(tableid,i,type,subTableId){
 
 	if(type=="newStock"){
 		newStockprodutNameRow ='<input type="text" name="productName['+subTableId+'][]" required>';
-		gotpricerow = '<td><input type="number"  min="1" required id="gotprice'+i+'" name="gotprice['+subTableId+'][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
-		spprice='<td><input type="number"  min="1" required id="spprice'+i+'" name="spprice['+subTableId+'][]"></td>';
-		quantRow = '<td><input type="number" min="1" required id="quant'+i+'" name="quant['+subTableId+'][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
-		totalRow = '<td><input type="number"  min="1" required id="total'+i+'" name="total['+subTableId+'][]" readonly>';
+		gotpricerow = '<td><input type="number" step="0.01"  min="1" required id="gotprice'+i+'" name="gotprice['+subTableId+'][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
+		spprice='<td><input type="number" step="0.01"  min="1" required id="spprice'+i+'" name="spprice['+subTableId+'][]"></td>';
+		quantRow = '<td><input type="number" step="0.01" min="1" required id="quant'+i+'" name="quant['+subTableId+'][]" onkeyup="changeTotalPrice('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"></td>';
+		totalRow = '<td><input type="number" step="0.01"  min="1" required id="total'+i+'" name="total['+subTableId+'][]" readonly>';
 		deleteRow = '<td><a class="btn bg-grey" onclick="removeRow('+encodeURIComponent("'newStock'")+','+i+','+subTableId+')"><i class="glyphicon glyphicon-remove text-danger"></i><span class="text-danger">Remove</span></a></td>'
 		row='<tr id="row'+i+'">'+'<td>'+newStockprodutNameRow+'</td>'+spprice+gotpricerow+quantRow+totalRow+deleteRow+'</tr>';
 		$(tableid).before(row);
 	}
 	else if(type == "oldStock"){
-		gotpricerow = '<td><input type="number" min="1" required id="gotprice'+i+'" name="gotprice[]" onkeyup="changeTotalPrice('+encodeURIComponent("'oldStock'")+','+i+',0)"></td>';
-		spprice='<td><input type="number" min="1" required  id="spprice'+i+'" name="spprice[]"></td>';
-		quantRow = '<td><input type="number" min="1" required  id="quant'+i+'" name="quant[]" onkeyup="changeTotalPrice('+encodeURIComponent("'oldStock'")+','+i+',0)"></td>';
-		totalRow = '<td><input type="number" min="1" required  id="total'+i+'" name="total[]" readonly>';
+		gotpricerow = '<td><input type="number" step="0.01" min="1" required id="gotprice'+i+'" name="gotprice[]" onkeyup="changeTotalPrice('+encodeURIComponent("'oldStock'")+','+i+',0)"></td>';
+		spprice='<td><input type="number" step="0.01" min="1" required  id="spprice'+i+'" name="spprice[]"></td>';
+		quantRow = '<td><input type="number" step="0.01" min="1" required  id="quant'+i+'" name="quant[]" onkeyup="changeTotalPrice('+encodeURIComponent("'oldStock'")+','+i+',0)"></td>';
+		totalRow = '<td><input type="number" step="0.01" min="1" required  id="total'+i+'" name="total[]" readonly>';
 		deleteRow = '<td><a class="btn bg-grey" onclick="removeRow('+encodeURIComponent("'oldStock'")+','+i+',0)"><i class="glyphicon glyphicon-remove text-danger"></i><span class="text-danger">Remove</span></a></td>'
 		row='<tr id="row'+i+'">'+'<td>'+oldStockProductNameRow+'</td>'+spprice+gotpricerow+quantRow+totalRow+deleteRow+'</tr>';
 		$(tableid).before(row);
