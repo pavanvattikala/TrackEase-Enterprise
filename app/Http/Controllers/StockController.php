@@ -123,7 +123,7 @@ class StockController extends Controller
                 "updated_at"=>today(),
                 "got_rate"=>$item['got_rate'],
                 "selling_price"=>$item['selling_price'],
-                "quantity"=>$item['quantity']
+                "quantity"=>$item['quantity'],
             ];
             
             DB::table('product')->where('product_id',$produtId)->update($value);
@@ -215,7 +215,8 @@ class StockController extends Controller
         "stock_type"=>$typeOfStock,
         "dealer"=>$dealer,
         "amount"=>$totalStockAmount,
-        "created_by"=>auth()->id()
+        "created_by"=>auth()->id(),
+        "created_at"=>$date
        ];
 
        $stock_id = DB::table('stock')->insertGetId($stock_values);
@@ -224,7 +225,8 @@ class StockController extends Controller
        $stock_data_values = [
         "stock_id"=>$stock_id,
         "products"=>json_encode($product_set),
-        "created_by"=>auth()->id()
+        "created_by"=>auth()->id(),
+        "created_at"=>$date
 
        ];
 
