@@ -7,9 +7,9 @@
 	}
 </style>
 
-<!-- fullCalendar 2.2.5-->
+{{-- <!-- fullCalendar 2.2.5-->
     <link rel="stylesheet" href="assests/plugins/fullcalendar/fullcalendar.min.css">
-    <link rel="stylesheet" href="assests/plugins/fullcalendar/fullcalendar.print.css" media="print">
+    <link rel="stylesheet" href="assests/plugins/fullcalendar/fullcalendar.print.css" media="print"> --}}
 
 
 <div class="row">
@@ -84,34 +84,18 @@
 	</div>
 </div>
 
-<!-- fullCalendar 2.2.5 -->
-<script src="assests/plugins/moment/moment.min.js"></script>
-<script src="assests/plugins/fullcalendar/fullcalendar.min.js"></script>
+<script src="{{ asset('assests/plugins/fullcalendar/dist/index.global.min.js') }}"></script>
 
+<script>
 
-<script type="text/javascript">
-	$(function () {
-			// top bar active
-	$('#navDashboard').addClass('active');
+	document.addEventListener('DOMContentLoaded', function() {
+		var calendarEl = document.getElementById('calendar');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			initialView: 'dayGridMonth',
+		});
+		calendar.render();
+	});
 
-      //Date for the calendar events (dummy data)
-      var date = new Date();
-      var d = date.getDate(),
-      m = date.getMonth(),
-      y = date.getFullYear();
+  </script>
 
-      $('#calendar').fullCalendar({
-        header: {
-          left: '',
-          center: 'title'
-        },
-        buttonText: {
-          today: 'today',
-          month: 'month'          
-        }        
-      });
-
-
-    });
-</script>	
 @endsection
