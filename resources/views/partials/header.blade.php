@@ -41,20 +41,13 @@
 
   <!-- jquery ui -->  
   <link rel="stylesheet" href="{{ asset('assests/jquery-ui/jquery-ui.min.css') }}">
-  <script src="{{ asset('assests/jquery-ui/jquery-ui.min.js') }}"></script>
-
-
-
-  <!-- bootstrap js -->
-	<script src="{{ asset('assests/bootstrap/js/bootstrap.min.js') }}"></script>
-
-
+  
 
 {{-- bootstrap select  --}}
 
 <link rel="stylesheet" href=" {{ asset('assests/bootstrap-select/css/bootstrap-select.min.css') }}">
 
-<script src="{{ asset('assests/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
+
 
 </head>
 
