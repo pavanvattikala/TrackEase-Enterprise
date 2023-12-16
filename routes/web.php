@@ -90,7 +90,7 @@ Route::middleware('auth')->group(function(){
     Route::prefix('orders')->group(function(){
     
         Route::get('/add_order',function(){
-            return view('sv.order.add_order');
+            return view('sv.order.add_order2');
         });
         
         Route::post('/insert_order',[OrderController::class,'create']);
