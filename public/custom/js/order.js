@@ -2,15 +2,32 @@ var manageOrderTable;
 
 // to load the data table
 $(document).ready(function() {
-	$('select').selectpicker();
-
-	$('#navOrder').addClass('active');
 	
-	manageOrderTable = $("#manageOrderTable").DataTable({
-		'ajax': '/orders/fetchOrders',
-		'order': [],
-		order: [[0, 'desc']], // to sort the order id in reverse
-	});		
+	$('#search_button').click(function (e) {
+        e.preventDefault();
+        
+        // Get the search input and search type
+        var searchInput = $('#search_by').val();
+        var searchType = $('#search_type').val();
+        
+        // Perform an AJAX request to fetch search results
+        $.ajax({
+            url: '/search', // api end point for searching
+            method: 'POST',
+            data: {
+                search_input: searchInput,
+                search_type: searchType
+            },
+            success: function (data) {
+                // Update the product table with search results
+                $('#productTable').html(data);
+            },
+            error: function (xhr) {
+                // Handle errors
+                console.log(xhr.responseText);
+            }
+        });
+    });
 					
 });
 
