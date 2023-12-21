@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\DaySheetController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -66,21 +67,25 @@ Route::middleware('auth')->group(function(){
     // categories end
     
     //product start
-    Route::prefix('product')->group(function(){
+    Route::prefix('product')->name('product.')->group(function(){
         Route::get('/',function(){
             return view('sv.product.index');
         
         });
+        
         Route::get('/add_product',function(){
             return view('sv.product.add_product');
         });
+        Route::post('/get-new-product-component',[ProductController::class,'getProductComponent'])->name('get.new.component');
         Route::post('/createProduct',[ProductController::class,'create']);
         Route::get('/fetchProduct',[ProductController::class,'fetchProduct']);
-        Route::post('/fetchSelectedProduct ',[ProductController::class,'fetchSelectedProduct']);
-        Route::post('/fetchProductData ',[ProductController::class,'fetchProductData']);
+        Route::post('/fetchSelectedProduct ',[ProductController::class,'fetchSelectedProduct'])->name('fetch.selected');
+        Route::post('/fetchProductData', [ProductController::class, 'fetchProductData'])->name('get.all');
         Route::post('/trash ',[ProductController::class,'trash']);
     
         Route::post('/editProduct ',[ProductController::class,'editProduct']);
+
+        Route::get('/get-search-results',[ProductController::class,'searchResults'])->name('get.search.results');
     
     });
     
@@ -204,6 +209,14 @@ Route::middleware('auth')->group(function(){
         });
 
         Route::post('/createuser',[UserController::class,'create']);
+
+    });
+
+    Route::prefix('sale')->name('sale.')->group(function () {
+
+        Route::post('/get-sale-items',[SaleController::class,'getSaleItems'])->name('get.items');
+
+        Route::post('/get-sale-item-component',[SaleController::class,'getSaleItemComponent'])->name('get.item.component');
 
     });
 });

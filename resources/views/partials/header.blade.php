@@ -47,6 +47,8 @@
 
 <link rel="stylesheet" href=" {{ asset('assests/bootstrap-select/css/bootstrap-select.min.css') }}">
 
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+
 
 
 </head>

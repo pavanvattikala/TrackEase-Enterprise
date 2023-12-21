@@ -6,21 +6,21 @@
           <div class="collapse navbar-collapse">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="#"><h3><i class="bi bi-asterisk"></i></h3></a>
+                <button class="btn nav-btn" data-search-type="all"><h3><i class="bi bi-asterisk"></i></h3></button>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><h3><i class="bi bi-upc-scan"></i></h3></a>
+                <button class="btn nav-btn" data-search-type="barcode"><h3><i class="bi bi-upc-scan"></i></h3></button>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><h3><i class="bi bi-hash"></i></h3></a>
+                <button class="btn nav-btn" data-search-type="sku"><h3><i class="bi bi-hash"></i></h3></button>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"><h3><i class="bi bi-tag-fill"></i></h3></a>
+                <button class="btn nav-btn" data-search-type="name"><h3><i class="bi bi-tag-fill"></i></h3></button>
               </li>
             </ul>
             <div class="input-group">
               <span class="input-group-text"><i class="bi bi-search"></i></span>
-              <input type="text" class="form-control" placeholder="Search products by name, code, or barcode"/>
+              <input type="text" id="search_by" class="form-control" placeholder="Search products by name, code, or barcode"/>
             </div>
           </div>
         </div>
@@ -37,8 +37,16 @@
                 <th scope="col">Quantity</th>
                 <th scope="col">Price</th>
                 <th scope="col">Amount</th>
+                <th scope="col">Options</th>
               </tr>
             </thead>
+            <tbody id="products">
+              <tr>
+                <td colspan="4" class="text-center">No Products Added</td>
+              </tr>
+            </tbody>
+              
+            </tbody>
           </table>
         </div>
         <div class="col-md-6 options">
@@ -80,6 +88,11 @@
         
       </div>
     </div>
+
+    <script>
+      var getSaleItems = "{{ route('sale.get.items',[],false) }}";
+      var getSaleItemData = "{{ route('sale.get.item.component',[],false) }}";
+  </script>
 
 <script src="{{ asset('custom/js/order.js') }}"></script>
 </x-sales>
