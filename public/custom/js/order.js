@@ -53,13 +53,21 @@ function insertProduct(item) {
     );
 
     if ($("#item" + selectedProduct.product_id).length > 0) {
-        var prevQuantity = $(
-            "#item" + selectedProduct.product_id + " > #item_quantity"
-        ).text();
+        var oldItem = $("#item" + selectedProduct.product_id);
 
-        $("#item" + selectedProduct.product_id + " > #item_quantity").text(
-            Number(prevQuantity) + 1
-        );
+        var prevQuantity = oldItem.find("#item_quantity").text();
+
+        var price = oldItem.find("#item_selling_price").text();
+
+        var newQuantity = Number(prevQuantity) + 1;
+        var newAmount = newQuantity * price;
+
+        oldItem.find("#item_quantity").text(newQuantity);
+
+        oldItem.find("#item_selling_price").text();
+        oldItem.find("#item_amount").text(newAmount);
+
+        updateTotalAmounts();
 
         return;
     }
@@ -76,6 +84,7 @@ function insertProduct(item) {
         },
         success: function (response) {
             $("#products").append(response);
+            updateTotalAmounts();
         },
         error: function (error) {
             console.error("Error inserting product:", error);
@@ -97,6 +106,7 @@ function deleteItem(id) {
     // Implement your delete logic here using the 'id'
     console.log("Deleting item with ID:", id);
     $("#item" + id).remove();
+    updateTotalAmounts();
 }
 
 // Open the modal
@@ -139,6 +149,33 @@ function getSaleItemInfo(id) {
     var selectedProduct = products.find((product) => product.product_id === id);
 
     return selectedProduct;
+}
+
+function updateTotalAmounts() {
+    var subTotal = 0;
+
+    // Iterate over each sale item
+    $(".saleItem").each(function () {
+        var quantity = parseInt($(this).find("#item_quantity").text());
+        var sellingPrice = parseFloat(
+            $(this).find("#item_selling_price").text()
+        );
+        var itemTotal = quantity * sellingPrice;
+
+        // Update the subtotal
+        subTotal += itemTotal;
+    });
+
+    // Calculate discount, tax, and grand total (you need to implement your logic here)
+    var discount = 0;
+    var tax = 0;
+    var grandTotal = subTotal - discount + tax;
+
+    // Update the values in the HTML
+    $("#subTotalAmt").text("Sub Total: " + subTotal.toFixed(2));
+    $("#discountAmt").text("Discount: " + discount.toFixed(2));
+    $("#taxAmt").text("Tax: " + tax.toFixed(2));
+    $("#grandTotalAmt").text("Total: " + grandTotal.toFixed(2));
 }
 
 document

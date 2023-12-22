@@ -50,6 +50,21 @@
               </tr>
             </tbody>
 
+            <tfoot>
+              <tr>
+                <td colspan="4" id="subTotalAmt" class="text-end">Sub Total</td>
+              </tr>
+              <tr>
+                <td colspan="4" id="discountAmt" class="text-end">Disocunt</td>
+              </tr>
+              <tr>
+                <td colspan="4" id="taxAmt" class="text-end">Tax</td>
+              </tr>
+              <tr>
+                <td colspan="4" id="grandTotalAmt" class="text-end">Total</td>
+              </tr>
+            </tfoot>
+
           </table>
         </div>
         <div class="col-md-6 options">
