@@ -1,6 +1,6 @@
-<tr id="item{{ $item->product_id }}" class="saleItem">
-    <td>{{ $item->product_name }}</td>
-    <td>1</td>
-    <td>{{ $item->selling_price }}</td>
-    <td>{{ $item->selling_price }}</td>
+<tr id="item{{ $item->product_id }}" class="saleItem selected">
+    <td id="item_name">{{ $item->product_name }}</td>
+    <td id="item_quantity">1</td>
+    <td id="item_selling_price">{{ $item->selling_price }}</td>
+    <td id="item_amount">{{ $item->selling_price }}</td>
 </tr>

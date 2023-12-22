@@ -1,5 +1,10 @@
-
 <x-sales>
+  <style>
+      .active{
+          --bs-table-bg:#fdd0d0;
+          font-weight: 600;
+      }
+  </style>
     <header>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
@@ -41,11 +46,10 @@
             </thead>
             <tbody id="products">
               <tr>
-                <td colspan="4" class="text-center">No Products Added</td>
+                <td colspan="4" id="noproducts" class="text-center">No Products Added</td>
               </tr>
             </tbody>
-              
-            </tbody>
+
           </table>
         </div>
         <div class="col-md-6 options">
@@ -87,6 +91,34 @@
         
       </div>
     </div>
+
+    {{-- modal window for settign quantity --}}
+
+    <div class="modal fade" id="quantityModal" tabindex="-1" aria-labelledby="quantityModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="quantityModalLabel">Change Quantity</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <!-- Display item name -->
+                  <p>Item Name: <span id="ChangeQuantityitemName"></span></p>
+  
+                  <!-- Input for entering quantity -->
+                  <label for="quantityInput" class="form-label">Enter Quantity:</label>
+                  <input type="number" class="form-control" id="quantityInput" placeholder="Enter quantity" min="1" required>
+              </div>
+              <div class="modal-footer">
+                  <!-- Button to set quantity -->
+                  <button type="button" id="changeQuantityBtn" class="btn btn-primary">Set Quantity</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+
 
     <script>
       var getSaleItems = "{{ route('sale.get.items',[],false) }}";

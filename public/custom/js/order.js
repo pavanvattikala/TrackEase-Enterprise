@@ -42,9 +42,27 @@ $(document).ready(function () {
 });
 
 function insertProduct(item) {
+    setTimeout(function () {
+        $("#search_by").val("");
+    }, 300);
+
+    $("#noproducts").remove();
+
     var selectedProduct = products.find(
         (product) => product.product_name === item
     );
+
+    if ($("#item" + selectedProduct.product_id).length > 0) {
+        var prevQuantity = $(
+            "#item" + selectedProduct.product_id + " > #item_quantity"
+        ).text();
+
+        $("#item" + selectedProduct.product_id + " > #item_quantity").text(
+            Number(prevQuantity) + 1
+        );
+
+        return;
+    }
 
     $.ajax({
         url: getSaleItemData,
@@ -57,10 +75,7 @@ function insertProduct(item) {
             itemType: "product",
         },
         success: function (response) {
-            console.log("Product inserted successfully:", response);
-
             $("#products").append(response);
-            $("#search_by").val("");
         },
         error: function (error) {
             console.error("Error inserting product:", error);
@@ -71,8 +86,10 @@ function insertProduct(item) {
 $(document).on("click", ".saleItem", function () {
     var id = this.id.replace("item", ""); // Fix typo in 'replace'
     $(this).toggleClass("active");
-    $("#close").addClass("bg-danger");
+    $("#close").toggleClass("bg-danger");
     $("#close").attr("onclick", "deleteItem(" + id + ")"); // Assign 'deleteItem' as an event handler
+
+    $("#quantity").attr("onclick", "showQuantityModal(" + id + ")");
 });
 
 // Corrected deleteItem function
@@ -81,6 +98,58 @@ function deleteItem(id) {
     console.log("Deleting item with ID:", id);
     $("#item" + id).remove();
 }
+
+// Open the modal
+
+function showQuantityModal(id) {
+    var selectedProduct = getSaleItemInfo(id);
+    console.log(selectedProduct);
+    $("#quantityModalLabel").text(
+        "Change Quantity of " + selectedProduct.product_name
+    );
+
+    var prevQuantity = $("#item" + id + " > #item_quantity").text();
+
+    $("#ChangeQuantityitemName").text(selectedProduct.product_name);
+
+    $("#quantityInput").val(prevQuantity);
+
+    $("#changeQuantityBtn").attr("onclick", "setQuantity(" + id + ")");
+
+    $("#quantityModal").modal("show");
+
+    setTimeout(function () {
+        var inputField = document.getElementById("quantityInput");
+
+        inputField.focus();
+
+        inputField.select();
+    }, 500);
+}
+
+function setQuantity(id) {
+    var newQuantity = $("#quantityInput").val();
+
+    var prevQuantity = $("#item" + id + " > #item_quantity").text(newQuantity);
+
+    $("#quantityModal").modal("hide");
+}
+
+function getSaleItemInfo(id) {
+    var selectedProduct = products.find((product) => product.product_id === id);
+
+    return selectedProduct;
+}
+
+document
+    .getElementById("quantityInput")
+    .addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            // Trigger the button click event
+            document.getElementById("changeQuantityBtn").click();
+        }
+    });
+
 function addRow() {
     $(".nav-btn").click(function () {
         $(".nav-btn").removeClass("active bg-primary");
