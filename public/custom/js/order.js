@@ -60,6 +60,7 @@ function insertProduct(item) {
             console.log("Product inserted successfully:", response);
 
             $("#products").append(response);
+            $("#search_by").val("");
         },
         error: function (error) {
             console.error("Error inserting product:", error);
@@ -67,6 +68,19 @@ function insertProduct(item) {
     });
 }
 
+$(document).on("click", ".saleItem", function () {
+    var id = this.id.replace("item", ""); // Fix typo in 'replace'
+    $(this).toggleClass("active");
+    $("#close").addClass("bg-danger");
+    $("#close").attr("onclick", "deleteItem(" + id + ")"); // Assign 'deleteItem' as an event handler
+});
+
+// Corrected deleteItem function
+function deleteItem(id) {
+    // Implement your delete logic here using the 'id'
+    console.log("Deleting item with ID:", id);
+    $("#item" + id).remove();
+}
 function addRow() {
     $(".nav-btn").click(function () {
         $(".nav-btn").removeClass("active bg-primary");
