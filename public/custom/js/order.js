@@ -1,6 +1,6 @@
-var saleItemsNames = [];
+var autoCompleteNames = [];
 
-var saleItems = [];
+var items = [];
 
 // to load the data table
 $(document).ready(function () {
@@ -15,11 +15,19 @@ $(document).ready(function () {
             var dataArray = JSON.parse(data);
 
             dataArray.forEach(function (item) {
-                saleItemsNames.push(item.product_name);
-                saleItems.push({
-                    product_id: item.product_id,
-                    product_name: item.product_name,
-                });
+                if (item.product_id != null) {
+                    autoCompleteNames.push(item.product_name);
+                    items.push({
+                        id: "p" + item.product_id,
+                        name: item.product_name,
+                    });
+                } else {
+                    autoCompleteNames.push(item.service_name);
+                    items.push({
+                        id: "s" + item.service_id,
+                        name: item.service_name,
+                    });
+                }
             });
         },
         error: function (error) {
@@ -29,7 +37,7 @@ $(document).ready(function () {
 
     // autocomplete ui
     $("#search_by").autocomplete({
-        source: saleItemsNames,
+        source: autoCompleteNames,
         autoFocus: true,
         select: function (event, ui) {
             item = ui.item.value;
@@ -40,19 +48,23 @@ $(document).ready(function () {
 });
 
 // to insert product in products table
-function insertProduct(item) {
+function insertProduct(itemName) {
     setTimeout(function () {
         $("#search_by").val("");
     }, 300);
 
     $("#noproducts").remove();
 
-    var selectedProduct = saleItems.find(
-        (product) => product.product_name === item
-    );
+    var selectedItem = getItemUsingName(itemName);
 
-    if ($("#item" + selectedProduct.product_id).length > 0) {
-        var oldItem = $("#item" + selectedProduct.product_id);
+    if (selectedItem.id.startsWith("s")) {
+        showServicePriceModal(selectedItem);
+
+        return;
+    }
+
+    if ($("#item" + selectedItem.id).length > 0) {
+        var oldItem = $("#item" + selectedItem.id);
 
         var prevQuantity = oldItem.find("#item_quantity").text();
 
@@ -67,6 +79,7 @@ function insertProduct(item) {
         oldItem.find("#item_amount").text(newAmount);
 
         updateTotalAmounts();
+        focusSearchBy();
 
         return;
     }
@@ -78,7 +91,7 @@ function insertProduct(item) {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         data: {
-            itemId: selectedProduct.product_id,
+            itemId: selectedItem.id.replace("p", ""),
             itemType: "product",
         },
         success: function (response) {
@@ -89,6 +102,7 @@ function insertProduct(item) {
             console.error("Error inserting product:", error);
         },
     });
+    focusSearchBy();
 }
 
 // toggle active class on sale Item and close & quantity functions
@@ -99,8 +113,8 @@ $(document).on("click", ".saleItem", function () {
         $(".saleItem").removeClass("active");
         $(this).addClass("active");
         $("#deleteItem").addClass("bg-danger");
-        $("#deleteItem").attr("onclick", "deleteItem(" + id + ")");
-        $("#quantity").attr("onclick", "showQuantityModal(" + id + ")");
+        $("#deleteItem").attr("onclick", "deleteItem('" + id + "')");
+        $("#quantity").attr("onclick", "showQuantityModal('" + id + "')");
     } else {
         // If the clicked item is already active, remove the active state
         $(this).removeClass("active");
@@ -122,24 +136,22 @@ function deleteItem(id) {
 
 // Open the modal
 function showQuantityModal(id) {
-    var selectedProduct = getSaleItemInfo(id);
+    var selectedProduct = getItemUsingId(id);
     console.log(selectedProduct);
-    $("#quantityModalLabel").text(
-        "Change Quantity of " + selectedProduct.product_name
-    );
+    $("#quantityModalLabel").text("Change Quantity of " + selectedProduct.name);
 
     var prevQuantity = $("#item" + id + " > #item_quantity").text();
 
-    $("#ChangeQuantityitemName").text(selectedProduct.product_name);
+    $("#ChangeQuantityitemName").text(selectedProduct.name);
 
-    $("#quantityInput").val(prevQuantity);
+    $("#quantityModalInput").val(prevQuantity);
 
-    $("#changeQuantityBtn").attr("onclick", "setQuantity(" + id + ")");
+    $("#quantityModalSubmitBtn").attr("onclick", "setQuantity('" + id + "')");
 
     $("#quantityModal").modal("show");
 
     setTimeout(function () {
-        var inputField = document.getElementById("quantityInput");
+        var inputField = document.getElementById("quantityModalInput");
 
         inputField.focus();
 
@@ -149,7 +161,7 @@ function showQuantityModal(id) {
 
 //set quantity for product id
 function setQuantity(id) {
-    var newQuantity = $("#quantityInput").val();
+    var newQuantity = $("#quantityModalInput").val();
 
     var prevQuantity = $("#item" + id + " > #item_quantity").text(newQuantity);
 
@@ -158,13 +170,18 @@ function setQuantity(id) {
     updateTotalAmounts();
 }
 
-// get sale item data using id
-function getSaleItemInfo(id) {
-    var selectedProduct = saleItems.find(
-        (product) => product.product_id === id
-    );
+// get item data using id
+function getItemUsingId(id) {
+    console.log(id);
+    var item = items.find((item) => item.id === id);
 
-    return selectedProduct;
+    return item;
+}
+
+function getItemUsingName(name) {
+    var selectedItem = items.find((item) => item.name === name);
+
+    return selectedItem;
 }
 
 // update total amounts
@@ -197,11 +214,24 @@ function updateTotalAmounts() {
 
 // accept enter key as input in set quantity
 document
-    .getElementById("quantityInput")
+    .getElementById("quantityModalInput")
     .addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
             // Trigger the button click event
-            document.getElementById("changeQuantityBtn").click();
+            document.getElementById("quantityModalSubmitBtn").click();
+        }
+    });
+
+document
+    .getElementById("serviceModalInput")
+    .addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            // Trigger the button click event
+            var service_name = $("#service_name").text();
+            var service_id = $("#service_id").text().replace("s", "");
+            var service_price = $("#serviceModalInput").val();
+            insertService(service_id, service_price);
+            $("#serviceModal").modal("hide");
         }
     });
 
@@ -213,3 +243,51 @@ $(document).on("click", "#discardOrder", function () {
     updateTotalAmounts();
     $("#products").append(noData);
 });
+
+function showServicePriceModal(service) {
+    var selectedItem = getItemUsingId(service.id);
+    console.log(selectedItem);
+
+    $("#serviceModalInput").val("");
+    $("#ServiceModalLabel").text("Set Price of " + selectedItem.name);
+
+    $("#service_name").text(service.name);
+    $("#service_id").text(service.id);
+
+    $("#serviceModal").modal("show");
+
+    setTimeout(function () {
+        var inputField = document.getElementById("serviceModalInput");
+
+        inputField.focus();
+    }, 500);
+}
+
+function insertService(service_id, service_price) {
+    $.ajax({
+        url: getSaleItemData,
+        method: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        data: {
+            itemId: service_id,
+            service_price: service_price,
+            itemType: "service",
+        },
+        success: function (response) {
+            $("#products").append(response);
+            updateTotalAmounts();
+            focusSearchBy();
+        },
+        error: function (error) {
+            console.error("Error inserting product:", error);
+        },
+    });
+}
+
+function focusSearchBy() {
+    var inputField = document.getElementById("search_by");
+
+    inputField.focus();
+}

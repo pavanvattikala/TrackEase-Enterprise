@@ -124,16 +124,39 @@
                   <p>Item Name: <span id="ChangeQuantityitemName"></span></p>
   
                   <!-- Input for entering quantity -->
-                  <label for="quantityInput" class="form-label">Enter Quantity:</label>
-                  <input type="number" class="form-control" id="quantityInput" placeholder="Enter quantity" min="1" required>
+                  <label for="modalInput" class="form-label">Enter Quantity:</label>
+                  <input type="number" class="form-control" id="quantityModalInput" placeholder="Enter quantity" min="1" required>
               </div>
               <div class="modal-footer">
                   <!-- Button to set quantity -->
-                  <button type="button" id="changeQuantityBtn" class="btn btn-primary">Set Quantity</button>
+                  <button type="button" id="quantityModalSubmitBtn" class="btn btn-primary">Set Quantity</button>
               </div>
           </div>
       </div>
   </div>
+
+  <div class="modal fade" id="serviceModal" tabindex="-1" aria-labelledby="ServiceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ServiceModalLabel">Set Price</h5>
+                <p id="service_name" hidden></p>
+                <p id="service_id" hidden></p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <!-- Input for entering quantity -->
+                <label for="modalInput" class="form-label">Enter Price:</label>
+                <input type="number" class="form-control" id="serviceModalInput" placeholder="Enter Price" min="1" required>
+            </div>
+            <div class="modal-footer">
+                <!-- Button to set quantity -->
+                <button type="button" id="serviceModalSubmitBtn" class="btn btn-primary">Set Price</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
