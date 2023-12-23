@@ -214,6 +214,10 @@ Route::middleware('auth')->group(function(){
 
     Route::prefix('sale')->name('sale.')->group(function () {
 
+        Route::get('/new',function(){
+            return view('sv.order.add_order2');
+        })->name('new');
+
         Route::post('/get-sale-items',[SaleController::class,'getSaleItems'])->name('get.items');
 
         Route::post('/get-sale-item-component',[SaleController::class,'getSaleItemComponent'])->name('get.item.component');

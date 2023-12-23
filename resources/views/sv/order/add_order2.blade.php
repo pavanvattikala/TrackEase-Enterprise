@@ -4,6 +4,9 @@
           --bs-table-bg:#fdd0d0;
           font-weight: 600;
       }
+      .btn{
+        color: #000;
+      }
   </style>
     <header>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">

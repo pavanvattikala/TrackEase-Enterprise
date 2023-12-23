@@ -1,16 +1,5 @@
-@extends('layouts.app')
-@section('content')
-
-<style type="text/css">
-	.ui-datepicker-calendar {
-		display: none;
-	}
-</style>
-
-{{-- <!-- fullCalendar 2.2.5-->
-    <link rel="stylesheet" href="assests/plugins/fullcalendar/fullcalendar.min.css">
-    <link rel="stylesheet" href="assests/plugins/fullcalendar/fullcalendar.print.css" media="print"> --}}
-
+<x-admin-layout>
+	
 
 <div class="row">
 	
@@ -46,7 +35,6 @@
 		</div> 
 	</div> 
 </div> 
-@include('partials.error')
 
 <div class="row">
 	<div class="col-md-4">
@@ -83,19 +71,4 @@
 		 
 	</div>
 </div>
-
-<script src="{{ asset('assests/plugins/fullcalendar/dist/index.global.min.js') }}"></script>
-
-<script>
-
-	document.addEventListener('DOMContentLoaded', function() {
-		var calendarEl = document.getElementById('calendar');
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView: 'dayGridMonth',
-		});
-		calendar.render();
-	});
-
-  </script>
-
-@endsection
+</x-admin-layout>

@@ -1,44 +1,58 @@
-<nav class="navbar navbar-default navbar-static-top">
-    <!-- Top Navigation Bar -->
-    <div class="container">
-        <!-- Center the company name -->
-        <a class="navbar-brand mx-auto" href="#">{{ env('COMPANY_NAME') }}</a>
-    </div>
-
-    <!-- Tab Navigation -->
-    <ul class="nav nav-tabs" id="myTabs" role="tablist">
-
-        <li class="nav-item active" role="presentation">
-          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" aria-expanded="true">Home</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link" id="reports-tab" data-toggle="tab" href="#reports" role="tab" aria-controls="reports" aria-selected="false">Reports</a>
-        </li>
-        <li class="nav-item" role="presentation">
-          <a class="nav-link" id="admin-tab" data-toggle="tab" href="#admin" role="tab" aria-controls="admin" aria-selected="false">Admin</a>
-      </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link" id="others-tab" data-toggle="tab" href="#others" role="tab" aria-controls="others" aria-selected="false">Others</a>
-        </li>
-    </ul>
-
-    <!-- Tab Content -->
-    <div class="tab-content" id="myTabsContent">
-        <div class="tab-pane fade active in" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <!-- Content for the Home tab goes here -->
-            @include('partials.nav.home')
+<!--Main Navigation-->
+<link rel="stylesheet" href="{{ asset('custom/css/navbar.css') }}">
+<header>
+    <!-- Sidebar -->
+    <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+      <div class="position-sticky">
+        <div class="list-group list-group-flush mx-3 mt-4">
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple active" aria-current="true">
+            <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Dashboard</span>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+            <i class="fas fa-chart-area fa-fw me-3"></i><span>Products</span>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fas fa-lock fa-fw me-3"></i><span>Services</span></a>
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fas fa-chart-line fa-fw me-3"></i><span>Stocks</span></a>
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+            <i class="fas fa-chart-pie fa-fw me-3"></i><span>Reporting</span>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fas fa-chart-bar fa-fw me-3"></i><span>Users</span></a>
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fas fa-globe fa-fw me-3"></i><span>Payments</span></a>
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fas fa-building fa-fw me-3"></i><span>My Company</span></a>
         </div>
-        <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="reports-tab">
-            <!-- Content for the Reports tab goes here -->
-            @include('partials.nav.reports')
+      </div>
+    </nav>
+    <!-- Sidebar -->
+  
+    <!-- Navbar -->
+    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu"
+          aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+  
+        <!-- Brand -->
+        <a class="navbar-brand" href="/">
+          <img src="{{ asset('logo.jpg') }}" height="25" alt="MDB Logo"
+            loading="lazy" />
+        </a>
+  
+          <!-- Icon -->
+          <div class="nav-item">
+            <a class="nav-link me-3 me-lg-0" href="{{ route('sale.new') }}">
+              <i class="fas fa-fill-close">Close</i>
+            </a>
         </div>
-        <div class="tab-pane fade" id="admin" role="tabpanel" aria-labelledby="admin-tab">
-          <!-- Content for the Reports tab goes here -->
-          @include('partials.nav.admin')
-        </div>
-        <div class="tab-pane fade" id="others" role="tabpanel" aria-labelledby="others-tab">
-            <!-- Content for the Others tab goes here -->
-            @include('partials.nav.others')
-        </div>
-    </div>
-</nav>
+    </nav>
+    <!-- Navbar -->
+  </header>
+  <!--Main Navigation-->
+  
