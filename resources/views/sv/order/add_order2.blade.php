@@ -69,7 +69,7 @@
         </div>
         <div class="col-md-6 options">
             <div class="row d-flex justify-content-between cart-options-1">
-                <x-cart-options shortcut="F1" id="close" icon="bi bi-x-lg" name="Close" />
+                <x-cart-options shortcut="F1" id="deleteItem" icon="bi bi-x-lg" name="Close" />
                 <x-cart-options shortcut="F2" id="search" icon="bi bi-search" name="Search" />
                 <x-cart-options shortcut="F3" id="quantity" icon="bi bi-basket-fill" name="Quantity" />
                 <x-cart-options shortcut="F4" id="newSale" icon="bi bi-plus-lg" name="New Sale" />
@@ -99,7 +99,7 @@
                 <div class="row d-flex justify-content-between">
                     <x-cart-options shortcut="F1" id="close8" icon="bi bi-floppy" name="Lock" />
                     <x-cart-options shortcut="F2" id="close9" icon="bi bi-eraser-fill" name="Transfer" />
-                    <x-cart-options class="bg-danger" id="close10" shortcut="F3" icon="bi bi-person-raised-hand" name="Void Order" />
+                    <x-cart-options class="bg-danger" id="discardOrder" shortcut="F3" icon="bi bi-person-raised-hand" name="Void Order" />
                     <x-cart-options shortcut="F4" id="close11" icon="bi bi-inbox-fill" name="..." />
                 </div>
             </div>
