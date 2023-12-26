@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
@@ -26,201 +27,192 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes(['register' => false]);
 
-Route::middleware('auth')->group(function(){
 
-    Route::get('/',[DashBoardController::class,'index']);
+Route::middleware('auth')->group(function () {
 
-    Route::get('/home', [DashBoardController::class,'index']);
-    
+
+    Route::get('/', function () {
+        return view('sv.order.add_order2');
+    });
+
+
+    //Route::get('/',[DashBoardController::class,'index']);
+
+    Route::get('/home', [DashBoardController::class, 'index']);
+
     // brand start
-    Route::prefix('brand')->group(function(){
-    
-        Route::get('/',function(){
+    Route::prefix('brand')->group(function () {
+
+        Route::get('/', function () {
             return view('sv.brand.index');
-        
         });
-        
-        Route::post('/createbrand',[BrandController::class,'create']);
-        Route::get('/fetch_brand',[BrandController::class,'fetchbrand']);
-        Route::post('/fetchSelectedBrand',[BrandController::class,'fetchselectedbrand']);
-        Route::post('/editBrand',[BrandController::class,'editbrand']);
-        Route::post('/trash',[BrandController::class,'trash']);
-    
+
+        Route::post('/createbrand', [BrandController::class, 'create']);
+        Route::get('/fetch_brand', [BrandController::class, 'fetchbrand']);
+        Route::post('/fetchSelectedBrand', [BrandController::class, 'fetchselectedbrand']);
+        Route::post('/editBrand', [BrandController::class, 'editbrand']);
+        Route::post('/trash', [BrandController::class, 'trash']);
     });
     //brand end
-    
+
     // categories start
-    Route::prefix('category')->group(function(){
-        Route::get('/',function(){
+    Route::prefix('category')->group(function () {
+        Route::get('/', function () {
             return view('sv.category.index');
         });
-        Route::post('/create_category',[CategoryController::class,'create']);
-        Route::get('/fetchCategories',[CategoryController::class,'fetchCategories']);
-        Route::post('/fetchSelectedCategories',[CategoryController::class,'fetchSelectedCategories']);
-    
-        Route::post('/edit_category',[CategoryController::class,'editCategory']);
-    
-        Route::post('/trash',[CategoryController::class,'trash']);
-    
-    
+        Route::post('/create_category', [CategoryController::class, 'create']);
+        Route::get('/fetchCategories', [CategoryController::class, 'fetchCategories']);
+        Route::post('/fetchSelectedCategories', [CategoryController::class, 'fetchSelectedCategories']);
+
+        Route::post('/edit_category', [CategoryController::class, 'editCategory']);
+
+        Route::post('/trash', [CategoryController::class, 'trash']);
     });
     // categories end
-    
+
     //product start
-    Route::prefix('product')->name('product.')->group(function(){
-        Route::get('/',function(){
+    Route::prefix('product')->name('product.')->group(function () {
+        Route::get('/', function () {
             return view('sv.product.index');
-        
         });
-        
-        Route::get('/add_product',function(){
+
+        Route::get('/add_product', function () {
             return view('sv.product.add_product');
         });
-        Route::post('/get-new-product-component',[ProductController::class,'getProductComponent'])->name('get.new.component');
-        Route::post('/createProduct',[ProductController::class,'create']);
-        Route::get('/fetchProduct',[ProductController::class,'fetchProduct']);
-        Route::post('/fetchSelectedProduct ',[ProductController::class,'fetchSelectedProduct'])->name('fetch.selected');
+        Route::post('/get-new-product-component', [ProductController::class, 'getProductComponent'])->name('get.new.component');
+        Route::post('/createProduct', [ProductController::class, 'create']);
+        Route::get('/fetchProduct', [ProductController::class, 'fetchProduct']);
+        Route::post('/fetchSelectedProduct ', [ProductController::class, 'fetchSelectedProduct'])->name('fetch.selected');
         Route::post('/fetchProductData', [ProductController::class, 'fetchProductData'])->name('get.all');
-        Route::post('/trash ',[ProductController::class,'trash']);
-    
-        Route::post('/editProduct ',[ProductController::class,'editProduct']);
+        Route::post('/trash ', [ProductController::class, 'trash']);
 
-        Route::get('/get-search-results',[ProductController::class,'searchResults'])->name('get.search.results');
-    
+        Route::post('/editProduct ', [ProductController::class, 'editProduct']);
+
+        Route::get('/get-search-results', [ProductController::class, 'searchResults'])->name('get.search.results');
     });
-    
-    
+
+
     // product end
-    
-    Route::prefix('orders')->group(function(){
-    
-        Route::get('/add_order',function(){
+
+    Route::prefix('orders')->group(function () {
+
+        Route::get('/add_order', function () {
             return view('sv.order.add_order2');
         });
-        
-        Route::post('/insert_order',[OrderController::class,'create']);
-        
-        Route::get('/manage',function(){
+
+        Route::post('/insert_order', [OrderController::class, 'create']);
+
+        Route::get('/manage', function () {
             return view('sv.order.manage_order');
         });
-    
-        Route::get('/fetchOrders',[OrderController::class,'fetchOrders']);
-    
-        Route::post('/removeOrder',[OrderController::class,'removeOrder']);
-    
-        Route::get('/manage/view_order/{orderId}',[OrderController::class,'viewOrder']);
-    
+
+        Route::get('/fetchOrders', [OrderController::class, 'fetchOrders']);
+
+        Route::post('/removeOrder', [OrderController::class, 'removeOrder']);
+
+        Route::get('/manage/view_order/{orderId}', [OrderController::class, 'viewOrder']);
     });
-    
+
     //orders end
-    
+
     //service start
-    
+
     Route::prefix('service')->group(function () {
-    
-        Route::get('/add_service_type',function(){
+
+        Route::get('/add_service_type', function () {
             return view('sv.service.add_service_types');
         });
-    
-        Route::get('/fetchServiceTypes',[ServiceController::class,'fetchServiceTypesData']);
-    
-        Route::post('/insert_service_type',[ServiceController::class,'insert_service_type']);
-    
-        
-        Route::get('/add_service',function(){
+
+        Route::get('/fetchServiceTypes', [ServiceController::class, 'fetchServiceTypesData']);
+
+        Route::post('/insert_service_type', [ServiceController::class, 'insert_service_type']);
+
+
+        Route::get('/add_service', function () {
             return view('sv.service.add_service');
         });
-        
-        Route::post('/fetchSelectedService',[ServiceController::class,'fetchSelectedService']);
-        
-        Route::get('/fetchService',[ServiceController::class,'fetchService']);
-        
-        Route::post('/insert_service',[ServiceController::class,'insertService']);
-        
-        Route::post('/fetchServiceData',[ServiceController::class,'fetchServiceData']);
-        
-        
-        
-        Route::get('/manage',function(){
+
+        Route::post('/fetchSelectedService', [ServiceController::class, 'fetchSelectedService']);
+
+        Route::get('/fetchService', [ServiceController::class, 'fetchService']);
+
+        Route::post('/insert_service', [ServiceController::class, 'insertService']);
+
+        Route::post('/fetchServiceData', [ServiceController::class, 'fetchServiceData']);
+
+
+
+        Route::get('/manage', function () {
             return view('sv.service.manage_service');
         });
-    
-        Route::get('/',function(){
+
+        Route::get('/', function () {
             return view('sv.service.manage_service');
         });
-    
-        Route::get('/manage/view_service/{service_id}',[ServiceController::class,'viewService']);
-        
-        Route::get('/print/{service_id}',[ServiceController::class,'print']);
-    
-        Route::post('/trash',[ServiceController::class,'trash']);
-    
+
+        Route::get('/manage/view_service/{service_id}', [ServiceController::class, 'viewService']);
+
+        Route::get('/print/{service_id}', [ServiceController::class, 'print']);
+
+        Route::post('/trash', [ServiceController::class, 'trash']);
     });
     //service end
-    
+
     //day sheet
     Route::prefix('daysheet')->group(function () {
-    
-        Route::get('/',[DaySheetController::class,'index']);
-    
-        Route::post('/fetchdata',[DaySheetController::class,'fetchdata']);
-    
+
+        Route::get('/', [DaySheetController::class, 'index']);
+
+        Route::post('/fetchdata', [DaySheetController::class, 'fetchdata']);
     });
-    
+
     //expense
     Route::prefix('expense')->group(function () {
-    
-        Route::get('/',function(){
+
+        Route::get('/', function () {
             return view('sv.expense.index');
-        
         });
-        
-        Route::post('/createExpense',[ExpenseController::class,'create']);
-        Route::get('/fetchExpense',[ExpenseController::class,'fetchExpense']);
-        Route::post('/fetchSelectedBrand',[ExpenseController::class,'fetchselectedbrand']);
-        Route::post('/editBrand',[ExpenseController::class,'editbrand']);
-        Route::post('/trash',[ExpenseController::class,'trash']);
-    
+
+        Route::post('/createExpense', [ExpenseController::class, 'create']);
+        Route::get('/fetchExpense', [ExpenseController::class, 'fetchExpense']);
+        Route::post('/fetchSelectedBrand', [ExpenseController::class, 'fetchselectedbrand']);
+        Route::post('/editBrand', [ExpenseController::class, 'editbrand']);
+        Route::post('/trash', [ExpenseController::class, 'trash']);
     });
-    
-    
-    
-    
+
+
+
+
     Route::prefix('stock')->group(function () {
-    
-        Route::get('/',function(){
+
+        Route::get('/', function () {
             return view('sv.stock.index');
-        
         });
-        
-        Route::get('/add_stock',[StockController::class,'add_stock']);
-        Route::get('/getStockEntryOptions',[StockController::class,'getStockEntryOptions']);
-        Route::post('/insert_stock',[StockController::class,'insertStock']);
-        Route::get('/fetchStock',[StockController::class,'fetchStock']);
-        Route::post('/trash',[StockController::class,'trash']);
-    
+
+        Route::get('/add_stock', [StockController::class, 'add_stock']);
+        Route::get('/getStockEntryOptions', [StockController::class, 'getStockEntryOptions']);
+        Route::post('/insert_stock', [StockController::class, 'insertStock']);
+        Route::get('/fetchStock', [StockController::class, 'fetchStock']);
+        Route::post('/trash', [StockController::class, 'trash']);
     });
 
     Route::prefix('users')->middleware('check-permission')->group(function () {
-    
-        Route::get('/',function(){
+
+        Route::get('/', function () {
             return view('sv.users.index');
-        
         });
 
-        Route::post('/createuser',[UserController::class,'create']);
-
+        Route::post('/createuser', [UserController::class, 'create']);
     });
 
     Route::prefix('sale')->name('sale.')->group(function () {
 
-        Route::get('/new',function(){
+        Route::get('/new', function () {
             return view('sv.order.add_order2');
         })->name('new');
 
-        Route::post('/get-sale-items',[SaleController::class,'getSaleItems'])->name('get.items');
+        Route::post('/get-sale-items', [SaleController::class, 'getSaleItems'])->name('get.items');
 
-        Route::post('/get-sale-item-component',[SaleController::class,'getSaleItemComponent'])->name('get.item.component');
-
+        Route::post('/get-sale-item-component', [SaleController::class, 'getSaleItemComponent'])->name('get.item.component');
     });
 });

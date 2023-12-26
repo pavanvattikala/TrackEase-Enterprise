@@ -47,6 +47,10 @@ $(document).ready(function () {
     });
 });
 
+function getPrice(item) {
+    return;
+}
+
 // to insert product in products table
 function insertProduct(itemName) {
     setTimeout(function () {
@@ -115,22 +119,27 @@ $(document).on("click", ".saleItem", function () {
         $("#deleteItem").addClass("bg-danger");
         $("#deleteItem").attr("onclick", "deleteItem('" + id + "')");
         $("#quantity").attr("onclick", "showQuantityModal('" + id + "')");
+        $("#discount").attr("onclick", "showDiscountModal('" + id + "')");
     } else {
         // If the clicked item is already active, remove the active state
         $(this).removeClass("active");
-        $("#deleteItem").removeClass("bg-danger");
-        $("#deleteItem").removeAttr("onclick");
-        $("#quantity").removeAttr("onclick");
+        clearAttributes();
     }
 });
+
+function clearAttributes() {
+    $("#deleteItem").removeClass("bg-danger");
+    $("#deleteItem").removeAttr("onclick");
+    $("#quantity").removeAttr("onclick");
+    $("#discount").removeAttr("onclick");
+}
 
 // delete Item
 function deleteItem(id) {
     // Implement your delete logic here using the 'id'
     console.log("Deleting item with ID:", id);
-    $("#item" + id).remove();
-    $("#deleteItem").removeClass("bg-danger");
-    $("#quantity").removeAttr("onclick");
+    $("#item" + id + ".active").remove();
+    clearAttributes();
     updateTotalAmounts();
 }
 
@@ -140,7 +149,7 @@ function showQuantityModal(id) {
     console.log(selectedProduct);
     $("#quantityModalLabel").text("Change Quantity of " + selectedProduct.name);
 
-    var prevQuantity = $("#item" + id + " > #item_quantity").text();
+    var prevQuantity = $("#item" + id + ".active > #item_quantity").text();
 
     $("#ChangeQuantityitemName").text(selectedProduct.name);
 
@@ -163,7 +172,7 @@ function showQuantityModal(id) {
 function setQuantity(id) {
     var newQuantity = $("#quantityModalInput").val();
 
-    var prevQuantity = $("#item" + id + " > #item_quantity").text(newQuantity);
+    $("#item" + id + ".active > #item_quantity").text(newQuantity);
 
     $("#quantityModal").modal("hide");
 
@@ -190,13 +199,7 @@ function updateTotalAmounts() {
 
     // Iterate over each sale item
     $(".saleItem").each(function () {
-        var quantity = parseInt($(this).find("#item_quantity").text());
-        var sellingPrice = parseFloat(
-            $(this).find("#item_selling_price").text()
-        );
-        var itemTotal = quantity * sellingPrice;
-
-        // Update the subtotal
+        var itemTotal = parseInt($(this).find("#item_amount").text());
         subTotal += itemTotal;
     });
 
@@ -291,3 +294,81 @@ function focusSearchBy() {
 
     inputField.focus();
 }
+
+function focusInputFeild(id) {
+    setTimeout(function () {
+        var inputField = document.getElementById(id);
+
+        inputField.focus();
+        inputField.select();
+    }, 500);
+}
+
+function showDiscountModal(id) {
+    var selectedItem = getItemUsingId(id);
+
+    $("#discountModalLabel").text("Set Discount of " + selectedItem.name);
+
+    $("#discountitemName").text(selectedItem.name);
+
+    $("#discountModalSubmitBtn").attr("onclick", "setDiscount('" + id + "')");
+
+    $("#discountModal").modal("show");
+
+    focusInputFeild("discountModalInput");
+}
+
+function setDiscount(id) {
+    var newDiscount = parseFloat($("#discountModalInput").val());
+
+    if (isNaN(newDiscount) || newDiscount < 0) {
+        // Handle invalid discount input
+        console.error("Invalid discount input");
+        return;
+    }
+
+    var selectedItem = $("#item" + id + ".active");
+
+    if (selectedItem.length === 0) {
+        // Handle the case where no item is selected
+        console.error("No item is selected");
+        return;
+    }
+
+    var quantity = selectedItem.find("#item_quantity");
+    var priceElement = selectedItem.find("#item_selling_price");
+    var totalElement = selectedItem.find("#item_amount");
+
+    // Get the original price and quantity as numbers
+    var originalPrice = parseFloat(priceElement.text());
+    var originalQuantity = parseInt(quantity.text());
+
+    // Apply the discount logic
+    var discountedPrice = originalPrice - newDiscount;
+    var newTotal = discountedPrice * originalQuantity;
+
+    // Update the UI with the new values
+    priceElement.html(
+        `<del>${originalPrice.toFixed(2)}</del> ${discountedPrice.toFixed(2)}`
+    );
+    totalElement.text(newTotal.toFixed(2));
+
+    // Hide the discount modal
+    $("#discountModal").modal("hide");
+
+    // Update total amounts if necessary
+    updateTotalAmounts();
+}
+function calculateDiscountedPrice(originalPrice, discount) {
+    return originalPrice - discount;
+}
+document
+    .getElementById("discountModalInput")
+    .addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            // Trigger the button click event
+            document.getElementById("discountModalSubmitBtn").click();
+        }
+    });
+
+$(document).on("click", "#upi", function () {});
